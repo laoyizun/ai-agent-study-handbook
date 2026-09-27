@@ -74,6 +74,49 @@
         <details class="fold">
           <summary>📖 服务是什么 · 怎么验证它在跑</summary>
           <div class="fold-body">
+            <div class="diagram">
+              <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="浏览器通过服务访问数据库的三方关系图">
+                <!-- 左侧：浏览器 = 你（顾客） -->
+                <rect x="30" y="60" width="160" height="100" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+                <text x="110" y="92" font-size="14" fill="#333333" text-anchor="middle" font-weight="700">浏览器</text>
+                <text x="110" y="112" font-size="11" fill="#64748B" text-anchor="middle">= 你（顾客）</text>
+                <text x="110" y="130" font-size="10" fill="#64748B" text-anchor="middle">发请求</text>
+                <text x="110" y="146" font-size="10" fill="#64748B" text-anchor="middle">localhost:3000</text>
+
+                <!-- 中间：服务 = 小店员（永远在跑） -->
+                <rect x="280" y="50" width="160" height="120" fill="#F3A21C" opacity="0.10" stroke="#F3A21C" stroke-width="2" rx="8"/>
+                <text x="360" y="82" font-size="14" fill="#F3A21C" text-anchor="middle" font-weight="700">服务</text>
+                <text x="360" y="102" font-size="11" fill="#333333" text-anchor="middle">= 小店员</text>
+                <text x="360" y="122" font-size="10" fill="#64748B" text-anchor="middle">永远在跑</text>
+                <text x="360" y="138" font-size="10" fill="#64748B" text-anchor="middle">你走开它还在</text>
+                <text x="360" y="156" font-size="10" fill="#64748B" text-anchor="middle">关浏览器不关它</text>
+
+                <!-- 右侧：数据库 = 保险箱 -->
+                <rect x="530" y="60" width="160" height="100" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+                <text x="610" y="92" font-size="14" fill="#333333" text-anchor="middle" font-weight="700">数据库</text>
+                <text x="610" y="112" font-size="11" fill="#64748B" text-anchor="middle">= 保险箱</text>
+                <text x="610" y="130" font-size="10" fill="#64748B" text-anchor="middle">店员能打开</text>
+                <text x="610" y="146" font-size="10" fill="#64748B" text-anchor="middle">memory-cards.db</text>
+
+                <!-- 箭头：浏览器 → 服务 -->
+                <line x1="190" y1="110" x2="278" y2="110" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                <text x="234" y="100" font-size="10" fill="#64748B" text-anchor="middle">请求</text>
+
+                <!-- 箭头：服务 → 数据库 -->
+                <line x1="440" y1="110" x2="528" y2="110" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                <text x="484" y="100" font-size="10" fill="#64748B" text-anchor="middle">读 / 写</text>
+
+                <!-- 底部提示 -->
+                <text x="360" y="200" font-size="11" fill="#333333" text-anchor="middle">浏览器不能直接动保险箱 —— 必须让店员去开</text>
+
+                <defs>
+                  <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <polygon points="0 0, 8 4, 0 8" fill="#333333"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+            <p class="diagram-caption">数据不能浏览器直接改。必须经过中间这个"永远在跑"的服务。</p>
             <p><strong>类比 · 永远在跑的小店员</strong></p>
             <p>你可以这样想：</p>
             <ul>
@@ -222,6 +265,39 @@
           <div class="fold-body">
             <p>之前 L4 你做卡片时只有「问题 / 答案 / 章节」3 项，<strong>够用</strong>。但升级到数据库后，AI 要按固定结构写入数据 —— 字段必须一致，否则 AI 写不进去。</p>
             <p>下面是 3 张清单的<strong>字段定义</strong>（你和 AI 都会用到）：</p>
+
+            <div class="diagram">
+              <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3 张数据库表的栈式包含关系图">
+                <!-- 第一张：students -->
+                <rect x="200" y="20" width="320" height="60" fill="#FFFFFF" stroke="#333333" stroke-width="2" rx="8"/>
+                <text x="360" y="46" font-size="14" fill="#333333" text-anchor="middle" font-weight="700">📋 第一张 · students（你）</text>
+                <text x="360" y="66" font-size="11" fill="#64748B" text-anchor="middle">name · created_at</text>
+
+                <!-- 第二张：cards -->
+                <rect x="160" y="120" width="400" height="60" fill="#FFFFFF" stroke="#333333" stroke-width="2" rx="8"/>
+                <text x="360" y="146" font-size="14" fill="#333333" text-anchor="middle" font-weight="700">📋 第二张 · cards（卡片）</text>
+                <text x="360" y="166" font-size="11" fill="#64748B" text-anchor="middle">student_name · subject · question · answer · created_at</text>
+
+                <!-- 第三张：reviews -->
+                <rect x="120" y="220" width="480" height="60" fill="#F3A21C" opacity="0.10" stroke="#F3A21C" stroke-width="2" rx="8"/>
+                <text x="360" y="246" font-size="14" fill="#F3A21C" text-anchor="middle" font-weight="700">📋 第三张 · reviews（复习）</text>
+                <text x="360" y="266" font-size="11" fill="#64748B" text-anchor="middle">card_id · mark (✓△✗) · reviewed_at</text>
+
+                <!-- 连接线 1：students → cards（左侧标签"属于谁"） -->
+                <line x1="280" y1="80" x2="280" y2="120" stroke="#333333" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <text x="210" y="106" font-size="10" fill="#64748B" text-anchor="middle">student_name</text>
+                <text x="210" y="118" font-size="9" fill="#64748B" text-anchor="middle">属于谁</text>
+
+                <!-- 连接线 2：cards → reviews（右侧标签"哪张卡"） -->
+                <line x1="460" y1="180" x2="460" y2="220" stroke="#F3A21C" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <text x="510" y="206" font-size="10" fill="#F3A21C" text-anchor="middle">card_id</text>
+                <text x="510" y="218" font-size="9" fill="#F3A21C" text-anchor="middle">哪张卡</text>
+
+                <!-- 底部提示 -->
+                <text x="360" y="304" font-size="11" fill="#333333" text-anchor="middle">上一张包含下一张：reviews 属于某张 card，card 属于某个 student</text>
+              </svg>
+            </div>
+            <p class="diagram-caption">3 张表是有"上下级"的：reviews 上面挂着 cards，cards 上面挂着 students。</p>
 
             <h4>📋 第一张：谁是你（students）</h4>
             <table class="compare-table">
