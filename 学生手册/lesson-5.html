@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 5 章 · 从浏览器到本地服务 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">5</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">从浏览器到本地服务</h1>
+      <p class="ch-desc">L4 把复习记录存在浏览器里。这一章让你理解「为什么数据应该住在数据库里」，以及怎么让 AI 帮你搭起来。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 场景问题 ============ -->
+    <h2>一个真实的问题</h2>
+    <p>你在 L4 复习卡片，标记「✓ 已掌握」。刷新页面，状态还在。</p>
+    <p>但是 ——</p>
+    <ul>
+      <li>你<strong>换个浏览器</strong>登录，状态没了</li>
+      <li>你<strong>换台电脑</strong>用，状态没了</li>
+      <li>你<strong>让 AI 帮你看</strong>「我上周复习过什么」，AI 说「我不知道」</li>
+    </ul>
+    <p>为什么会这样？因为 L4 的数据存在 <strong>浏览器的 localStorage</strong> 里 —— 浏览器关掉就锁在自己家，AI 进不去。</p>
+    <p>这一章要解决的就是：<strong>数据应该住在一个独立的地方</strong>。这个地方叫「数据库」。访问数据库的那个角色叫「服务」。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 工作流 4 步 ============ -->
+    <h2>📌 工作流（4 步）</h2>
+
+    <!-- 步骤 1 -->
+    <div class="big-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3 class="step-title">场景 · 复习数据为什么留不住</h3>
+        <p>三个不够 —— 不只是「理论上的问题」，是你 L4 上完后一定会撞到的具体场景。</p>
+        <details class="fold">
+          <summary>📖 三个真实场景 · 你会撞到哪个</summary>
+          <div class="fold-body">
+            <p><strong>场景 1：换电脑 / 换浏览器 = 数据归零</strong></p>
+            <p>L4 的数据存在 localStorage 里 —— 这是浏览器给每个网站分配的「小抽屉」。换浏览器、换电脑、清理浏览器数据，抽屉就没了。</p>
+            <p><strong>场景 2：AI 进不去你的复习历史</strong></p>
+            <p>你想让 AI 帮你分析「我哪类卡片总忘记」，AI 看不到你 localStorage 里的数据。AI 只能<strong>读文件</strong>，读不到浏览器的抽屉。</p>
+            <p><strong>场景 3：一学期下来数据爆掉</strong></p>
+            <p>localStorage 限额大约 5MB。听起来很大，但你加上「每次复习的时间戳」「每次的标记」「你自己的批注」，一学期下来可能到 4MB。再往下就报错。</p>
+            <p>三个场景共同指向一个解法：<strong>数据搬到独立的地方</strong>。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="big-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3 class="step-title">概念 · 服务是什么</h3>
+        <p>服务 = 一个<strong>永远在跑的小店员</strong>。你走开它还在电脑里值班，浏览器给它发请求，它接得住。</p>
+        <details class="fold">
+          <summary>📖 服务是什么 · 怎么验证它在跑</summary>
+          <div class="fold-body">
+            <p><strong>类比 · 永远在跑的小店员</strong></p>
+            <p>你可以这样想：</p>
+            <ul>
+              <li>浏览器 = 你（顾客）</li>
+              <li>服务 = 小店员（永远在店里）</li>
+              <li>数据库 = 保险箱（店员能打开）</li>
+              <li>你发请求 = 你对小店员说「把这条复习记录存保险箱」</li>
+              <li>店员存好 = 数据库里多了一条记录</li>
+            </ul>
+            <p><strong>服务的两个特征：</strong></p>
+            <ul>
+              <li><strong>有地址</strong> —— 通常是 <code>http://localhost:3000</code>，浏览器通过这个地址找到它</li>
+              <li><strong>永远在跑</strong> —— 你关掉浏览器它不关，除非电脑关机或你主动停止</li>
+            </ul>
+            <p><strong>怎么知道服务在跑？</strong></p>
+            <p>浏览器打开 <code>http://localhost:3000</code>，如果看到任何页面（哪怕是「服务运行中」一行字），说明服务在跑。看到「无法连接」说明服务没起。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="big-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3 class="step-title">概念 · 数据库是什么</h3>
+        <p>数据库 = 一个<strong>比 localStorage 大得多的保险箱</strong>。可以存几万条记录，AI 也能读它。</p>
+        <details class="fold">
+          <summary>📖 数据库 vs localStorage · 关键区别</summary>
+          <div class="fold-body">
+            <p><strong>localStorage 的局限：</strong></p>
+            <ul>
+              <li>存 5MB 上限</li>
+              <li>只在浏览器里，换电脑就丢</li>
+              <li>AI 进不去</li>
+              <li>查询慢（要在所有数据里翻）</li>
+            </ul>
+            <p><strong>数据库的优势：</strong></p>
+            <ul>
+              <li>能存几 GB 甚至更多</li>
+              <li>是一个<strong>文件</strong>，可以拷到任何电脑</li>
+              <li>AI 能直接读（因为它是个文件）</li>
+              <li>查询快（按索引找）</li>
+            </ul>
+            <p><strong>数据库长什么样？</strong></p>
+            <p>对你来说，数据库就是一个文件 —— 比如 <code>memory-cards.db</code>。你不用关心里面怎么存，你只需要知道：</p>
+            <ul>
+              <li>它在硬盘上</li>
+              <li>服务能打开它</li>
+              <li>AI 能读它</li>
+              <li>它和 localStorage 的本质区别是「独立于浏览器」</li>
+            </ul>
+            <p><strong>你不需要懂 SQL</strong>。你只需要知道：让 AI 帮你写「存一条」「读一条」「统计一下」的请求就行。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="big-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3 class="step-title">写 prompt · 让 AI 帮你搭起来</h3>
+        <p>整个升级过程不是你去敲命令、写代码，而是<strong>你写 prompt，AI 干脏活</strong>。但你得理解概念才能写出好的 prompt。</p>
+        <details class="fold">
+          <summary>📖 4.1 看一个 prompt 是什么样</summary>
+          <div class="fold-body">
+            <p>这是「让 AI 帮你检查 Node.js 是否安装」的一个 prompt 示例（仅展示，不要复制）：</p>
+            <div class="code-wrap">
+              <pre><code>你是我的电脑环境检查助手，不是通用聊天 AI。
+
+【角色】你懂 Node.js 安装和命令行
+【任务】帮我检查电脑是否安装了 Node.js
+【上下文】我是初中生，对命令行不熟，需要你一步步带我
+【输出要求】先告诉我检查思路，再告诉我具体敲哪条命令，最后把命令输出贴回来让我看</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <p>这是「<strong>展示</strong>」，不是「<strong>模板</strong>」。看一遍就行，下一段拆解它的结构。</p>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.2 拆解 prompt · 四要素结构</summary>
+          <div class="fold-body">
+            <p>一个能用的 prompt 通常有四块。少一块 AI 就会跑偏。</p>
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>要素</th>
+                  <th>是什么</th>
+                  <th>示例里是哪一句</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>角色</b></td><td>告诉 AI 它是谁</td><td>「你是我的电脑环境检查助手，不是通用聊天 AI」</td></tr>
+                <tr><td><b>任务</b></td><td>要 AI 做什么</td><td>「帮我检查电脑是否安装了 Node.js」</td></tr>
+                <tr><td><b>上下文</b></td><td>你的背景 / 限制</td><td>「我是初中生，对命令行不熟，需要你一步步带我」</td></tr>
+                <tr><td><b>输出</b></td><td>AI 该怎么给结果</td><td>「先告诉我思路，再告诉我具体命令，最后贴回输出」</td></tr>
+              </tbody>
+            </table>
+            <p><strong>为什么四要素都要有？</strong></p>
+            <ul>
+              <li>少「角色」：AI 不知道自己该用什么口吻，可能给你讲一堆无关的</li>
+              <li>少「任务」：AI 不知道做什么，会泛泛而谈</li>
+              <li>少「上下文」：AI 默认你是工程师，给的命令你敲不动</li>
+              <li>少「输出」：AI 可能直接跑命令不告诉你，导致你看不到过程</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.3 场景思考 · 你自己想写一个 prompt</summary>
+          <div class="fold-body">
+            <p>不需要你现在就写出来。但想一想这个场景：</p>
+            <div class="callout">
+              <p><strong>场景：</strong>你想让 AI 帮你启动一个本地服务，让浏览器能读写数据库。</p>
+              <p>你要发给 AI 的 prompt 里应该包含哪四块？每块大概写什么？</p>
+            </div>
+            <p>动手之前，先在脑子里过一遍：</p>
+            <ul>
+              <li><b>角色：</b>AI 是谁？「服务搭建助手」？「本地开发伙伴」？</li>
+              <li><b>任务：</b>要 AI 做什么？「帮我搭一个 Node 服务」？</li>
+              <li><b>上下文：</b>你的限制是什么？「我用 Node + SQLite」「我在 macOS」</li>
+              <li><b>输出：</b>AI 该给什么？「给我能跑的命令」「告诉我服务怎么验证在跑」</li>
+            </ul>
+            <p>下次真要搭的时候，按这个结构自己写一个 prompt —— 别复制，自己写。</p>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.4 验证 · 怎么知道 AI 做对了</summary>
+          <div class="fold-body">
+            <p>AI 执行完后，<strong>你</strong>要能验证它做对了。验证点：</p>
+            <ul>
+              <li><strong>服务在跑</strong> —— 浏览器打开 <code>http://localhost:3000</code> 看到页面</li>
+              <li><strong>数据库有内容</strong> —— 让 AI 给你看「数据库里有几条记录」</li>
+              <li><strong>浏览器能写</strong> —— L4 页面试着标一张卡为「✓」，让 AI 确认数据库里多了这条</li>
+              <li><strong>重启不丢</strong> —— 关掉服务再重启，数据还在</li>
+            </ul>
+            <p>任何一步不对，告诉 AI「这一步没成功」，让它排查。AI 会读日志 / 改命令 / 重新跑 —— <strong>这是你和 AI 协作的核心循环</strong>。</p>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.5 你要建的 3 张清单 · 字段定下来</summary>
+          <div class="fold-body">
+            <p>之前 L4 你做卡片时只有「问题 / 答案 / 章节」3 项，<strong>够用</strong>。但升级到数据库后，AI 要按固定结构写入数据 —— 字段必须一致，否则 AI 写不进去。</p>
+            <p>下面是 3 张清单的<strong>字段定义</strong>（你和 AI 都会用到）：</p>
+
+            <h4>📋 第一张：谁是你（students）</h4>
+            <table class="compare-table">
+              <thead>
+                <tr><th>显示名</th><th>字段名</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>名字</td><td><code>name</code></td><td>你的名字（你填）</td></tr>
+                <tr><td>加入时间</td><td><code>created_at</code></td><td>系统自动填</td></tr>
+              </tbody>
+            </table>
+
+            <h4>📋 第二张：你的卡片（cards）</h4>
+            <table class="compare-table">
+              <thead>
+                <tr><th>显示名</th><th>字段名</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>属于谁</td><td><code>student_name</code></td><td>你的名字（和第一张关联）</td></tr>
+                <tr><td>学科</td><td><code>subject</code></td><td>数学 / 英语 / 物理……</td></tr>
+                <tr><td>问题</td><td><code>question</code></td><td>卡片的正面</td></tr>
+                <tr><td>答案</td><td><code>answer</code></td><td>卡片的反面</td></tr>
+                <tr><td>加卡时间</td><td><code>created_at</code></td><td>系统自动填</td></tr>
+              </tbody>
+            </table>
+
+            <h4>📋 第三张：你的复习（reviews）</h4>
+            <table class="compare-table">
+              <thead>
+                <tr><th>显示名</th><th>字段名</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>哪张卡</td><td><code>card_id</code></td><td>第二张里的编号</td></tr>
+                <tr><td>标记</td><td><code>mark</code></td><td>✓ / △ / ✗</td></tr>
+                <tr><td>复习时间</td><td><code>reviewed_at</code></td><td>系统自动填</td></tr>
+              </tbody>
+            </table>
+
+            <details class="fold">
+              <summary>📖 发给 AI 的 prompt（让 AI 帮你建这 3 张清单）</summary>
+              <div class="fold-body">
+                <p>把下面这段话复制给 AI：</p>
+                <div class="code-wrap">
+                  <pre><code>请帮我在我的电脑上装一个本地数据库（SQLite），建以下 3 张清单。
+建完后告诉我是不是有 3 张清单 + 每张清单的字段是不是和下面一致。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+第一张：谁是你（students）
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+- 名字（name）：填你的名字
+- 加入时间（created_at）：系统自动填
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+第二张：你的卡片（cards）
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+- 属于谁（student_name）：填你的名字（和第一张关联）
+- 学科（subject）：填数学 / 英语等
+- 问题（question）：填卡片的正面
+- 答案（answer）：填卡片的反面
+- 加卡时间（created_at）：系统自动填
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+第三张：你的复习（reviews）
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+- 哪张卡（card_id）：填第二张里的编号
+- 标记（mark）：填 ✓ / △ / ✗
+- 复习时间（reviewed_at）：系统自动填</code></pre>
+                  <button class="copy-btn">复制</button>
+                </div>
+                <p><strong>注意：</strong>这是「<strong>展示</strong>」，不是「<strong>模板</strong>」。下次真的要让 AI 搭数据库时，自己写 —— 按 4.2 拆的四要素结构来。</p>
+              </div>
+            </details>
+
+            <details class="fold">
+              <summary>📖 验证 · AI 建好后怎么知道建对了</summary>
+              <div class="fold-body">
+                <p>完成后让 AI 告诉你：</p>
+                <ol>
+                  <li>是不是有 3 张清单（<code>students</code> / <code>cards</code> / <code>reviews</code>）</li>
+                  <li>每张清单的字段是不是和上面表格一致</li>
+                  <li>能不能看到「<code>name</code>」「<code>student_name</code>」「<code>mark</code>」这些字段</li>
+                </ol>
+                <p>任何一项不对，让 AI 重做。这是你和 AI 协作的核心循环。</p>
+              </div>
+            </details>
+
+            <div class="callout">
+              <p><strong>为什么字段必须一致？</strong></p>
+              <p>L6 上云端时也用同样的 3 张清单、同样的字段。你现在定义一次，L6 直接对接，<strong>不需要重新填数据</strong>。</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 完成检查 ============ -->
+    <h2>✅ 完成检查</h2>
+    <p>做完后自己打勾：</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> 我能用一句话解释「localStorage 和数据库的区别」</label></li>
+      <li><label><input type="checkbox"> 我能用类比解释「服务是什么」</label></li>
+      <li><label><input type="checkbox"> 我知道为什么 L4 的数据换电脑会丢</label></li>
+      <li><label><input type="checkbox"> 我能拆解一个 prompt 的四要素（角色 / 任务 / 上下文 / 输出）</label></li>
+      <li><label><input type="checkbox"> 我知道怎么验证 AI 帮我搭的服务在跑</label></li>
+    </ul>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="lesson-4.html">← 上一章 · L4 记忆卡片</a>
+    <a class="ch-nav-link" href="lesson-ai-capabilities.html">回到 AI 能力全景图 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据概览 · 用 AI Agent 学学习</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="admin-topbar">
+  <a class="brand" href="../index.html">用 AI Agent 学学习</a>
+  <a class="back" href="../index.html">← 返回首页</a>
+</header>
+
+<main class="admin-container">
+
+  <!-- ============ 头部 ============ -->
+  <section class="admin-head">
+    <h1 class="admin-title">📊 数据概览</h1>
+    <p class="admin-desc">所有学生的卡片、复习记录、统计进度。这里只读，不会改任何数据。</p>
+    <div class="admin-meta">
+      <span id="last-updated" class="meta-pill">加载中...</span>
+      <button id="refresh-btn" class="refresh-btn">🔄 刷新</button>
+    </div>
+  </section>
+
+  <!-- ============ 总览统计 ============ -->
+  <section class="overview">
+    <div class="ov-card">
+      <div class="ov-num" id="ov-students">—</div>
+      <div class="ov-label">学生</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-num" id="ov-cards">—</div>
+      <div class="ov-label">总卡数</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-num" id="ov-reviews">—</div>
+      <div class="ov-label">复习记录</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-num" id="ov-subjects">—</div>
+      <div class="ov-label">学科数</div>
+    </div>
+  </section>
+
+  <!-- ============ 学生进度表 ============ -->
+  <section class="section-block">
+    <h2 class="section-title">👥 学生进度</h2>
+    <p class="section-desc">每个学生一行 · 卡数 / 三色标记分布 / 学科覆盖</p>
+    <div class="table-wrap">
+      <table class="students-table" id="students-table">
+        <thead>
+          <tr>
+            <th>学生</th>
+            <th>卡数</th>
+            <th>学科</th>
+            <th>复习次数</th>
+            <th>已掌握</th>
+            <th>半掌握</th>
+            <th>未掌握</th>
+            <th>掌握率</th>
+          </tr>
+        </thead>
+        <tbody id="students-tbody">
+          <tr><td colspan="8" class="empty-row">加载中...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 学科覆盖 ============ -->
+  <section class="section-block">
+    <h2 class="section-title">📚 学科覆盖</h2>
+    <p class="section-desc">按学科看卡片分布</p>
+    <div id="subject-grid" class="subject-grid">
+      <div class="empty-row">加载中...</div>
+    </div>
+  </section>
+
+  <!-- ============ 最近复习活动 ============ -->
+  <section class="section-block">
+    <h2 class="section-title">⏱ 最近复习</h2>
+    <p class="section-desc">最近 20 条复习记录</p>
+    <div class="table-wrap">
+      <table class="recent-table" id="recent-table">
+        <thead>
+          <tr>
+            <th>时间</th>
+            <th>学生</th>
+            <th>学科</th>
+            <th>问题</th>
+            <th>标记</th>
+          </tr>
+        </thead>
+        <tbody id="recent-tbody">
+          <tr><td colspan="5" class="empty-row">加载中...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/admin-view.js"></script>
+</body>
+</html>

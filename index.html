@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用 AI Agent 学学习</title>
+  <link rel="stylesheet" href="https://laoyizun.github.io/ai-agent-study-handbook/学生手册/css/style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(at 20% 0%, rgba(243, 162, 28, 0.08), transparent 50%),
+        radial-gradient(at 80% 100%, rgba(243, 162, 28, 0.05), transparent 50%),
+        var(--bg);
+    }
+    .portal {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .portal h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 16px 0 12px;
+      color: var(--ink);
+    }
+    .portal .lede {
+      font-size: 17px;
+      color: var(--ink-mute);
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .portal-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .portal-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(243, 162, 28, 0.08);
+    }
+    .portal-card .icon {
+      width: 56px;
+      height: 56px;
+      background: var(--orange-08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .portal-card .title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .portal-card .desc {
+      font-size: 13px;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+    .portal-footer {
+      color: var(--ink-mute);
+      font-size: 13px;
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+  <main class="portal">
+    <div style="font-size:13px;color:var(--ink-mute);letter-spacing:0.1em;">AI 协作素养课 · DAILY LEARNING</div>
+    <h1>用 AI Agent 学学习</h1>
+    <p class="lede">
+      面向初中生的 AI 协作素养课程。以学生日常学业为内容载体，<br>
+      训练学生调用 AI Agent 解决真实问题的底层能力。
+    </p>
+
+    <div class="portal-grid">
+      <a href="学生手册/" class="portal-card">
+        <div class="icon">📘</div>
+        <div class="title">学生手册</div>
+        <div class="desc">已学章节 · 工作空间 / 闪念本 / 记忆卡片 / 本地服务</div>
+      </a>
+      <a href="课设/" class="portal-card">
+        <div class="icon">📐</div>
+        <div class="title">老师课设</div>
+        <div class="desc">课堂设计 · 老师视角 · 备课资料</div>
+      </a>
+      <a href="admin/" class="portal-card">
+        <div class="icon">📊</div>
+        <div class="title">数据概览</div>
+        <div class="desc">查看班级所有学生的卡片与复习情况</div>
+      </a>
+    </div>
+
+    <div class="portal-footer">
+      卡住不是失败，是信号 · 这门课的全部价值在学生主动调用 AI 的那一刻
+    </div>
+  </main>
+</body>
+</html>

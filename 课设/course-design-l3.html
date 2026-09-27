@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>L3 课设 · 让 AI 输出变成可复用资产 · 老师用</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-brand">用 AI Agent 学学习 · 课设</a>
+      <a href="index.html" class="site-nav-back">← 课设目录</a>
+    </div>
+  </nav>
+
+  <header class="ch-head">
+    <div class="ch-num">L3</div>
+    <div class="ch-text">
+      <div class="ch-eyebrow">第三节课设 · 老师用</div>
+      <h1 class="ch-h">让 AI 输出变成可复用资产</h1>
+      <p class="ch-d">90 分钟分段 · 学生动作 / 老师动作 / 撞墙点 / 闪念本模板 / 自查标准。</p>
+    </div>
+  </header>
+
+  <article class="ch-body">
+
+    <!-- ============ 课前声明 ============ -->
+    <div class="tch-banner">
+      <h3>课前 · 学情起点</h3>
+      <p>学生已上完 L1、L2。能建工作空间与多学科任务对话，会用结构化开场白、补充个人信息 prompt、对话审计 prompt，会方式 A / B 跨对话信息共享。</p>
+      <p>但学生普遍撞过的墙：</p>
+      <ul style="margin: 6px 0;">
+        <li>以为课程目标是「做网页」</li>
+        <li>开场白极简</li>
+        <li>新对话丢失上下文</li>
+        <li>闪念本字段不知道怎么填</li>
+        <li>进度页生成但没内容</li>
+        <li>错把单学科内容当进度看板</li>
+      </ul>
+      <p><strong>L3 的核心使命：</strong>让学生从「会对话」跨到「会沉淀」 —— AI 的输出不能只活在对话里，要变成可复用的资产。</p>
+    </div>
+
+    <div class="callout">
+      <p><span class="callout-label">核心命题</span>上周 AI 给你讲的某个概念，下周你想用时 AI 又得重讲 —— 怎么让这个好东西<strong>沉淀下来</strong>？</p>
+    </div>
+
+    <!-- ============ 课前准备 ============ -->
+    <div class="tch-prep">
+      <h3>课前准备清单</h3>
+      <ul>
+        <li><strong>老师演示用的真卡点</strong>：挑一个本班学生这周真实遇到的卡点（比如一元二次方程的几何意义），用来演示闪念本的诞生</li>
+        <li><strong>闪念本模板 v1</strong>：建一个空白 md 文件，模板字段见本页「闪念本模板」段</li>
+        <li><strong>三种沉淀方式的 prompt 模板</strong>：复制粘贴版 / 让 AI 生成片段版 / 学科闪念本版，复制到 workbuddy 工作空间里</li>
+        <li><strong>截图文案</strong>：演示「让 AI 输出 → 复制 → 沉淀」流程的截图位</li>
+        <li><strong>评估用的对照表</strong>：三种沉淀方式对比表的空白模板（打印 6 份）</li>
+      </ul>
+    </div>
+
+    <!-- ============ 90 分钟时间线 ============ -->
+    <div class="tch-timeline">
+      <span class="tch-timeline-chip">导入 5′</span>
+      <span class="tch-timeline-chip">暴露 10′</span>
+      <span class="tch-timeline-chip">演示 15′</span>
+      <span class="tch-timeline-chip">演练 35′</span>
+      <span class="tch-timeline-chip">共建 20′</span>
+      <span class="tch-timeline-chip">总结 5′</span>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 段 1：导入 ============ -->
+    <div class="tch-segment">
+      <div class="tch-segment-head">
+        <div class="tch-segment-num">1</div>
+        <div class="tch-segment-title">
+          <h3>导入 · 互相展示上周的进度页</h3>
+          <p>5 分钟 · 暴露「不可用」问题</p>
+        </div>
+        <div class="tch-segment-time">5′</div>
+      </div>
+
+      <div class="tch-roles">
+        <div class="tch-role teacher">
+          <span class="tch-role-label">老师动作</span>
+          让 2–3 个学生打开上周的进度页 / 仪表盘，<strong>投屏</strong>给同学看。老师问：「这周能用吗？」
+        </div>
+        <div class="tch-role student">
+          <span class="tch-role-label">学生动作</span>
+          互相看上周的产出物，点评「能用 / 不能用」。每个学生用 30 秒说一个判断。
+        </div>
+      </div>
+
+      <div class="tch-intent">
+        <p><strong>设计意图：</strong>让全班共同看到「成果物长什么样才算真的能用」。</p>
+      </div>
+
+      <div class="tch-wall">
+        <span class="tch-wall-label">撞墙点预案</span>
+        <p><strong>如果学生说「我的能用」</strong> → 老师追问：「那你现在能用它干什么？」逼学生展示具体用法。</p>
+        <p><strong>如果学生沉默 / 找不到上周的产出物</strong> → 老师不要硬拉，自己演示一个「空进度页」是什么样。</p>
+      </div>
+    </div>
+
+    <!-- ============ 段 2：暴露 ============ -->
+    <div class="tch-segment">
+      <div class="tch-segment-head">
+        <div class="tch-segment-num">2</div>
+        <div class="tch-segment-title">
+          <h3>暴露 · AI 的输出无法直接复用</h3>
+          <p>10 分钟 · 把上周的好东西拷到新对话看 AI 能不能接</p>
+        </div>
+        <div class="tch-segment-time">10′</div>
+      </div>
+
+      <div class="tch-roles">
+        <div class="tch-role teacher">
+          <span class="tch-role-label">老师动作</span>
+          演示：把上周对话里 AI 给的一段好解释粘到一个新对话，问 AI「这段什么意思？」 —— 让全班看 AI 怎么回应。
+        </div>
+        <div class="tch-role student">
+          <span class="tch-role-label">学生动作</span>
+          自己找一段上周对话里 AI 给的好输出，复制粘贴到新对话里，看 AI 怎么反应。
+        </div>
+      </div>
+
+      <div class="tch-intent">
+        <p><strong>设计意图：</strong>L3 的核心障碍 —— 学生会发现 AI 输出「粘过去了但接不上」。这是引出「沉淀」的钩子。</p>
+      </div>
+
+      <div class="tch-wall">
+        <span class="tch-wall-label">撞墙点预案</span>
+        <p><strong>如果学生说「AI 给的答案没接上」</strong> → 老师问「那你希望它怎么接？」 引出 L3 的核心命题 —— 沉淀。</p>
+        <p><strong>如果有学生说「我直接复制题目给新对话」</strong> → 老师区分「题目复制」和「AI 输出沉淀」是两件事，本节课聚焦后者。</p>
+      </div>
+    </div>
+
+    <!-- ============ 段 3：演示 ============ -->
+    <div class="tch-segment">
+      <div class="tch-segment-head">
+        <div class="tch-segment-num">3</div>
+        <div class="tch-segment-title">
+          <h3>演示 · 三种沉淀方式</h3>
+          <p>15 分钟 · 老师演示完整流程</p>
+        </div>
+        <div class="tch-segment-time">15′</div>
+      </div>
+
+      <div class="tch-roles">
+        <div class="tch-role teacher">
+          <span class="tch-role-label">老师动作</span>
+          <strong>全程投屏。</strong>演示三种沉淀方式：
+          <ol style="margin: 6px 0 0; padding-left: 20px;">
+            <li><strong>复制粘贴</strong>：把 AI 输出直接粘到闪念本 md 文件里</li>
+            <li><strong>让 AI 生成片段</strong>：让 AI 输出「下次新对话开场可以直接粘贴的提示词片段」</li>
+            <li><strong>学科闪念本</strong>：在闪念本里按学科组织，每条包含「卡点 + AI 输出 + 我讲通的版本」</li>
+          </ol>
+        </div>
+        <div class="tch-role student">
+          <span class="tch-role-label">学生动作</span>
+          跟着老师做 —— 在自己的 workbuddy 工作空间里新建一个空 md 文件「数学闪念本.md」，等待老师把模板字段发出来。
+        </div>
+      </div>
+
+      <div class="tch-intent">
+        <p><strong>设计意图：</strong>不超 15 分钟的演示。学生最缺的是「完整看一遍流程」，而不是再听一节课。</p>
+      </div>
+
+      <div class="tch-wall">
+        <span class="tch-wall-label">撞墙点预案</span>
+        <p><strong>如果学生跟不上演示</strong> → 老师在演示到第三种方式时停顿 30 秒，让落后的同学跟上。</p>
+      </div>
+
+      <div class="placeholder">
+        📷 截图占位 · 演示「AI 输出 → 复制 → 沉淀到闪念本」的完整流程
+        <span class="path">images/l3-demo-flow.png</span>
+        <span class="hint">老师演示时截屏，文件名参考</span>
+      </div>
+    </div>
+
+    <!-- ============ 段 4：演练 ============ -->
+    <div class="tch-segment">
+      <div class="tch-segment-head">
+        <div class="tch-segment-num">4</div>
+        <div class="tch-segment-title">
+          <h3>演练 · 学生在自己的真学科上跑一遍</h3>
+          <p>35 分钟 · 学生操作为主 · 教师陪跑</p>
+        </div>
+        <div class="tch-segment-time">35′</div>
+      </div>
+
+      <div class="tch-roles">
+        <div class="tch-role teacher">
+          <span class="tch-role-label">老师动作</span>
+          <strong>陪跑</strong>，不讲课。学生在自己真学科上走一遍流程。老师轮流帮：
+          <ul style="margin: 6px 0 0; padding-left: 20px;">
+            <li>找不到合适的 AI 输出沉淀 → 提示「挑你上周最卡的那一段」</li>
+            <li>闪念本字段不知道填什么 → 给闪念本模板 v1</li>
+            <li>AI 给的内容太杂 → 提示「只挑能复用的，不要贪多」</li>
+          </ul>
+        </div>
+        <div class="tch-role student">
+          <span class="tch-role-label">学生动作</span>
+          走完这 5 步：
+          <ol style="margin: 6px 0 0; padding-left: 20px;">
+            <li>打开上周对话，挑一段 AI 给的好输出</li>
+            <li>决定沉淀到哪个闪念本文件（数学 / 语文 / 英语 / 跨学科）</li>
+            <li>用闪念本模板填字段</li>
+            <li>让 AI 把闪念本读一下，确认结构合理</li>
+            <li>开一个新学科对话，让 AI 读取闪念本，看接不接得上</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="tch-intent">
+        <p><strong>设计意图：</strong>整节课的核心 —— 学生独立走通「对话 → 沉淀 → 反向调用」的最小闭环。</p>
+      </div>
+
+      <div class="tch-wall">
+        <span class="tch-wall-label">撞墙点预案</span>
+        <p><strong>撞墙 1：学生找不到上周对话的好输出</strong> → 老师演示「我上周对话里印象最深的一段」，给一个具体例子。</p>
+        <p><strong>撞墙 2：闪念本字段太多填不下去</strong> → 老师引导「只填必填字段，其他先留空」。闪念本是 v1，迭代着来。</p>
+        <p><strong>撞墙 3：新对话读取闪念本失败</strong> → 老师帮助检查「文件路径是不是在工作空间下」。</p>
+        <p><strong>撞墙 4：学生过早觉得「这个闪念本没用」</strong> → 老师提醒「闪念本的价值是第 8 课之后才显现 —— 沉淀需要积累」。</p>
+      </div>
+    </div>
+
+    <!-- ============ 段 5：共建 ============ -->
+    <div class="tch-segment">
+      <div class="tch-segment-head">
+        <div class="tch-segment-num">5</div>
+        <div class="tch-segment-title">
+          <h3>共建 · 闪念本模板 v1</h3>
+          <p>20 分钟 · 全班共识</p>
+        </div>
+        <div class="tch-segment-time">20′</div>
+      </div>
+
+      <div class="tch-roles">
+        <div class="tch-role teacher">
+          <span class="tch-role-label">老师动作</span>
+          主持共建。让每个学生说「我刚才填了哪些字段、哪些是必要的、哪些可以删」。老师汇总到一份「闪念本模板 v1」。
+        </div>
+        <div class="tch-role student">
+          <span class="tch-role-label">学生动作</span>
+          互相听、互相挑战：「你那个字段有必要吗？」「这个字段能复用吗？」
+        </div>
+      </div>
+
+      <div class="tch-intent">
+        <p><strong>设计意图：</strong>共建模板的过程本身就是元认知训练 —— 学生在判断「这个字段要不要保留」时，已经在做「沉淀的颗粒度决策」。</p>
+      </div>
+
+      <div class="tch-wall">
+        <span class="tch-wall-label">撞墙点预案</span>
+        <p><strong>如果学生意见分裂</strong> → 老师不强制共识，分两组都行 —— 闪念本本来就是个人化的。</p>
+      </div>
+    </div>
+
+    <!-- ============ 段 6：总结 ============ -->
+    <div class="tch-segment">
+      <div class="tch-segment-head">
+        <div class="tch-segment-num">6</div>
+        <div class="tch-segment-title">
+          <h3>总结 · 对话审计 + 课后预告</h3>
+          <p>5 分钟</p>
+        </div>
+        <div class="tch-segment-time">5′</div>
+      </div>
+
+      <div class="tch-roles">
+        <div class="tch-role teacher">
+          <span class="tch-role-label">老师动作</span>
+          让每个学生发「总结今天的学习情况」 prompt。同时预告下周 L4 的内容。
+        </div>
+        <div class="tch-role student">
+          <span class="tch-role-label">学生动作</span>
+          发 prompt 让 AI 总结。学生口头补一句：「我今天解锁的新能力是……」
+        </div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 闪念本模板 ============ -->
+    <h2>闪念本模板 v1</h2>
+    <p>下面这份是老师演示用的第一份模板。字段精简到 5 个 —— 多了学生填不动，少了闪念本没价值。</p>
+
+    <div class="tpl">
+      <div class="tpl-head">
+        <div class="tpl-icon">📓</div>
+        <div class="tpl-name">闪念本模板 v1 · 老师演示用</div>
+      </div>
+      <div class="tpl-body">
+        <div class="code-wrap">
+          <button class="copy-btn" onclick="copyCode(this)">复制</button>
+<pre><code># 数学闪念本 · [姓名] · v1
+
+## 一、学科元信息
+- 学科：数学
+- 当前主章节：一元二次方程
+- 学期进度：第 3 周 / 共 16 周
+- 学习目标：月考下后能稳定做对判别式类题目
+
+## 二、本周卡点
+- 卡点 1：判别式的几何意义（不知道 Δ&gt;0 时为什么图像交 x 轴两点）
+- 卡点 2：配方法的代数变形（经常漏掉 ±号）
+- 卡点 3：……
+
+## 三、AI 给的好解释（可直接复用的输出）
+### 卡点 1 的好解释
+&gt; AI 输出的原文粘贴到这里（最好是一段能独立读懂的内容）
+
+### 卡点 2 的好解释
+&gt; ……
+
+## 四、我讲通的版本（学生用自己话复述）
+- 卡点 1：判别式 &gt; 0 时……
+- 卡点 2：配方时先……再……
+
+## 五、下周要继续
+- 复习：……
+- 预习：……
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="tpl-analysis">
+      <h4>字段取舍的设计逻辑</h4>
+      <ol>
+        <li><b>学科元信息</b>字段 —— 让闪念本可被快速定位（不读全文就知道这个本子的语境）</li>
+        <li><b>本周卡点</b>字段 —— 是闪念本的「索引」，未来 AI 反向调用时从这里开始</li>
+        <li><b>AI 给的好解释</b>字段 —— 是 v1 的核心，v2 会加「我讲通的版本」</li>
+        <li><b>我讲通的版本</b>字段 —— 鼓励学生用自己话复述（费曼学习法的文件化）</li>
+        <li><b>下周要继续</b>字段 —— 让闪念本有「下一站」，形成连续性</li>
+      </ol>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 对照表 ============ -->
+    <h2>三种沉淀方式对比表</h2>
+    <p>学生填完这张表，应该能根据场景判断「这次用哪种」。</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th><span class="badge">A</span>复制粘贴</th>
+          <th><span class="badge">B</span>让 AI 生成片段</th>
+          <th><span class="badge">C</span>学科闪念本</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>操作形式</b></td>
+          <td>手复制 AI 输出到闪念本</td>
+          <td>让 AI 主动生成可粘贴片段</td>
+          <td>按学科组织结构化沉淀</td>
+        </tr>
+        <tr>
+          <td><b>沉淀成本</b></td>
+          <td>低（手复制）</td>
+          <td>中（要先让 AI 输出）</td>
+          <td>高（要填字段）</td>
+        </tr>
+        <tr>
+          <td><b>复用度</b></td>
+          <td>中（散落在闪念本里）</td>
+          <td>高（专门为复用设计）</td>
+          <td>最高（结构化反查）</td>
+        </tr>
+        <tr>
+          <td><b>适合场景</b></td>
+          <td>临时记录、灵感片段</td>
+          <td>开新对话前准备</td>
+          <td>长期学科沉淀</td>
+        </tr>
+        <tr>
+          <td><b>不适合场景</b></td>
+          <td>系统性整理</td>
+          <td>小段、不值得专门生成</td>
+          <td>临时性、一次性内容</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 关键 prompt 模板 ============ -->
+    <h2>关键 prompt 模板</h2>
+
+    <h3>1. 「让 AI 生成片段」prompt</h3>
+    <p>学生把这段发给 AI，AI 输出可粘贴进新对话的提示词片段。</p>
+
+    <div class="tpl">
+      <div class="tpl-head">
+        <div class="tpl-icon">B</div>
+        <div class="tpl-name">让 AI 输出片段 prompt</div>
+      </div>
+      <p class="tpl-when">演练环节 · 想要沉淀 AI 输出时用</p>
+      <div class="tpl-body">
+        <div class="code-wrap">
+          <button class="copy-btn" onclick="copyCode(this)">复制</button>
+<pre><code>把我们刚才这段对话里你给我的最好解释，整理成一段可粘贴的提示词片段。
+
+要求：
+1. 独立可读（粘到新对话里 AI 也能接住）
+2. 包含上下文（学科 + 卡点 + 关键概念）
+3. 不要包含「你刚才说的是」这种引用旧对话的话
+
+输出格式：直接是提示词内容，不要解释。</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h3>2. 「AI 读取闪念本」开场白</h3>
+    <p>学生开新对话时，发给 AI 让它自动读闪念本。</p>
+
+    <div class="tpl">
+      <div class="tpl-head">
+        <div class="tpl-icon">C</div>
+        <div class="tpl-name">闪念本读取开场白</div>
+      </div>
+      <p class="tpl-when">开新对话 · 想让 AI 接续闪念本时用</p>
+      <div class="tpl-body">
+        <div class="code-wrap">
+          <button class="copy-btn" onclick="copyCode(this)">复制</button>
+<pre><code>读一下这个工作空间下的 [学科]闪念本.md，了解我之前学过什么、卡在哪里。
+
+然后告诉我：
+1. 你读到了什么（简短复述）
+2. 你建议我从哪个卡点继续
+3. 我没读到的文件就跳过，不要瞎猜
+
+读完我们再继续。</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 课后自查 ============ -->
+    <h2>课后自查</h2>
+    <p>L3 自查标准对应「AI 能力全景图」自查表的 L3 行：</p>
+
+    <div class="tch-check">
+      <span class="tch-check-label">达标检查</span>
+      <p><strong>给每个学科建了独立的闪念本</strong>（含「卡点 + AI 输出」）</p>
+      <p><strong>区分了三种沉淀方式</strong>（复制粘贴 / 让 AI 生成片段 / 学科闪念本）</p>
+      <p><strong>参与了闪念本模板 v1 的共建</strong></p>
+    </div>
+
+    <div class="warn">
+      <p><strong>未达标的常见迹象：</strong>闪念本只填了一半 / 闪念本字段全是模板内容没有真东西 / 学生不知道怎么读闪念本给 AI</p>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 给 L4 的钩子 ============ -->
+    <h2>给下节课 L4 留的钩子</h2>
+
+    <p>L3 的闪念本是<strong>手动维护</strong>的 —— 学生手挑好输出、手填字段、手动更新。这会撞两个新墙：</p>
+
+    <ul>
+      <li><strong>墙 1：维护成本</strong> —— 闪念本积累一周后，学生懒得手动更新了</li>
+      <li><strong>墙 2：质量参差</strong> —— 学生自己挑的「好输出」未必真的好</li>
+    </ul>
+
+    <p>L4 的核心议题 —— <strong>让 AI 主动更新闪念本</strong>，引出「自动更新 prompt」。</p>
+
+    <div class="ch-tip">
+      <p><strong>布置作业：</strong>不布置「继续填闪念本」（这会让学生烦）。改布置「挑你闪念本里让你印象最深的一条，下节课带来说说为什么这条值得沉淀」。</p>
+    </div>
+
+  </article>
+
+  <nav class="ch-nav">
+    <a href="course-design-l2.html" class="prev"><span class="arrow">←</span><span class="text">上一节 · L2 跨对话信息共享</span></a>
+    <a href="index.html" class="next"><span class="text">课设目录</span><span class="arrow">→</span></a>
+  </nav>
+
+  <div class="footer">
+    这份课设由老师整理 · 内容来自「Daily Learning」自我学习教学设计<br>
+    卡住不是失败，是信号
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+/* ===== 方块鸟 Cubicbird 设计变量 ===== */
+:root {
+  --ink: #1f2937;
+  --ink-soft: #374151;
+  --ink-faint: #6b7280;
+  --paper: #ffffff;
+  --paper-soft: #f8fafc;
+  --paper-edge: #f1f5f9;
+  --line: #e5e7eb;
+  --line-soft: #f3f4f6;
+  --accent: #F3A21C;
+  --accent-soft: #fef3c7;
+  --good: #16a34a;
+  --good-soft: #dcfce7;
+  --warn: #d97706;
+  --warn-soft: #fef3c7;
+  --bad: #dc2626;
+  --bad-soft: #fee2e2;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow-1: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 1px rgba(15, 23, 42, 0.03);
+  --shadow-2: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --maxw: 1080px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --mono: "SF Mono", "Menlo", "Consolas", "Roboto Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper-soft);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== 顶部导航 ===== */
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-topbar .brand {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.admin-topbar .back {
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+
+.admin-topbar .back:hover {
+  color: var(--accent);
+}
+
+/* ===== 容器 ===== */
+.admin-container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 36px 28px 60px;
+}
+
+/* ===== 头部 ===== */
+.admin-head {
+  margin-bottom: 28px;
+}
+
+.admin-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.admin-desc {
+  font-size: 14px;
+  color: var(--ink-faint);
+  margin: 0 0 16px;
+}
+
+.admin-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meta-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.refresh-btn {
+  padding: 6px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: var(--font);
+  transition: all 0.15s;
+}
+
+.refresh-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.refresh-btn:active {
+  transform: scale(0.97);
+}
+
+.refresh-btn.loading {
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+
+/* ===== 总览卡片 ===== */
+.overview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 720px) {
+  .overview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ov-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-1);
+  transition: all 0.18s;
+}
+
+.ov-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.ov-num {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.ov-label {
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+
+/* ===== 区块 ===== */
+.section-block {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-1);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin: 0 0 18px;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.students-table, .recent-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.students-table th, .recent-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-soft);
+}
+
+.students-table td, .recent-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink-soft);
+  vertical-align: top;
+}
+
+.students-table tr:last-child td,
+.recent-table tr:last-child td {
+  border-bottom: none;
+}
+
+.students-table tr:hover td,
+.recent-table tr:hover td {
+  background: var(--paper-soft);
+}
+
+.empty-row {
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 13px;
+  padding: 24px 12px;
+}
+
+/* ===== 学生名 ===== */
+.student-name {
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+/* ===== 学科 chip ===== */
+.subject-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 200px;
+}
+
+.subject-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* ===== 复习标记 ===== */
+.mark-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.mark-done {
+  background: var(--good-soft);
+  color: var(--good);
+}
+
+.mark-half {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.mark-bad {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+
+/* ===== 掌握率条 ===== */
+.rate-bar {
+  width: 80px;
+  height: 8px;
+  background: var(--line-soft);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.rate-fill {
+  height: 100%;
+  background: var(--good);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.rate-fill.mid { background: var(--warn); }
+.rate-fill.low { background: var(--bad); }
+
+.rate-text {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-left: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rate-wrap {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== 学科覆盖网格 ===== */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.subject-cell {
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+}
+
+.subject-cell-name {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.subject-cell-count {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* ===== 最近复习表 ===== */
+.recent-question {
+  max-width: 320px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.recent-time {
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ===== 错误提示 ===== */
+.error-banner {
+  background: var(--bad-soft);
+  border: 1px solid var(--bad);
+  color: var(--bad);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 20px;
+}

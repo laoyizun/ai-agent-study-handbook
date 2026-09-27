@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 1 章 · 建工作空间 + 开第一个学科对话 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">1</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">建工作空间 + 开第一个学科对话</h1>
+      <p class="ch-desc">从「打开 AI 直接问」到「建工作空间和 AI 协作」—— 这一章是后面所有课的起点。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 思考引导 ============ -->
+    <h2>思考：你平时是怎么用 AI 的</h2>
+    <p>大多数同学打开 AI 的方式是「有问题 → 问 → 关」。这一章要做的，是把你的 AI 学习关系从「一次性问答」升级成「可延续的协作关系」。</p>
+    <p>先想想看：你现在打开 AI 时，AI 知道你是什么年级、卡在哪、喜欢怎么讲吗？如果不知道，那就对了 —— 这一章要解决的就是这个。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 工作流 5 步 ============ -->
+    <h2>📌 工作流（5 步）</h2>
+
+    <!-- 步骤 1 -->
+    <div class="big-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3 class="step-title">认识 workbuddy 工作空间</h3>
+        <p>工作空间是「一组相关对话 + 共享知识库」的容器。不同学科可以用不同对话，但同一学科的资料会跨对话共享。</p>
+        <details class="fold">
+          <summary>📖 workbuddy 是什么 · 工作空间能放什么</summary>
+          <div class="fold-body">
+            <p>workbuddy 是一个 AI Agent 工具。和你用过的聊天 AI 不同，它有 <strong>工作空间</strong>这个概念。一个工作空间里可以有：</p>
+            <ul>
+              <li><strong>多个学科任务对话</strong>（数学对话、英语对话...）</li>
+              <li><strong>知识库文件</strong>（学习者档案、闪念本、进度数据...）</li>
+              <li><strong>共享上下文</strong>（同一工作空间里的对话能看到彼此的文件）</li>
+            </ul>
+            <p>你可以这样类比：</p>
+            <div class="callout">
+              <p><strong>工作空间 = 一个学习房间</strong>。每个学科对话是房间里的一张桌子，文件是房间里的书架。AI 进房间后会自动看到书架上的所有书。</p>
+            </div>
+            <div class="placeholder" data-name="images/01-workbuddy-overview.png">📷 workbuddy 主界面截图<br><small>路径: images/01-workbuddy-overview.png</small></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="big-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3 class="step-title">建你的第一个工作空间</h3>
+        <p>给自己建一个学习房间。命名方式建议是「学科 / 学期 / 年级」，方便以后辨认。</p>
+        <details class="fold">
+          <summary>📖 操作步骤</summary>
+          <div class="fold-body">
+            <ol>
+              <li>打开 workbuddy，点击「新建工作空间」</li>
+              <li>命名（例如「初中数学 · 2026 秋季」）</li>
+              <li>进入新工作空间，确认是空的</li>
+            </ol>
+            <div class="placeholder" data-name="images/02-create-workspace.png">📷 新建工作空间按钮<br><small>路径: images/02-create-workspace.png</small></div>
+            <div class="placeholder" data-name="images/04-workspace-layout.png">📷 建好的空工作空间<br><small>路径: images/04-workspace-layout.png</small></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="big-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3 class="step-title">在工作空间下建第一个学科对话</h3>
+        <p>选你最常卡的一门学科，建一个对话。每个学科用一个独立对话。</p>
+        <details class="fold">
+          <summary>📖 操作步骤 + 为什么一个学科一个对话</summary>
+          <div class="fold-body">
+            <ol>
+              <li>进入你的工作空间，点击「新建对话」</li>
+              <li>命名（例如「数学 · 一元二次方程」）</li>
+              <li>确认这个对话 <strong>归属</strong> 于你刚才建的工作空间（不在工作空间下的对话后面会出问题）</li>
+            </ol>
+            <div class="placeholder" data-name="images/03-create-dialog.png">📷 新建对话按钮<br><small>路径: images/03-create-dialog.png</small></div>
+            <p><strong>为什么一个学科一个对话？</strong>不同学科有不同上下文（公式、术语、思维模式），混在一起 AI 会乱。一个学科一个对话 = 一张桌子放一类书。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="big-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3 class="step-title">写开场白 · 让 AI 进入陪练模式</h3>
+        <p>第一次和 AI 对话，发一段固定的开场白。这段话的作用是「告诉 AI 你是谁、要它做什么、不能做什么」。</p>
+        <details class="fold">
+          <summary>📖 开场白模板（含复制按钮）</summary>
+          <div class="fold-body">
+            <div class="code-wrap">
+              <pre><code>你是我的 [学科] 学习陪练，不是老师。
+陪练 = 我自己做、你帮我纠错；老师 = 你讲我听。
+
+请先做这一件事（没有文件就跳过）：
+读这个工作空间下的所有文件，看有没有已经存在的「学习者档案.md」或者学科闪念本。
+
+当前任务：
+- 主题：[这次具体要学的知识点]
+- 我已经懂了：[你已经会的部分，AI 不用再讲]
+- 我卡在：[你具体卡在哪]
+- 我试过：[你试过但没解决的方法]
+
+我对你的四条要求（不要改）：
+1. 不要直接给答案，先问我「你想从哪里切入」
+2. 我卡住时换三种角度重讲（代数 / 几何 / 类比，或其他你想到的角度）
+3. 我讲完后给我一个费曼提问 —— 假装你是 K12 学生，看我能不能讲明白
+4. 不要夸我，直接说我哪里讲得不对
+
+请按上面开始。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <details class="fold">
+              <summary>📖 模板逐行解读 · 为什么这么写</summary>
+              <div class="fold-body">
+                <ol>
+                  <li><b>「你是我的[学科] 学习陪练，不是老师」</b>定下 AI 的身份。陪练是「我自己做、你帮我纠错」，老师是「你讲我听」。一旦 AI 把自己当老师，它会习惯性给完整答案 —— 那是偷懒的温床。</li>
+                  <li><b>「请先做这一件事（没有文件就跳过）」</b>告诉 AI 先读工作空间里的资料。第一节课你的工作空间是空的，AI 会回「没读到任何文件」。从第二节课开始，如果你在工作空间里建了 <code>学习者档案.md</code>，AI 会自动读它。</li>
+                  <li><b>「主题 / 我已经懂了 / 我卡住 / 我试过」</b>给 AI 的「档案」，省去了 AI 来回问你的时间。「我已经懂了」很关键 —— 不写的话 AI 经常从最基础开始讲，浪费你时间。</li>
+                  <li><b>「四条要求」</b>这是你和 AI 的契约，能挡住 AI 偷懒给你直接答案的冲动。改的时候这四条一个字都不能动。</li>
+                  <li><b>「费曼提问」</b>费曼学习法的核心 ——「能讲明白才是真懂」。这一条让 AI 主动追问你。</li>
+                  <li><b>「不要夸我」</b>AI 喜欢夸人（「好问题！」），但夸奖没用 —— 直接告诉你哪里错才是真帮到你。</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 5 -->
+    <div class="big-step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3 class="step-title">AI 不认识你？补一段个人信息</h3>
+        <p>AI 第一次读你的工作空间时通常说「没读到任何文件」。这时候需要你主动告诉 AI 你是谁。</p>
+        <details class="fold">
+          <summary>📖 补充个人信息 prompt</summary>
+          <div class="fold-body">
+            <p>把这段发给 AI：</p>
+            <div class="code-wrap">
+              <pre><code>补充一下我的信息：
+
+我是 [年级] 的学生，叫 [名字]，在 [学校类型]。
+我目前主要想学的学科是 [学科]，最近卡在 [具体知识点]。
+我用你是为了让你当陪练，不是为了让你替我做作业。
+
+我对你的要求（和开场白里一样）：
+1. 不要直接给答案，先问我「你想从哪里切入」
+2. 我卡住时换三种角度重讲
+3. 我讲完后给我一个费曼提问
+4. 不要夸我，直接说我哪里讲得不对
+
+请告诉我你记住了什么，我看看有没有漏。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <details class="fold">
+              <summary>📖 为什么这么写</summary>
+              <div class="fold-body">
+                <ol>
+                  <li><b>「补充一下我的信息」</b>不是从零开始聊天，而是「追加一段档案」。AI 看到这句话会知道这是个人设定，会主动记住。</li>
+                  <li><b>「我是 [年级] 的 [学校类型]」</b>年级决定 AI 用什么难度讲。学校类型决定 AI 用什么例子（公立学生和私立学生身边例子不同）。</li>
+                  <li><b>「不是为了让你替我做作业」</b>这是红线提醒。AI 经常默认你是来抄答案的，这一行把它拉回陪练模式。</li>
+                  <li><b>「请告诉我你记住了什么」</b>让 AI 复述一遍。如果复述漏了什么（比如把「不夸我」漏了），你能立刻补。</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 6 -->
+    <div class="big-step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3 class="step-title">下课时 · 让 AI 总结今天的学习</h3>
+        <p>每次下课前，发一句让 AI 总结今天学了什么。这一步的目的是让自己回头看。</p>
+        <details class="fold">
+          <summary>📖 三种总结 prompt（任选一个）</summary>
+          <div class="fold-body">
+            <p><strong>简洁版</strong>（5 秒发出去）：</p>
+            <div class="code-wrap">
+              <pre><code>总结今天的学习情况。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <p><strong>详细版</strong>（让 AI 按结构整理）：</p>
+            <div class="code-wrap">
+              <pre><code>总结今天的学习情况，按下面三件事：
+1. 我学了什么（具体到知识点）
+2. 我还卡在哪
+3. 下次建议从哪继续</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <p><strong>输出可复用版</strong>（让 AI 输出成 markdown）：</p>
+            <div class="code-wrap">
+              <pre><code>总结今天的学习情况，输出为 markdown，包括：
+- 学科 + 章节
+- 已掌握 / 半掌握 / 未掌握（带具体知识点）
+- 下次复习建议
+
+最后单独给一段「迁移 prompt」：让我下次开新对话时能直接粘贴，让 AI 接上今天的内容。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 完成检查 ============ -->
+    <h2>✅ 完成检查</h2>
+    <p>做完后自己打勾：</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> 我在工作空间下建了一个学科对话</label></li>
+      <li><label><input type="checkbox"> 我把开场白发给 AI，AI 没有直接给答案</label></li>
+      <li><label><input type="checkbox"> 我能让 AI 进入陪练模式而不是代写模式</label></li>
+      <li><label><input type="checkbox"> 我能用三种角度重讲（如果我卡了）</label></li>
+      <li><label><input type="checkbox"> AI 能给我费曼提问（如果我讲了）</label></li>
+      <li><label><input type="checkbox"> 我让 AI 总结了今天的学习</label></li>
+    </ul>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="lesson-ai-capabilities.html">← 上一章 · AI 能力全景图</a>
+    <a class="ch-nav-link" href="lesson-2.html">下一章 · L2 跨对话共享 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

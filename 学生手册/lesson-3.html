@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 3 章 · 让 AI 输出变成可复用资产 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">3</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">让 AI 输出变成可复用资产</h1>
+      <p class="ch-desc">你和 AI 聊完一次后，下周开新对话 AI 又不记得了。这章把 AI 的好输出沉淀成你自己的「学科闪念本」。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 思考引导 ============ -->
+    <h2>思考：AI 给的好答案为什么留不住</h2>
+    <p>你上周让 AI 给你讲了「判别式 Δ>0 的几何意义」，AI 讲得很好。但你这周问同样问题，新对话的 AI 又得从头讲一遍。</p>
+    <p>为什么？因为这次讲得好，是「你和那个 AI 共同生成的上下文」，不是「你的资产」。它只活在那个对话里，没沉淀到工作空间。</p>
+    <p>这一章要做的：把 AI 给的好答案<strong>沉淀到工作空间的文件里</strong>，让下次开新对话 AI 能直接读。这就是「学科闪念本」。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 工作流 5 步 ============ -->
+    <h2>📌 工作流（5 步）</h2>
+
+    <!-- 步骤 1 -->
+    <div class="big-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3 class="step-title">暴露问题 · 上周的进度页为什么是空的</h3>
+        <p>你可能让 AI 生成了「学习进度展示网页」，但打开看是空的 —— 因为你学的内容<strong>没沉淀</strong>。进度页只是外壳，里面的数据要从沉淀的文件读。</p>
+        <details class="fold">
+          <summary>📖 现状分析 · 进度页空的原因</summary>
+          <div class="fold-body">
+            <p>上周进度页是空的，三种可能：</p>
+            <ul>
+              <li><strong>学科闪念本没建</strong> —— 没东西给 AI 读</li>
+              <li><strong>建了但没填字段</strong> —— 文件是空壳</li>
+              <li><strong>填了但 AI 没被要求去读</strong> —— AI 不知道有这个文件</li>
+            </ul>
+            <p>三个问题都要解决：先建闪念本 → 填字段 → 让 AI 读它。这一章解决前两个。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="big-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3 class="step-title">选沉淀方式 · 复制粘贴 / 让 AI 生成片段 / 闪念本</h3>
+        <p>不是所有 AI 输出都值得沉淀。先选对方式 —— 临时记录 / 一次性探索 / 长期学科资产。</p>
+        <details class="fold">
+          <summary>📖 三种方式对比表</summary>
+          <div class="fold-body">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>维度</th>
+                  <th><span class="badge">A</span>复制粘贴</th>
+                  <th><span class="badge">B</span>让 AI 生成片段</th>
+                  <th><span class="badge">C</span>学科闪念本</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>操作形式</b></td><td>手复制 AI 输出到闪念本</td><td>让 AI 主动生成可粘贴片段</td><td>按学科组织结构化沉淀</td></tr>
+                <tr><td><b>沉淀成本</b></td><td>低（手复制）</td><td>中（要先让 AI 输出）</td><td>高（要填字段）</td></tr>
+                <tr><td><b>复用度</b></td><td>中（散落在闪念本里）</td><td>高（专门为复用设计）</td><td>最高（结构化反查）</td></tr>
+                <tr><td><b>适合场景</b></td><td>临时记录、灵感片段</td><td>开新对话前准备</td><td>长期学科沉淀</td></tr>
+                <tr><td><b>不适合场景</b></td><td>系统性整理</td><td>小段、不值得专门生成</td><td>临时性、一次性内容</td></tr>
+              </tbody>
+            </table>
+            <p>这一章重点是 <strong>方式 C · 学科闪念本</strong>。A 和 B 作为补充。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="big-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3 class="step-title">写你的第一份学科闪念本</h3>
+        <p>在工作空间里新建 <code>数学闪念本.md</code>（每个学科一个文件），按模板填。</p>
+        <details class="fold">
+          <summary>📖 闪念本模板（含复制按钮）</summary>
+          <div class="fold-body">
+            <div class="code-wrap">
+              <pre><code># [学科] 闪念本 · [你的名字] · v1
+
+## 一、学科元信息
+- 学科：[学科]
+- 当前主章节：[第几章 / 单元]
+- 学期进度：[第 X 周 / 共 Y 周]
+- 学习目标：[一句话目标]
+
+## 三、AI 给的好解释（可直接复用的输出）
+
+### [卡点名称] 的好解释
+> [粘贴 AI 给的、能直接复用的解释]
+> [可以多段，但每段不超过 100 字]
+
+### [卡点名称] 的好解释
+> ...
+
+## 五、下周要继续
+- 复习：[具体复习任务]
+- 预习：[下周要预习的内容]
+- 闪念本更新：[要加进闪念本的内容]</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <p><strong>字段填写要点：</strong></p>
+            <ul>
+              <li><b>学科元信息</b> —— 写完后下次开新对话 AI 一眼就知道你学到哪</li>
+              <li><b>本周卡点</b> —— 这周你遇到的真问题，写具体（不要写「数学」）</li>
+              <li><b>AI 给的好解释</b> —— 只复制「说人话、能复述、不超过 100 字」的部分</li>
+              <li><b>我讲通的版本</b> —— 用自己的话讲一遍，检验你是否真的懂</li>
+              <li><b>下周要继续</b> —— 写具体行动项，不是「继续努力」</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="big-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3 class="step-title">让 AI 主动读闪念本</h3>
+        <p>闪念本建好后，新对话开场时让 AI 自动读取。</p>
+        <details class="fold">
+          <summary>📖 闪念本读取开场白</summary>
+          <div class="fold-body">
+            <div class="code-wrap">
+              <pre><code>你是我的 [学科] 学习陪练，不是老师。
+
+请先做这一件事：
+读工作空间下的「[学科] 闪念本.md」，看看我之前学到哪、卡在哪。
+如果你看到「我讲通的版本」字段，那是之前我自己讲通过的版本 —— 不要重复教我那部分。
+
+当前任务：[这次具体要学的]
+
+我对你的四条要求（和之前一样）：
+1. 不要直接给答案
+2. 卡住时换三种角度重讲
+3. 我讲完后给我费曼提问
+4. 不要夸我
+
+请按上面开始。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <p>关键改动：开场白里多了「读闪念本」指令 —— 这就是让 AI 接续之前对话的核心。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 5 -->
+    <div class="big-step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3 class="step-title">让 AI 续讲 · 反向调用</h3>
+        <p>沉淀的最终目的是「让 AI 接着讲」。这一步展示怎么用闪念本喂给 AI，让它接着之前的进度讲。</p>
+        <details class="fold">
+          <summary>📖 反向调用示例 + prompt</summary>
+          <div class="fold-body">
+            <p><strong>用法示例：</strong></p>
+            <div class="callout">
+              <p>你有一份数学闪念本，里面记了「上周卡在判别式 Δ>0 的几何意义」。这周你想接着学「判别式 Δ=0」。</p>
+              <p>开新对话 → 发「读闪念本」开场白 → AI 读了就知道你上周卡在哪 → 你问「Δ=0 怎么办」 → AI 不会从头讲，会直接从 Δ>0 推导出 Δ=0。</p>
+            </div>
+            <p><strong>反向调用 prompt（让 AI 主动找你之前卡的地方）：</strong></p>
+            <div class="code-wrap">
+              <pre><code>读完闪念本后，告诉我：
+1. 我上周卡在哪
+2. 这些卡点和今天我新问的问题有没有关联
+3. 如果有，请基于闪念本里「我讲通的版本」接着讲
+
+不要重复我之前已经讲通的部分。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 成品闪念本示例 ============ -->
+    <h2>📋 成品示例 · 一份完整的数学闪念本</h2>
+    <p>这是 L3 上完后你闪念本该长成的样子（参考样式，不是模板）：</p>
+    <div class="code-wrap">
+      <pre><code># 数学闪念本 · 小明 · v1
+
+## 一、学科元信息
+- 学科：数学
+- 当前主章节：一元二次方程
+- 学期进度：第 3 周 / 共 16 周
+- 学习目标：月考后能稳定做对判别式类题目
+
+## 三、AI 给的好解释（可直接复用的输出）
+
+### 判别式 Δ>0 的几何意义
+> 判别式 Δ = b² - 4a 是「看抛物线和 x 轴相不相遇」的尺子。
+> Δ>0：抛物线和 x 轴相交两点（两个不同实根）
+> Δ=0：抛物线刚好擦过 x 轴（一个重根）
+> Δ&lt;0：抛物线整个在 x 轴上方或下方（无实根）
+> 几何原因：顶点纵坐标 (4ac-b²)/4a = -Δ/(4a)。
+
+### 配方法的四步
+> 1. 移项：常数项到右边
+> 2. 系数归 1：x² 系数除出去
+> 3. 配成完全平方：左边加 (b/2)² 再减掉
+> 4. 开方：记得 ± 号
+
+## 五、下周要继续
+- 复习：把判别式 3 种情况各做 2 道题
+- 预习：根与系数的关系（韦达定理）
+- 闪念本更新：把韦达定理加到「AI 学科元信息」字段</code></pre>
+    </div>
+    <div class="callout">
+      <p>💡 <strong>教师展示环节：</strong>L3 结束后老师会看全班闪念本，挑做得好的截图给家长看。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 完成检查 ============ -->
+    <h2>✅ 完成检查</h2>
+    <p>做完后自己打勾：</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> 我给至少一个学科建了闪念本文件</label></li>
+      <li><label><input type="checkbox"> 我填了「学科元信息」「本周卡点」「AI 给的好解释」三个字段</label></li>
+      <li><label><input type="checkbox"> 我能用新对话让 AI 主动读我的闪念本</label></li>
+      <li><label><input type="checkbox"> AI 能接续闪念本里的内容接着讲</label></li>
+      <li><label><input type="checkbox"> 我能用反向调用 prompt 让 AI 续讲</label></li>
+    </ul>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="lesson-2.html">← 上一章 · L2 跨对话共享</a>
+    <a class="ch-nav-link" href="lesson-4.html">下一章 · L4 让 AI 给你生成记忆卡片 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

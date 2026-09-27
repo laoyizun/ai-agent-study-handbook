@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI 能力全景图 + 自查表 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-brand">用 AI Agent 学学习</a>
+      <a href="index.html" class="site-nav-back">← 课程目录</a>
+    </div>
+  </nav>
+
+  <header class="ch-head">
+    <div class="ch-num">★</div>
+    <div class="ch-text">
+      <div class="ch-eyebrow">课程全景</div>
+      <h1 class="ch-h">AI 能力全景图 + 自查表</h1>
+      <p class="ch-d">这门课涉及的全部 AI 能力点（按 5 大维度展开）+ 按课自查表（老师用）。</p>
+    </div>
+  </header>
+
+  <article class="ch-body">
+
+    <p>这一页是这门课的<strong>全局参考卡</strong>。展开下面两张折叠卡可以看到：</p>
+
+    <ul>
+      <li><strong>能力点详细表</strong> —— 5 大 AI 能力维度，每个维度下涉及的全部具体能力点</li>
+      <li><strong>按课自查表</strong> —— 每节课学生应该达到的标准，供老师课后检查</li>
+    </ul>
+
+    <p>两张卡默认收起，按需打开。</p>
+
+    <!-- ============ 折叠 1：能力点详细表 ============ -->
+    <details class="cap-details">
+      <summary>
+        <span class="cap-summary-icon">🧭</span>
+        <span class="cap-summary-text">
+          <h3>能力点详细表 · 5 大维度</h3>
+          <p>5 大 AI 能力维度 · 共 24 个具体能力点</p>
+        </span>
+        <span class="cap-summary-arrow">›</span>
+      </summary>
+
+      <div class="cap-details-body">
+
+        <p>这门课涉及的 AI 能力拆分成 <strong>5 大维度</strong>，每个维度下有多个<strong>具体能力点</strong>。所有能力点平铺在这里，不标注进度 —— 学生按课次自然接触到。</p>
+
+        <h3>维度 1 · 工具认知（Tool Awareness）</h3>
+        <p>理解 AI 工具能做什么、不能做什么、有什么边界。解决「撞墙」类问题 —— 比如 AI 不认识我、新对话丢上下文。</p>
+        <table class="compare-table">
+          <thead>
+            <tr><th>能力点</th><th>学生要做到什么</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>AI 工作空间机制</b></td>
+              <td>理解工作空间是「一组对话 + 共享知识库」的容器，能正确创建、迁移</td>
+            </tr>
+            <tr>
+              <td><b>学科任务对话</b></td>
+              <td>知道每个学科用独立对话，不混用</td>
+            </tr>
+            <tr>
+              <td><b>跨设备 / 跨账号迁移</b></td>
+              <td>学会用迁移文件携带自己的 AI 资产</td>
+            </tr>
+            <tr>
+              <td><b>AI 上下文窗口</b></td>
+              <td>知道 AI 不是「全知」，闪念本太长它会漏读</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>维度 2 · Prompt 工程（Prompt Engineering）</h3>
+        <p>学会用结构化的提示词（开场白、移植、审计、自动更新、反向调用）让 AI 按你希望的方式工作，而不是默认方式。</p>
+        <table class="compare-table">
+          <thead>
+            <tr><th>能力点</th><th>学生要做到什么</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>结构化 prompt 三要素</b></td>
+              <td>用「角色设定 + 上下文约束 + 输出规范」组织开场白</td>
+            </tr>
+            <tr>
+              <td><b>个人信息 prompt</b></td>
+              <td>主动告诉 AI 自己的年级、学校、班级等上下文</td>
+            </tr>
+            <tr>
+              <td><b>对话审计 prompt</b></td>
+              <td>用「总结今天的学习情况」让 AI 反向记录</td>
+            </tr>
+            <tr>
+              <td><b>prompt 移植</b></td>
+              <td>让旧对话生成开场白，复制到新对话复用</td>
+            </tr>
+            <tr>
+              <td><b>自动更新 prompt</b></td>
+              <td>让 AI 主动 append 内容到闪念本</td>
+            </tr>
+            <tr>
+              <td><b>反向调用 prompt</b></td>
+              <td>把闪念本喂给 AI，让它接着讲</td>
+            </tr>
+            <tr>
+              <td><b>弱项诊断 prompt</b></td>
+              <td>让 AI 基于闪念本找出自己的弱项</td>
+            </tr>
+            <tr>
+              <td><b>学习计划 prompt</b></td>
+              <td>让 AI 把闪念本里的卡点转成学习任务</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>维度 3 · 知识库设计（Knowledge Base Design）</h3>
+        <p>把分散在对话里的有用信息，组织成结构化、可复用的知识库 —— 这是 AI 时代最重要的「个人笔记」能力。</p>
+        <table class="compare-table">
+          <thead>
+            <tr><th>能力点</th><th>学生要做到什么</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>文件即知识库</b></td>
+              <td>理解 <code>学习者档案.md</code>、<code>进度.json</code> 等是 AI 可读取的知识库载体</td>
+            </tr>
+            <tr>
+              <td><b>字段颗粒度决策</b></td>
+              <td>决定档案里写多少字段、写哪些</td>
+            </tr>
+            <tr>
+              <td><b>学科闪念本结构</b></td>
+              <td>给每个学科建独立的闪念本，含「卡点 + AI 输出 + 我讲通的版本」</td>
+            </tr>
+            <tr>
+              <td><b>仪表盘数据模型</b></td>
+              <td>设计跨学科汇总的仪表盘</td>
+            </tr>
+            <tr>
+              <td><b>闪念本版本迭代</b></td>
+              <td>在 v1 基础上加「我讲通的版本」</td>
+            </tr>
+            <tr>
+              <td><b>学习计划结构化</b></td>
+              <td>把目标 / 截止日期 / 任务 / 预期产出设计成可执行清单</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>维度 4 · 对话协作（Dialogue Collaboration）</h3>
+        <p>和 AI 进行有判断力的协作 —— 让 AI 进入陪练模式、澄清误判、审阅 AI 输出、听懂同学讲解。</p>
+        <table class="compare-table">
+          <thead>
+            <tr><th>能力点</th><th>学生要做到什么</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>让 AI 进入陪练模式而非代写模式</b></td>
+              <td>通过 prompt 让 AI 知道「我不是来抄答案的」</td>
+            </tr>
+            <tr>
+              <td><b>AI 误判澄清</b></td>
+              <td>当 AI 把打错字误判为不理解，主动澄清</td>
+            </tr>
+            <tr>
+              <td><b>多轮对话的迭代</b></td>
+              <td>让 AI 反复更新闪念本，自己审阅质量</td>
+            </tr>
+            <tr>
+              <td><b>AI 输出可移植性</b></td>
+              <td>判断 AI 的输出能不能在新对话里被用</td>
+            </tr>
+            <tr>
+              <td><b>同伴互演</b></td>
+              <td>听同学讲解，反馈哪些可借鉴</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>维度 5 · 元认知与反思（Meta-cognition &amp; Reflection）</h3>
+        <p>跳出工具看自己 —— 知道 AI 在哪里帮到你、哪里没帮到；意识到「假装懂了」的盲区；写出自己的成长轨迹。</p>
+        <table class="compare-table">
+          <thead>
+            <tr><th>能力点</th><th>学生要做到什么</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>学习状态自评</b></td>
+              <td>在 AI 总结中识别「假装懂了」的盲区</td>
+            </tr>
+            <tr>
+              <td><b>对话审计习惯</b></td>
+              <td>每节课结束前主动让 AI 总结</td>
+            </tr>
+            <tr>
+              <td><b>沉淀意识</b></td>
+              <td>意识到 AI 输出要变成自己资产</td>
+            </tr>
+            <tr>
+              <td><b>跨学科迁移思维</b></td>
+              <td>看到不同学科闪念本里的共性</td>
+            </tr>
+            <tr>
+              <td><b>目标拆解能力</b></td>
+              <td>把学习目标拆成可执行任务</td>
+            </tr>
+            <tr>
+              <td><b>元认知文档化</b></td>
+              <td>写一份「我从这门课学到了什么」</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </details>
+
+    <!-- ============ 折叠 2：按课自查表 ============ -->
+    <details class="cap-details">
+      <summary>
+        <span class="cap-summary-icon">✅</span>
+        <span class="cap-summary-text">
+          <h3>按课自查表 · 老师课后检查用</h3>
+          <p>每节课的达标标准 · 老师用 ✗ / △ / ✓ 自评</p>
+        </span>
+        <span class="cap-summary-arrow">›</span>
+      </summary>
+
+      <div class="cap-details-body">
+
+        <p>每节课结束后，老师按这张表检查学生是否达标。下表包含<strong>已上的 3 节课</strong>，未来课程的内容可能会改变 —— 每节新课上完后，老师把对应行补充进来即可。</p>
+
+        <h3>已上课的自查标准</h3>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="width: 80px;">课次</th>
+              <th>主题</th>
+              <th>学生应做到的</th>
+              <th style="width: 140px;">达标评估</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>L1</b></td>
+              <td>工作空间 + 开场白</td>
+              <td>
+                建好工作空间与第一个学科任务对话<br>
+                构造结构化开场白 prompt（角色 + 上下文 + 输出规范）<br>
+                课结束时让 AI 总结今日学习（对话审计）
+              </td>
+              <td>
+                <label><input type="checkbox"> 全部做到</label><br>
+                <label><input type="checkbox"> 部分做到</label><br>
+                <label><input type="checkbox"> 未做到</label>
+              </td>
+            </tr>
+            <tr>
+              <td><b>L2</b></td>
+              <td>跨对话信息共享 + 进度页初探</td>
+              <td>
+                在同一工作空间下建第二个学科任务对话<br>
+                让旧对话生成开场白（方式 A），复制到新对话<br>
+                听到方式 B 的原理，理解文件作为共享载体的概念
+              </td>
+              <td>
+                <label><input type="checkbox"> 全部做到</label><br>
+                <label><input type="checkbox"> 部分做到</label><br>
+                <label><input type="checkbox"> 未做到</label>
+              </td>
+            </tr>
+            <tr>
+              <td><b>L3</b></td>
+              <td>让 AI 输出变成可复用资产</td>
+              <td>
+                给每个学科建独立的闪念本（含「卡点 + AI 输出」）<br>
+                区分三种沉淀方式（复制粘贴 / 让 AI 生成片段 / 学科闪念本）<br>
+                共建闪念本模板
+              </td>
+              <td>
+                <label><input type="checkbox"> 全部做到</label><br>
+                <label><input type="checkbox"> 部分做到</label><br>
+                <label><input type="checkbox"> 未做到</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>待补充 · 未来课程</h3>
+        <p>下面 5 行留空，老师每上完一节新课，按上面同样的格式补一行（课次 / 主题 / 应做到 / 评估）。</p>
+
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="width: 80px;">课次</th>
+              <th>主题</th>
+              <th>学生应做到的</th>
+              <th style="width: 140px;">达标评估</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>L4</b></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">—</i></td>
+            </tr>
+            <tr>
+              <td><b>L5</b></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">—</i></td>
+            </tr>
+            <tr>
+              <td><b>L6</b></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">—</i></td>
+            </tr>
+            <tr>
+              <td><b>L7</b></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">—</i></td>
+            </tr>
+            <tr>
+              <td><b>L8</b></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">（待补）</i></td>
+              <td><i style="color:var(--ink-mute);">—</i></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ch-tip">
+          <p><strong>自查表的两种用法：</strong>① 老师课后挨个问学生，自己打勾；② 老师和学生一起过一遍，学生自己打勾（培养反思能力）。两种都可以，看课堂节奏。</p>
+        </div>
+
+      </div>
+    </details>
+
+  </article>
+
+  <nav class="ch-nav">
+    <a href="index.html" class="prev"><span class="arrow">←</span><span class="text">课程目录</span></a>
+    <a href="lesson-1.html" class="next"><span class="text">下一章 · 建工作空间 + 开第一个学科对话</span><span class="arrow">→</span></a>
+  </nav>
+
+  <div class="footer">
+    这本手册由你的老师整理 · 内容来自「Daily Learning」自我学习教学设计<br>
+    卡住不是失败，是信号
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

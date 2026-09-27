@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 4 章 · 记忆卡片 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">4</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">记忆卡片</h1>
+      <p class="ch-desc">闪念本是给 AI 看的，记忆卡片是给自己看的。这一章不讲怎么生成卡片，而是想清楚卡片对你有什么用、怎么设计、怎么用它复习。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 场景问题 ============ -->
+    <h2>一个真实的问题</h2>
+    <p>
+      你上节课让 AI 给你讲了「判别式 Δ>0 的几何意义」，你觉得自己听懂了 —— 你甚至能在脑子里把 AI 的解释再过一遍。
+    </p>
+    <p>但是 ——</p>
+    <ul>
+      <li>今天你打开闪念本想复习，发现闪念本里只有 AI 给的解释，没有「<strong>你</strong>的理解」</li>
+      <li>你想考自己一遍，但闪念本不是给你追问的文档</li>
+      <li>你想知道「我到底哪些真懂 / 哪些假懂」，但没人告诉你</li>
+    </ul>
+    <p>
+      闪念本是<strong>给 AI 看的上下文</strong>，不是给你复习用的。<strong>记忆卡片</strong>就是补这个缺口 —— 它让你自己<strong>主动回忆</strong>，而不是被动地读 AI 写好的文字。
+    </p>
+    <p>这一章不教你「怎么生成记忆卡片」（这是 L4 之前的版本做的事）。这一章想清楚三件事：</p>
+    <ul>
+      <li>为什么记忆卡片是好的（背后有什么原理）</li>
+      <li>怎么设计一张<strong>好用</strong>的卡片</li>
+      <li>怎么标记自己的<strong>熟练度</strong>，让复习有节奏</li>
+    </ul>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 4 章大字 ============ -->
+    <h2>📌 这一章讲 4 件事</h2>
+
+    <!-- 章节 1 -->
+    <div class="big-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3 class="step-title">为什么记忆卡片能帮你学</h3>
+        <p>记忆卡片不是普通的「看问题找答案」。它背后有 4 个教育心理学原理 —— 知道这些，你才知道为什么「翻牌」比「重读」更有效。</p>
+        <details class="fold">
+          <summary>📖 4 个原理 · 为什么「想」比「看」记得牢</summary>
+          <div class="fold-body">
+            <p><strong>原理 1 · 主动回忆</strong></p>
+            <p>大脑<strong>想</strong>出一个答案，比<strong>看</strong>到答案记得牢 2 倍以上。被动阅读 = 大脑在偷懒；主动回忆 = 大脑在<strong>检索</strong>。</p>
+            <p>记忆卡片的核心就是这个 —— 正面挡住，反面要你<strong>自己想</strong>。</p>
+            <p><strong>原理 2 · 间隔效应</strong></p>
+            <p>同一张卡：今天复习 + 明天复习 + 一周后复习 = 比连着复习三天记得更久。</p>
+            <p>大脑有个「<strong>遗忘曲线</strong>」—— 越接近忘记的时刻复习，记得越牢。记忆卡片的三色标记（✓△✗）就是按这个曲线设计。</p>
+            <p><strong>原理 3 · 测试效应</strong></p>
+            <p>「考自己」比「再读一遍」效果好。<strong>测试</strong>是个动作，不是个文档。</p>
+            <p>翻牌复习 = 测试。读 AI 总结 = 阅读。两者看起来都在「复习」，但效果差很多。</p>
+            <p><strong>原理 4 · 颗粒度</strong></p>
+            <p>一卡一个概念，比整页笔记更容易记。颗粒度 = <strong>这张卡够不够小</strong>。</p>
+            <p>如果一张卡要讲 5 个概念，那就是 5 张卡的合集，不是 1 张卡。</p>
+            <p><strong>一句话总结：</strong>记忆卡片之所以好，不是因为它「方便」，是因为它强迫你<strong>主动想</strong> + <strong>考自己</strong> + <strong>小颗粒度</strong> + <strong>按节奏复习</strong>。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 章节 2 -->
+    <div class="big-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3 class="step-title">怎么设计一张好卡片</h3>
+        <p>「问题」写得烂，卡片就是废卡。「答案」写得长，卡片就读不下去。这一章讲：好卡片 vs 坏卡片的区别。</p>
+        <details class="fold">
+          <summary>📖 好问题 vs 坏问题 · 好答案 vs 坏答案</summary>
+          <div class="fold-body">
+            <p><strong>问题的好 vs 坏</strong></p>
+            <div class="callout">
+              <p>❌ <strong>坏问题</strong>：复述型 ——「判别式 Δ 是什么？」</p>
+              <p>✅ <strong>好问题</strong>：判断型 ——「什么时候 Δ>0 / Δ=0 / Δ<0，几何上分别是什么意思？」</p>
+            </div>
+            <p>坏问题让你<strong>背定义</strong>，答得出来可能只是记得文字。</p>
+            <p>好问题让你<strong>调用概念</strong>，答得出来才是真懂。</p>
+
+            <p><strong>答案的好 vs 坏</strong></p>
+            <div class="callout">
+              <p>❌ <strong>坏答案</strong>：超长 ——「判别式 Δ = b² - 4a，是看 ax²+bx+c=0 根的性质的公式。当 Δ>0 时方程有两个不同实根，Δ=0 时有一个重根，Δ<0 时没有实根……」</p>
+              <p>✅ <strong>好答案</strong>：精炼 ——「Δ = b² - 4a。Δ>0：抛物线和 x 轴交两点。Δ=0：刚好擦过。Δ<0：无交点。」</p>
+            </div>
+            <p>坏答案让你<strong>读完</strong>（= 没主动想）。</p>
+            <p>好答案让你<strong>想完再读</strong>，读的部分只有 3 行。</p>
+
+            <p><strong>一卡一概念</strong></p>
+            <p>一张卡只能考一个点。如果你需要考 3 个点 —— 做 3 张卡，不是塞到 1 张里。</p>
+            <p>例子：</p>
+            <ul>
+              <li>卡 1：「Δ>0 的几何意义」</li>
+              <li>卡 2：「Δ=0 的几何意义」</li>
+              <li>卡 3：「Δ<0 的几何意义」</li>
+              <li>而不是 1 张：「Δ 的三种情况」</li>
+            </ul>
+            <p>一卡一概念 = 你能精准定位「我具体哪一卡不行」。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 章节 3 -->
+    <div class="big-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3 class="step-title">熟练度三色的真正含义</h3>
+        <p>✓ △ ✗ 不是随便画的。每颗涂完一个颜色，意味着「我知道多久后该再复习这张卡」。</p>
+        <details class="fold">
+          <summary>📖 三色标记 + 间隔复习节奏</summary>
+          <div class="fold-body">
+            <p><strong>三色分别代表什么</strong></p>
+            <ul>
+              <li><strong>✓ 绿色 · 已掌握</strong>：5 秒内能讲清，立刻答出，不卡。</li>
+              <li><strong>△ 橙色 · 半掌握</strong>：答得出来，但讲不清，或者需要想一会儿。</li>
+              <li><strong>✗ 红色 · 未掌握</strong>：想不起来，或讲错。</li>
+            </ul>
+            <p><strong>间隔复习的节奏</strong></p>
+            <p>复习间隔按「熟练度」调整：</p>
+            <ul>
+              <li><strong>✗ 红色</strong> → <strong>明天</strong>再复习</li>
+              <li><strong>△ 橙色</strong> → <strong>下周</strong>再复习</li>
+              <li><strong>✓ 绿色</strong> → <strong>下个月</strong>再复习</li>
+            </ul>
+            <p>为什么要这样？因为<strong>越接近忘记的时刻复习，记得越牢</strong>。</p>
+            <ul>
+              <li>红色 = 快忘了 → 必须明天复习，否则彻底忘</li>
+              <li>橙色 = 大概记得 → 一周后还能想起来，再复习一次</li>
+              <li>绿色 = 记得清楚 → 一个月后复习就够</li>
+            </ul>
+            <p><strong>常见错误</strong></p>
+            <ul>
+              <li>「我今天复习了 30 张」 —— 不是数量，是<strong>节奏</strong>。20 张卡按节奏复习比 50 张连着刷有效得多。</li>
+              <li>「全标绿就算复习完了」 —— 1 个月后你会全忘，因为没有间隔。</li>
+              <li>「红色卡片先跳过」 —— 红色才是今天<strong>最该看</strong>的，不是「最难所以跳过」。</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 章节 4 -->
+    <div class="big-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3 class="step-title">记忆卡片在哪些学习场景能用</h3>
+        <p>记忆卡片不是万能的。有些场景用它特别好，有些场景用它反而浪费。</p>
+        <details class="fold">
+          <summary>📖 适合 / 不适合 · 真实场景对比</summary>
+          <div class="fold-body">
+            <p><strong>适合的场景</strong></p>
+            <ul>
+              <li><strong>公式、定理、定义</strong> —— 单元明确，颗粒度天然小</li>
+              <li><strong>单词 / 字音字形</strong> —— 一对一记忆，记忆卡片的天堂</li>
+              <li><strong>历史年代 / 地理事实</strong> —— 离散事实，没有推导</li>
+              <li><strong>概念对比</strong> ——「质量 vs 重量」「位移 vs 路程」这种容易混淆的</li>
+            </ul>
+            <p><strong>不适合的场景</strong></p>
+            <ul>
+              <li><strong>复杂推导题</strong> —— 比如「怎么解一道几何证明」，一张卡片讲不清</li>
+              <li><strong>需要理解的散文 / 文章</strong> —— 卡片会破坏阅读流</li>
+              <li><strong>需要大量上下文的事实</strong> ——「宋朝为什么会灭亡」不能塞到一张卡里</li>
+              <li><strong>「我知道我不确定」的场景</strong> —— 你还没搞懂就做卡片，卡片就是错的</li>
+            </ul>
+            <p><strong>判断口诀</strong></p>
+            <p>问自己三个问题：</p>
+            <ol>
+              <li>这个东西<strong>能拆</strong>成多个「一对一」的事实吗？</li>
+              <li>我<strong>愿意</strong>主动想一下吗？（如果不愿意，可能是太难或太简单）</li>
+              <li>这个卡能<strong>30 秒内</strong>讲清楚吗？</li>
+            </ol>
+            <p>三个都是「是」 → 做卡片。有一个「否」 → 想想是不是该用别的方式（笔记 / 闪念本 / 直接问 AI）。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 互动演示区 ============ -->
+    <h2>🃏 看看卡片长什么样 · 体验翻牌</h2>
+    <p>下面是几张<strong>已经做好的卡片</strong>（示范用）。点卡片可以翻面 —— 看正面想答案，再点看反面。</p>
+
+    <div class="memory-tool">
+      <div id="card-grid" class="card-grid"></div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 自检清单 ============ -->
+    <h2>✅ 完成检查</h2>
+    <p>这一章的 checkbox 和前面不一样 —— 不是「做了哪些事」，而是「<strong>想清楚了哪些问题</strong>」。做完想清楚后打勾：</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> 我能用一句话说清「为什么主动回忆比被动阅读记得牢」</label></li>
+      <li><label><input type="checkbox"> 我能区分「好问题」和「坏问题」（举例）</label></li>
+      <li><label><input type="checkbox"> 我能说清 ✓△✗ 三色各自代表什么 + 多久该复习</label></li>
+      <li><label><input type="checkbox"> 我知道哪些场景适合记忆卡片、哪些不适合</label></li>
+      <li><label><input type="checkbox"> 我能用「30 秒口诀」判断一个知识点该不该做卡片</label></li>
+    </ul>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="lesson-3.html">← 上一章 · L3 学科闪念本</a>
+    <a class="ch-nav-link" href="lesson-5.html">下一章 · L5 从浏览器到本地服务 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+<script src="js/memory-cards.js"></script>
+</body>
+</html>

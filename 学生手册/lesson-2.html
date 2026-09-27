@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 2 章 · 第二个学科对话 + 跨对话信息共享 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">2</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">第二个学科对话 + 跨对话信息共享</h1>
+      <p class="ch-desc">新对话的 AI 又不认识你了 —— 这一章教两种方法让 AI 跨对话记住你。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 思考引导 ============ -->
+    <h2>思考：为什么新对话又得重来</h2>
+    <p>第一节课你和数学 AI 协作得很好。但你想开始学英语时建了新对话，发现 AI 又不认识你了。</p>
+    <p>为什么会这样？AI 的对话之间是<strong>默认隔离</strong>的 —— 每个对话有自己的上下文，看不到别的对话。除非你主动把信息搬过去。</p>
+    <p>这一章要解决的就是：<strong>怎么让不同学科的对话「继承」你的基本信息和偏好</strong>。两种方法，你选适合自己的。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 工作流 4 步 ============ -->
+    <h2>📌 工作流（4 步）</h2>
+
+    <!-- 步骤 1 -->
+    <div class="big-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3 class="step-title">在工作空间下建第二个学科对话</h3>
+        <p>选另一门学科，建一个对话。注意：必须和第一个对话在<strong>同一个工作空间</strong>下。</p>
+        <details class="fold">
+          <summary>📖 为什么必须在同一个工作空间</summary>
+          <div class="fold-body">
+            <p>跨对话共享的文件是放在<strong>工作空间</strong>里的，不在工作空间下的对话看不到工作空间的文件。这意味着：</p>
+            <ul>
+              <li>✅ 在工作空间 A 下建两个对话 → 它们能共享 A 里的文件</li>
+              <li>❌ 一个对话在工作空间 A，一个在工作空间 B → 它们彼此看不到</li>
+            </ul>
+            <p>常见错误：把新对话建在工作空间外（workbuddy 默认会让你选工作空间，要主动选）。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="big-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3 class="step-title">方式 A · 让旧对话生成开场白</h3>
+        <p>最简单的方法。在旧对话（数学）里发一段 prompt，让 AI 生成一个针对<strong>新学科</strong>的开场白。复制粘贴到新对话（英语）。</p>
+        <details class="fold">
+          <summary>📖 让旧对话生成新开场白的 prompt</summary>
+          <div class="fold-body">
+            <div class="code-wrap">
+              <pre><code>根据我们这个对话的全部上下文，帮我生成一段开场白，让我能复制到新开的 [新学科] 对话里直接用。
+
+要求：
+1. 开头必须是「你是我的学习陪练，不是老师」
+2. 包含「我对你的要求」四点（不直接给答案 / 三种角度 / 费曼提问 / 不夸我）
+3. 包含我之前告诉你的学习偏好（年级、目标学科、已懂什么）
+4. 输出格式必须是纯文本，可以直接复制粘贴，不要任何 markdown 标记
+
+输出后告诉我：你做了哪些取舍？</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <details class="fold">
+              <summary>📖 模板解读</summary>
+              <div class="fold-body">
+                <ol>
+                  <li><b>「根据我们这个对话的全部上下文」</b>告诉 AI：不是凭空写，是从我们已有的对话里提取。省略这句，AI 会写出一个「通用版」开场白，没法把你个性化。</li>
+                  <li><b>要求 1「开头必须是...」</b>这是契约。开场白如果改了这句，陪练关系就破了。</li>
+                  <li><b>要求 2「包含四条要求」</b>这是护栏。AI 自己写开场白时有时会「优化」掉 —— 你需要强制它保留。</li>
+                  <li><b>要求 3「包含学习偏好」</b>让 AI 把你的基本情况（年级、当前学科、已经懂的）也带过去，新 AI 一读就懂。</li>
+                  <li><b>要求 4「纯文本」</b>格式约束。AI 输出时可能带一堆 markdown 标记或解释，复制时容易把格式搞乱。</li>
+                  <li><b>「你做了哪些取舍？」</b>让 AI 主动暴露「我改了哪里」。如果它省略了某些关键信息，你能立刻发现。</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="big-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3 class="step-title">方式 B · 创建学习者档案文件</h3>
+        <p>更长效的方法。在工作空间里建一个<strong>档案文件</strong>，新对话开场时让 AI 主动读取。这样以后任何学科的对话都自动继承。</p>
+        <details class="fold">
+          <summary>📖 学习者档案模板</summary>
+          <div class="fold-body">
+            <p>在工作空间里新建文件，命名为 <code>学习者档案.md</code>：</p>
+            <div class="code-wrap">
+              <pre><code># 学习者档案
+
+## 我是谁
+- 年级：[你的年级]
+- 学校类型：[公立 / 私立 / 国际]
+- 吃力学科：[你最容易卡的学科]
+
+## 我用 AI 的目的
+- [为什么用 AI —— 陪练 / 解释概念 / 拓展 / 复习...]
+
+## 我对 AI 的四条要求
+1. 不要直接给答案，先问我「你想从哪里切入」
+2. 我卡住时换三种角度重讲（代数 / 几何 / 类比）
+3. 我讲完后给我一个费曼提问
+4. 不要夸我，直接说我哪里讲得不对
+
+## 我学过的学科（按学期更新）
+- 数学：[第几章，学到什么程度]
+- 英语：[学到哪]
+- ...
+
+## 我的卡点诊断（按学科记录）
+- 数学卡点：...
+- 英语卡点：...</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <details class="fold">
+              <summary>📖 字段解读</summary>
+              <div class="fold-body">
+                <ol>
+                  <li><b>「学习者档案」文件名</b>固定不要改 —— 不同工作空间里这个文件名一样，AI 一找就能找到。</li>
+                  <li><b>「我是谁」三个字段</b>年级 + 吃力学科 + 用 AI 目的。目的那一行是 AI 自我提醒的「红线」。</li>
+                  <li><b>「四条要求」</b>这是护栏。文件化之后，<strong>任何学科对话都自动遵守</strong>，不用每次复制开场白。</li>
+                  <li><b>「我学过的学科」</b>这是进度地图。AI 看到这个就知道你学过什么、还差什么，能跨学科帮你做迁移。</li>
+                  <li><b>「我的卡点诊断」</b>这是元认知积累。每解决一个卡点，把症状 + 破法记下来。</li>
+                </ol>
+              </div>
+            </details>
+            <p>建好后，发一句让 AI 读这个文件：</p>
+            <div class="code-wrap">
+              <pre><code>请读工作空间下的「学习者档案.md」，按里面的偏好和我的卡点开始这一节。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="big-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3 class="step-title">选 A 还是 B</h3>
+        <p>两种方式不是互斥的。你可以根据场景选 —— 这一步是判断能力。</p>
+        <details class="fold">
+          <summary>📖 A vs B 对比表</summary>
+          <div class="fold-body">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>维度</th>
+                  <th><span class="badge">A</span>提示词移植</th>
+                  <th><span class="badge">B</span>模板文件读取</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><b>操作形式</b></td><td>复制粘贴开场白</td><td>建文件，新对话 AI 自动读</td></tr>
+                <tr><td><b>什么时候用</b></td><td>偶尔开新对话 / 临时探索</td><td>长期复用 / 多学科并行</td></tr>
+                <tr><td><b>复用度</b></td><td>每次要重新生成</td><td>改一次，所有对话生效</td></tr>
+                <tr><td><b>适合的对话</b></td><td>临时对话、一次性探索</td><td>长期学科对话</td></tr>
+                <tr><td><b>前置条件</b></td><td>旧对话已被调教好</td><td>要写一份完整模板</td></tr>
+                <tr><td><b>缺点</b></td><td>旧对话坏掉就没了</td><td>初期比 A 费事</td></tr>
+                <tr><td><b>选它的信号</b></td><td>「我就开这一次」</td><td>「我会持续学下去」</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 完成检查 ============ -->
+    <h2>✅ 完成检查</h2>
+    <p>做完后自己打勾：</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> 我在同一工作空间下建了第二个学科对话</label></li>
+      <li><label><input type="checkbox"> 我能用方式 A · 让旧对话生成开场白</label></li>
+      <li><label><input type="checkbox"> 我能用方式 B · 建学习者档案文件</label></li>
+      <li><label><input type="checkbox"> 我知道什么场景用 A，什么场景用 B</label></li>
+      <li><label><input type="checkbox"> 我能让新对话的 AI 不用从零认识我</label></li>
+    </ul>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="lesson-1.html">← 上一章 · L1 工作空间 + 学科对话</a>
+    <a class="ch-nav-link" href="lesson-3.html">下一章 · L3 学科闪念本 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
