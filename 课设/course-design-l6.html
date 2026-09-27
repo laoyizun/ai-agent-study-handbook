@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L6 课设 · 把数据库搬上云端 · 老师课设</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习 · 课设</a>
+  <a class="back" href="index.html">← 课设目录</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">L6</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">把数据库搬上云端</h1>
+      <p class="ch-desc">L5 学生已经搭好本地数据库。这一课让学生理解"为什么数据要搬到云端"+"云端是什么"+"API key 是什么"，并让 AI 帮他们完成迁移。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 课前信息 ============ -->
+    <h2>课前 · 学情起点</h2>
+    <div class="callout">
+      <p><strong>学生已经会：</strong></p>
+      <ul>
+        <li>L5 在本机搭好 SQLite，3 张表（students / cards / reviews）</li>
+        <li>本地数据库里有卡片 + 三色标记</li>
+        <li>prompt 四要素（角色 / 任务 / 上下文 / 输出）</li>
+        <li>验证 AI 输出（不轻信）</li>
+      </ul>
+      <p><strong>学生没经历过：</strong></p>
+      <ul>
+        <li>「换电脑数据没了」的真实痛点</li>
+        <li>「云端」这个概念</li>
+        <li>「API key」这个概念</li>
+        <li>云端表格编辑器（长得像 Excel）</li>
+      </ul>
+    </div>
+
+    <p><strong>本章核心命题：</strong>数据应该住在一个"任何时候都能打开"的地方。怎么搬 —— 让学生写 prompt，AI 干脏活。学生依然不接触任何代码。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 90 分钟时间线 ============ -->
+    <h2>⏱️ 90 分钟时间线</h2>
+
+    <div class="steps">
+      <div class="step-row"><b>5′</b><span>导入 · 三个真实场景（换电脑 / AI 看不到 / 别人看不到）</span></div>
+      <div class="step-row"><b>10′</b><span>概念 · 数据住址的两种选择（本机 vs 云端）</span></div>
+      <div class="step-row"><b>10′</b><span>概念 · 云端长什么样（网站 + 账号密码 + 表格）</span></div>
+      <div class="step-row"><b>10′</b><span>概念 · AI 之间的接头暗号（API key）</span></div>
+      <div class="step-row"><b>40′</b><span>主课 · 写 prompt + AI 搬数据 + 验证</span></div>
+      <div class="step-row"><b>10′</b><span>验证 · 抽样对比 + 三色标记一致性</span></div>
+      <div class="step-row"><b>5′</b><span>总结 · 对话审计 + L7 钩子</span></div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 详细设计 ============ -->
+
+    <h2>📚 详细设计</h2>
+
+    <!-- 分段 1 -->
+    <h3>1. 导入 · 三个真实场景（5′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>连续提三个场景问题，不给答案</p>
+      <ul>
+        <li>「L5 搭的数据库，你<strong>在学校电脑</strong>能打开吗？」</li>
+        <li>「想让 AI 看『我最近哪类错最多』，AI 能看到吗？」</li>
+        <li>「爸妈问『你家娃最近复习得怎么样』，你给他们看什么？」</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>口头回答「不能」「看不到」</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>不抽象讲"为什么本机不够"，直接抛场景。三个不够 → 升级到"云端"。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b>有学生说"那我用网盘同步本机数据库行不行"——不要否定，让他想一想"网盘同步"和"云端"的区别（一个是文件备份、一个是数据可被 AI 读写）。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 2 -->
+    <h3>2. 概念 · 数据住址的两种选择（10′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>讲一个类比 —— "本机保险箱 vs 云端保险箱"</p>
+      <ul>
+        <li>本机 = 你家保险箱 —— 只能你开，换电脑就没</li>
+        <li>云端 = 银行保险箱 —— 任何分行能开，要有账号密码</li>
+      </ul>
+      <p>强调：换电脑 / AI 看不到 / 别人看不到，三个不够。</p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>听 + 在自己本机打开 L5 的 SQLite 文件看一眼（确认"它真的在本地"）</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>"云端"是抽象词。先建一个具体的心智模型 —— 云端 = 银行保险箱 —— 然后再讲它长什么样。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 3 -->
+    <h3>3. 概念 · 云端长什么样（10′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>投屏或截图演示 Supabase 控制台</p>
+      <ul>
+        <li>打开浏览器 → 输网址 → 输账号密码 → 进控制台</li>
+        <li>左边菜单点 "Table Editor" → 看到一堆表格（长得像 Excel）</li>
+        <li>点一张表 → 能看到一行一行的数据 → 点一行能改</li>
+      </ul>
+      <p>强调：<strong>你依然不写代码</strong>。跟 L5 一样，AI 帮你处理。</p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>看演示 + 自己在本机打开浏览器试一下（如果老师已经创建了演示账号）</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>学生一旦看到"云端 = 一个能打开的网站 + 像 Excel 的表格"，神秘感就消失了。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 4 -->
+    <h3>4. 概念 · AI 之间的接头暗号 API key（10′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>讲类比 —— "俱乐部暗号"</p>
+      <ul>
+        <li>AI 帮学生和云端打交道，要报一串字符</li>
+        <li>这串字符叫 API key，长得像 <code>sb_publishable_xxxxx...</code></li>
+        <li>publishable = 不是最高机密，但也不能随便发</li>
+      </ul>
+      <p>强调三条规矩：截图打码 / 泄露就重置 / 不写进闪念本。</p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>听 + 能在 AI 截图里认出 API key（演示一次）</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>不讲"密钥学"、"认证"、"token"等术语。用"暗号"类比，让学生建立直觉：AI 替你做事也要"亮身份"。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b></p>
+      <ul>
+        <li>学生问"那我账号密码不也是暗号吗"——答：账号密码是<strong>你的</strong>暗号，API key 是<strong>AI</strong>的暗号。</li>
+        <li>学生问"那是不是所有 AI 都能拿这个 key"——答：理论上能拿到，<strong>所以才不能发群里</strong>。</li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 5 -->
+    <h3>5. 主课 · 写 prompt + AI 搬数据（40′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>演示三件事</p>
+      <ol>
+        <li>展示一个 prompt 的样子（屏幕上展示 lesson-6.html 里那个示例 prompt）</li>
+        <li>拆解四要素，<strong>不重复讲</strong>，引用 L5 的拆解（"角色 / 任务 / 上下文 / 输出"已经学过）</li>
+        <li>抛场景问题，让学生想（不要求写）：「只想搬 cards 表，prompt 里任务那块怎么写？」</li>
+      </ol>
+      <p>然后让学生打开自己的 AI 对话，按场景问题自己写 prompt（<strong>不是复制</strong>）。</p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b></p>
+      <ul>
+        <li>听老师讲（不重复讲四要素）</li>
+        <li>打开 AI 对话，自己写 prompt</li>
+        <li>让 AI 执行 → 看 AI 输出</li>
+        <li>如果 AI 没做对，调整 prompt（结构不变，换措辞）</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>这是本节课的核心 —— 学生必须自己写 prompt。复制 = 没学。AI 反馈不对 = 调整 prompt 的能力 = 核心技能。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b></p>
+      <ul>
+        <li>学生 prompt 极简（只写"帮我搬数据"）→ 引导补"角色""上下文""哪些表"</li>
+        <li>AI 执行报错 → 让学生把错误贴给 AI 看，让 AI 自己排查（这是协作能力）</li>
+        <li>学生误把 API key 发到群里 → 当场演示：让另一个 AI 用这个 key 改一条数据 → 学生看到后果</li>
+        <li>学生想直接复制示例 → 拒绝："自己写比复制有用 10 倍"</li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 6 -->
+    <h3>6. 验证 · 抽样对比（10′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>列出 5 个验证点（不展开讲，让学生自己点）</p>
+      <ol>
+        <li>云端网站能看到 3 张表</li>
+        <li>字段名跟 L5 定义的一致（特别是 <code>student_name</code>、<code>mark</code>）</li>
+        <li>行数对得上</li>
+        <li>抽样 3 条卡片看内容是否一致</li>
+        <li><strong>三色标记一致性</strong>：抽样 ✓ / △ / ✗ 各一条，确认颜色没串</li>
+      </ol>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>逐项验证，在 chat 里贴结果让 AI 确认</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>验证点 5 是本节课最关键的撞墙点 —— 三色标记变了，复习节奏全乱。这是迁移的"质量门"。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 7 -->
+    <h3>7. 总结（5′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>发总结 prompt 给 AI</p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>口头说明：今天学到的 4 件事</p>
+      <ul>
+        <li>本机和云端的区别（一句话）</li>
+        <li>云端是什么（一句话）</li>
+        <li>API key 是什么（一句话）</li>
+        <li>为什么不验证 = 没学</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>不是"学了哪些技能"，是"能用自己的话讲清楚 4 件事"。讲不清楚 = 没懂。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 课后自查 ============ -->
+    <h2>📋 课后自查 · 老师用</h2>
+
+    <h3>✅ 学生达标信号</h3>
+    <ul>
+      <li>能用一句话说清"本机和云端的区别"</li>
+      <li>能说出"云端"对你来说是什么（网站 + 账号密码 + 表格）</li>
+      <li>能解释"API key"是什么（AI 之间的接头暗号）</li>
+      <li>知道为什么 API key 不能发到群里</li>
+      <li>自己写过一个 prompt（不是复制示例）</li>
+      <li>抽样验证过：云端的卡 + 三色标记和本机一致</li>
+    </ul>
+
+    <h3>⚠️ 未达标的迹象</h3>
+    <ul>
+      <li>把示例 prompt 原封不动复制给 AI</li>
+      <li>AI 报错后不知道把错误贴给 AI</li>
+      <li>分不清"本地""云端""API key"三个概念</li>
+      <li>认为"AI 搬完了 = 对了"（不验证）</li>
+      <li>把 API key 发到群里（这条最严重 —— 要单独约谈）</li>
+    </ul>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 延伸钩子 ============ -->
+    <h2>🪝 延伸钩子 · 留给 L7</h2>
+
+    <p>本章结束时，3 个钩子留给 L7：</p>
+    <ol>
+      <li><strong>数据上去了但 AI 不会主动用</strong>：L7 让 AI 主动读云端数据库，告诉学生"你最近哪类错最多"</li>
+      <li><strong>三色标记可以驱动复习节奏</strong>：L7 让 AI 根据 ✓△✗ 自动生成"明天该复习哪些卡"</li>
+      <li><strong>多端共享还没真用上</strong>：L7+ 教"让爸妈登录云端看你的复习情况"</li>
+    </ol>
+
+    <!-- ============ 老师参考：学生卡上的常见 API key 报错 ============ -->
+    <h2>🛠️ 老师参考 · 学生卡上的常见报错</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>报错</th><th>原因</th><th>老师怎么介入</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>key 无效</b></td><td>暗号填错了 / 用过期的</td><td>让学生回云端网站重新复制一份新的</td></tr>
+        <tr><td><b>表已存在</b></td><td>之前建过同名表</td><td>让 AI 帮学生决定"覆盖"或"删旧建新"</td></tr>
+        <tr><td><b>字段不匹配</b></td><td>云端字段名跟本机不一样</td><td>对照 L5 的字段表修正</td></tr>
+        <tr><td><b>网络超时</b></td><td>云端连不上</td><td>重试 + 让学生在云端网站看下"服务状态"</td></tr>
+        <tr><td><b>权限被拒</b></td><td>RLS 没关（开发模式需要关）</td><td>让 AI 帮学生在控制台关 RLS</td></tr>
+      </tbody>
+    </table>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="course-design-l5.html">← L5 课设</a>
+    <a class="ch-nav-link" href="index.html">课设目录 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

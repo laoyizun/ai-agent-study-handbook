@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 6 章 · 把数据库搬上云端 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">6</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">把数据库搬上云端</h1>
+      <p class="ch-desc">L5 你的数据库只在家里电脑。这一章让你把它搬到一个"任何时候都能打开"的地方 —— 同时理解 AI 替你做这件事时，用的是什么样的"接头暗号"。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 场景问题 ============ -->
+    <h2>一个真实的问题</h2>
+    <p>你在 L5 让 AI 帮你搭了一个本地数据库，里面有你最近的卡片和三色标记。</p>
+    <p>但是 ——</p>
+    <ul>
+      <li>周末你在<strong>学校电脑</strong>打开复习页面 → 404，找不到</li>
+      <li>你想让 AI 看「我最近哪类错最多」 → AI 说「我看不到你电脑里的数据库」</li>
+      <li>你爸妈问「你家娃最近复习得怎么样」 → 你没法给他们看</li>
+    </ul>
+    <p>为什么？因为那个数据库<strong>只在你家电脑的硬盘上</strong>。换个电脑、换个浏览器、换个 AI，都碰不到它。</p>
+    <p>这一章解决：把数据搬到一个<strong>"任何地方都能打开"</strong>的地方。这个地方叫<strong>云端</strong>。</p>
+
+    <p>📌 <strong>类比补强：</strong>你 L4 在卡片上打的所有 <code>✓</code> <code>△</code> <code>✗</code> 也会一起搬到云端。换电脑复习时，颜色不变 —— 你之前"半掌握"的卡，云端看到还是"半掌握"。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 工作流 4 步 ============ -->
+    <h2>📌 工作流（4 步）</h2>
+
+    <!-- 步骤 1 -->
+    <div class="big-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3 class="step-title">概念 · 数据住址的两种选择</h3>
+        <p>数据要"住"在一个地方。住哪，决定了谁能访问到它。</p>
+        <details class="fold">
+          <summary>📖 本机 vs 云端 · 一张图讲清区别</summary>
+          <div class="fold-body">
+            <p><strong>本机保险箱</strong></p>
+            <ul>
+              <li>你家里的保险箱，只有你家的人能打开</li>
+              <li>你换电脑 = 保险箱留在旧家，新家没有</li>
+              <li>AI 在别的电脑 = 看不到你保险箱里有什么</li>
+              <li>别人想看 = 来你家</li>
+            </ul>
+            <p><strong>云端保险箱</strong></p>
+            <ul>
+              <li>银行的保险箱，任何分行都能打开</li>
+              <li>换电脑 = 换个分行开一下就行</li>
+              <li>AI 在任何电脑 = 都能读</li>
+              <li>别人想看 = 你给账号 + 暗号，或者开一个临时权限</li>
+            </ul>
+            <p><strong>一句话总结：</strong></p>
+            <p>本机 = 锁家里；云端 = 任何地方都能打开（但要账号密码）。</p>
+            <p>三个不够用的事 —— 换电脑 / AI 看不到 / 别人看不到 —— 三个都指向同一个解法：<strong>搬到云端</strong>。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="big-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3 class="step-title">概念 · "云端"对你来说是什么</h3>
+        <p>云端听起来很玄。但对你来说，它就是一个<strong>有账号密码的网站</strong>。</p>
+        <details class="fold">
+          <summary>📖 云端 = 网站 + 账号密码 + 表格编辑器</summary>
+          <div class="fold-body">
+            <p><strong>它对你来说长这样：</strong></p>
+            <ul>
+              <li><strong>一个网站</strong> —— 你打开浏览器，输入网址，进去了</li>
+              <li><strong>账号密码</strong> —— 你注册时设的，进门要输对</li>
+              <li><strong>一堆表格</strong> —— 进网站后能看到，长得像 Excel</li>
+              <li><strong>点鼠标就能改</strong> —— 你不需要写代码</li>
+            </ul>
+            <p><strong>关键澄清：</strong></p>
+            <p>你依然<strong>不写代码</strong>。这跟 L5 一样 —— 你点鼠标、你看表格，你让 AI 替你处理脏活。</p>
+            <p><strong>你和云端的区别只是：</strong></p>
+            <ul>
+              <li>本地数据库 = 你电脑上的一个文件（看不见摸不着）</li>
+              <li>云端 = 一个你能打开、能看到的网站</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="big-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3 class="step-title">概念 · AI 之间的"接头暗号"</h3>
+        <p>AI 帮你和云端打交道时，要报一串字符。这串字符就是<strong>API key</strong>。</p>
+        <details class="fold">
+          <summary>📖 什么是 API key · 俱乐部暗号类比</summary>
+          <div class="fold-body">
+            <p><strong>类比：俱乐部暗号</strong></p>
+            <p>你去一家老派俱乐部，进门要报"天王盖地虎"。只有对上暗号，服务员才让你进。API key 就是 AI 给云端报的暗号 —— 报对了，云端才让 AI 帮你读数据、写数据。</p>
+            <p><strong>它长什么样？</strong></p>
+            <p>AI 帮你处理时，截图里会出现类似这样的字符：</p>
+            <div class="code-wrap">
+              <pre><code>sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
+            </div>
+            <p>看到 <code>publishable</code> 这个词是正常的 —— 意思是"可以公布在前端代码里"。这不是最高机密，但也不应该随便发。</p>
+            <p><strong>为什么不能发到群里？</strong></p>
+            <p>类比：你家门钥匙丢了 ≠ 别人能立刻进门，但风险变高了。</p>
+            <p>API key 泄露同理：拿到这个暗号的人能<strong>冒充你</strong>改你云端上的数据。比如把你"已掌握"的卡偷偷改成"未掌握"。</p>
+            <p><strong>三条规矩：</strong></p>
+            <ol>
+              <li>截图发到群里之前，<strong>先打码</strong>这串字符</li>
+              <li>如果不小心发出去了，<strong>立刻在云端网站重置</strong>这个暗号</li>
+              <li>不要把暗号写进闪念本或工作空间文件（AI 会读到）</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="big-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3 class="step-title">主课 · 让 AI 帮你搬</h3>
+        <p>整个搬的过程不是你自己动手 —— 是<strong>你写 prompt，AI 干脏活</strong>。</p>
+
+        <details class="fold">
+          <summary>📖 4.1 看一个 prompt 是什么样</summary>
+          <div class="fold-body">
+            <p>这是「让 AI 帮你把本机数据库搬到云端」的一个 prompt 示例（仅展示）：</p>
+            <div class="code-wrap">
+              <pre><code>你是我的云端搭建助手，不是通用聊天 AI。
+
+【角色】你懂 Supabase 这种云端数据库的搭建
+【任务】帮我把本地 SQLite 里的 3 张表（students / cards / reviews）搬到云端，数据不丢
+【上下文】我是初中生，已经在本地搭好 SQLite，字段名已经定好。我现在想升级到云端。
+【输出要求】先告诉我建云端账号的步骤；再告诉我怎么把数据迁上去；最后给我 5 个验证点，让我确认搬对了。</code></pre>
+              <button class="copy-btn">复制</button>
+            </div>
+            <p>这是「<strong>展示</strong>」，不是「<strong>模板</strong>」。看一遍结构就行，下一段拆解。</p>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.2 拆解 prompt · 复用 L5 的四要素</summary>
+          <div class="fold-body">
+            <p>L5 你学过 prompt 的四要素：<strong>角色 / 任务 / 上下文 / 输出</strong>。这一章不重复讲，直接引用 L5 的拆解（<a href="lesson-5.html">看 L5.4.2</a>）。</p>
+            <p>这里只挑一点：<strong>上下文要写清楚"我的起点"和"我的目标"</strong>。</p>
+            <ul>
+              <li>起点 = 我已经在本地搭好 SQLite</li>
+              <li>目标 = 把 3 张表搬到云端，数据不丢</li>
+            </ul>
+            <p>AI 不知道你的起点和目标，就只能瞎猜。</p>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.3 场景思考 · 你自己想写一个 prompt</summary>
+          <div class="fold-body">
+            <p>不需要你现在就写出来。但想一想这个场景：</p>
+            <div class="callout">
+              <p><strong>场景：</strong>你想让 AI 帮你<strong>只把 cards 这张表</strong>搬到云端，students 和 reviews 暂时不搬。</p>
+              <p>你要发给 AI 的 prompt 里，<strong>任务</strong>那一块大概怎么写？</p>
+            </div>
+            <p>动手之前，先在脑子里过一遍：</p>
+            <ul>
+              <li><b>角色：</b>AI 是谁？「云端搭建助手」？</li>
+              <li><b>任务：</b>要 AI 做什么？（这一块要包含"只搬 cards"这个限定）</li>
+              <li><b>上下文：</b>你的起点是什么？你的目标是什么？</li>
+              <li><b>输出：</b>AI 该给你什么？「步骤 + 验证点」？</li>
+            </ul>
+            <p>下次真要搬的时候，按这个结构自己写 —— 别复制，自己写。</p>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.4 验证 · 怎么知道搬对了</summary>
+          <div class="fold-body">
+            <p>AI 执行完后，<strong>你</strong>要能验证它做对了。AI 说"搬完了" ≠ 真搬完了。</p>
+            <p><strong>5 个验证点：</strong></p>
+            <ol>
+              <li><strong>看到 3 张表</strong> —— 打开云端网站，能看到 <code>students</code> / <code>cards</code> / <code>reviews</code></li>
+              <li><strong>字段名一致</strong> —— 字段名跟 L5 定义的一样（特别是 <code>student_name</code>、<code>mark</code>）</li>
+              <li><strong>行数对得上</strong> —— 云端的 <code>cards</code> 表有几行，跟你本机的行数对得上</li>
+              <li><strong>内容抽样一致</strong> —— 抽样 3 条卡片，看内容是不是和本机一字不差</li>
+              <li><strong>三色标记没串</strong> —— 抽样打开一条 <code>✓</code> 一条 <code>△</code> 一条 <code>✗</code>，看颜色是不是和本机一致（这条最重要 —— 颜色变了复习节奏就乱了）</li>
+            </ol>
+            <div class="callout">
+              <p><strong>为什么不验证 = 没学？</strong></p>
+              <p>这是你和 AI 协作的核心循环：AI 做 → 你验证 → 不对就告诉 AI 让它改。AI 说"做完了"你就信，那不叫脚本，叫迷信。</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="fold">
+          <summary>📖 4.5 撞墙预案 · 如果 AI 报错</summary>
+          <div class="fold-body">
+            <p>搬的过程不一定一次就成。最常见的几种报错：</p>
+            <table class="compare-table">
+              <thead>
+                <tr><th>报错</th><th>原因</th><th>怎么处理</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><b>key 无效</b></td><td>暗号填错了 / 用过期的</td><td>回到云端网站，重新复制一份新的</td></tr>
+                <tr><td><b>表已存在</b></td><td>之前建过同名表</td><td>让 AI 帮你"删旧建新"或"覆盖"</td></tr>
+                <tr><td><b>字段不匹配</b></td><td>云端表的字段名跟本机不一样</td><td>让 AI 改字段名，跟 L5 定义一致</td></tr>
+                <tr><td><b>网络超时</b></td><td>云端连不上</td><td>重试一次；还不行就在云端网站看下"服务状态"</td></tr>
+              </tbody>
+            </table>
+            <p>任何一种报错，<strong>把错误原文贴给 AI</strong>，让 AI 自己排查。这是协作的核心。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 完成检查 ============ -->
+    <h2>✅ 完成检查</h2>
+    <p>做完后自己打勾：</p>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> 我能用一句话说出"本机 vs 云端"的区别</label></li>
+      <li><label><input type="checkbox"> 我能解释"云端"对我来说是什么（网站 + 账号密码 + 表格）</label></li>
+      <li><label><input type="checkbox"> 我知道"API key"是什么（AI 之间的接头暗号）</label></li>
+      <li><label><input type="checkbox"> 我知道为什么不能把 API key 发到群里</label></li>
+      <li><label><input type="checkbox"> 我自己写过 prompt 让 AI 搬数据（不是复制示例）</label></li>
+      <li><label><input type="checkbox"> 我抽样验证过：云端的卡 + 三色标记和本机一致</label></li>
+    </ul>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 下一章钩子 ============ -->
+    <div class="callout">
+      <p><strong>🪝 留给 L7：</strong>数据上去了，但 AI 不会主动用。下节课让 AI 主动告诉你"你最近哪些最容易错"。</p>
+    </div>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="ch-bottom-nav">
+    <a class="ch-nav-link" href="lesson-5.html">← 上一章 · L5 本地服务</a>
+    <a class="ch-nav-link" href="lesson-ai-capabilities.html">回到 AI 能力全景图 →</a>
+  </nav>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
