@@ -55,6 +55,57 @@
         <details class="fold">
           <summary>📖 本机 vs 云端 · 一张图讲清区别</summary>
           <div class="fold-body">
+            <div class="diagram">
+              <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="本机保险箱与云端保险箱的并排对比">
+                <!-- ========== 左侧：本机 ========== -->
+                <!-- 房子轮廓 -->
+                <rect x="60" y="120" width="240" height="160" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="6"/>
+                <polygon points="60,120 180,40 300,120" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+                <!-- 保险箱 -->
+                <rect x="130" y="170" width="100" height="80" fill="#F9FAFB" stroke="#333333" stroke-width="2" rx="6"/>
+                <circle cx="215" cy="210" r="10" fill="none" stroke="#333333" stroke-width="1.5"/>
+                <line x1="215" y1="210" x2="223" y2="210" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
+                <text x="180" y="240" font-size="13" fill="#333333" text-anchor="middle" font-weight="600">数据库.db</text>
+                <!-- 锁的标识 -->
+                <text x="180" y="300" font-size="12" fill="#64748B" text-anchor="middle">锁在家里</text>
+                <!-- 标题 -->
+                <text x="180" y="30" font-size="16" fill="#333333" text-anchor="middle" font-weight="700">本机保险箱</text>
+                <!-- 限制标识 -->
+                <text x="180" y="58" font-size="11" fill="#64748B" text-anchor="middle">换电脑 = 数据没了</text>
+                <text x="180" y="74" font-size="11" fill="#64748B" text-anchor="middle">AI 看不到 · 别人看不到</text>
+
+                <!-- ========== 中间：vs 分隔 ========== -->
+                <line x1="360" y1="40" x2="360" y2="280" stroke="#EDEDED" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <circle cx="360" cy="160" r="22" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2"/>
+                <text x="360" y="166" font-size="14" fill="#F3A21C" text-anchor="middle" font-weight="700">VS</text>
+
+                <!-- ========== 右侧：云端 ========== -->
+                <!-- 云端轮廓（多分支节点） -->
+                <circle cx="540" cy="200" r="100" fill="#F9FAFB" stroke="#333333" stroke-width="1.5"/>
+                <circle cx="460" cy="140" r="14" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+                <circle cx="620" cy="140" r="14" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+                <circle cx="460" cy="260" r="14" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+                <circle cx="620" cy="260" r="14" fill="#FFFFFF" stroke="#333333" stroke-width="1.5"/>
+                <line x1="540" y1="200" x2="460" y2="140" stroke="#333333" stroke-width="1"/>
+                <line x1="540" y1="200" x2="620" y2="140" stroke="#333333" stroke-width="1"/>
+                <line x1="540" y1="200" x2="460" y2="260" stroke="#333333" stroke-width="1"/>
+                <line x1="540" y1="200" x2="620" y2="260" stroke="#333333" stroke-width="1"/>
+                <!-- 中心保险箱 -->
+                <rect x="510" y="180" width="60" height="48" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2" rx="4"/>
+                <circle cx="555" cy="204" r="6" fill="none" stroke="#F3A21C" stroke-width="1.5"/>
+                <text x="540" y="230" font-size="11" fill="#333333" text-anchor="middle" font-weight="600">数据库</text>
+                <!-- 入口标注 -->
+                <text x="460" y="125" font-size="9" fill="#64748B" text-anchor="middle">电脑 A</text>
+                <text x="620" y="125" font-size="9" fill="#64748B" text-anchor="middle">电脑 B</text>
+                <text x="460" y="282" font-size="9" fill="#64748B" text-anchor="middle">手机 C</text>
+                <text x="620" y="282" font-size="9" fill="#64748B" text-anchor="middle">老师 AI</text>
+                <!-- 标题 -->
+                <text x="540" y="30" font-size="16" fill="#F3A21C" text-anchor="middle" font-weight="700">云端保险箱</text>
+                <text x="540" y="58" font-size="11" fill="#64748B" text-anchor="middle">任何电脑都能打开</text>
+                <text x="540" y="74" font-size="11" fill="#64748B" text-anchor="middle">（要账号密码）</text>
+              </svg>
+            </div>
+            <p class="diagram-caption">左：数据锁在自家电脑的硬盘里。右：数据住在云端，4 个节点都能访问。</p>
             <p><strong>本机保险箱</strong></p>
             <ul>
               <li>你家里的保险箱，只有你家的人能打开</li>
@@ -114,6 +165,48 @@
         <details class="fold">
           <summary>📖 什么是 API key · 俱乐部暗号类比</summary>
           <div class="fold-body">
+            <div class="diagram">
+              <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI 通过 API key 与云端数据库通信的流程">
+                <!-- 三个节点：学生电脑(AI) / 暗号 / 云端 -->
+                <!-- 左侧：学生电脑里的 AI -->
+                <rect x="40" y="60" width="160" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+                <text x="120" y="92" font-size="14" fill="#333333" text-anchor="middle" font-weight="700">你的 AI</text>
+                <text x="120" y="112" font-size="11" fill="#64748B" text-anchor="middle">(在你电脑上)</text>
+                <text x="120" y="128" font-size="10" fill="#64748B" text-anchor="middle">想读 / 写数据</text>
+
+                <!-- 中间：暗号 -->
+                <rect x="280" y="70" width="160" height="60" fill="#F3A21C" opacity="0.12" stroke="#F3A21C" stroke-width="2" rx="8"/>
+                <text x="360" y="92" font-size="13" fill="#F3A21C" text-anchor="middle" font-weight="700">报暗号</text>
+                <text x="360" y="110" font-size="10" fill="#333333" text-anchor="middle" font-family="monospace">sb_publishable_xxx...</text>
+                <text x="360" y="124" font-size="9" fill="#64748B" text-anchor="middle">API key</text>
+
+                <!-- 右侧：云端数据库 -->
+                <rect x="520" y="60" width="160" height="80" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2" rx="8"/>
+                <text x="600" y="92" font-size="14" fill="#F3A21C" text-anchor="middle" font-weight="700">云端数据库</text>
+                <text x="600" y="112" font-size="11" fill="#64748B" text-anchor="middle">(银行保险箱)</text>
+                <text x="600" y="128" font-size="10" fill="#64748B" text-anchor="middle">暗号对 → 开门</text>
+
+                <!-- 箭头：AI → 暗号 -->
+                <line x1="200" y1="100" x2="280" y2="100" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                <text x="240" y="92" font-size="10" fill="#64748B" text-anchor="middle">① 报暗号</text>
+
+                <!-- 箭头：暗号 → 云端 -->
+                <line x1="440" y1="100" x2="520" y2="100" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                <text x="480" y="92" font-size="10" fill="#64748B" text-anchor="middle">② 验证</text>
+
+                <!-- 底部说明 -->
+                <text x="360" y="170" font-size="11" fill="#333333" text-anchor="middle">暗号不对 = 云端不开门</text>
+                <text x="360" y="186" font-size="11" fill="#64748B" text-anchor="middle">暗号泄露 = 别人能冒充你开门</text>
+
+                <!-- 箭头定义 -->
+                <defs>
+                  <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <polygon points="0 0, 8 4, 0 8" fill="#333333"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+            <p class="diagram-caption">AI 替你做事时，要先"亮身份"。暗号对了才能让云端开门。</p>
             <p><strong>类比：俱乐部暗号</strong></p>
             <p>你去一家老派俱乐部，进门要报"天王盖地虎"。只有对上暗号，服务员才让你进。API key 就是 AI 给云端报的暗号 —— 报对了，云端才让 AI 帮你读数据、写数据。</p>
             <p><strong>它长什么样？</strong></p>
@@ -142,6 +235,53 @@
       <div class="step-body">
         <h3 class="step-title">主课 · 让 AI 帮你搬</h3>
         <p>整个搬的过程不是你自己动手 —— 是<strong>你写 prompt，AI 干脏活</strong>。</p>
+
+        <div class="diagram">
+          <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="把数据库搬上云端的 4 步流程">
+            <!-- Step 1 -->
+            <rect x="20" y="40" width="140" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+            <text x="90" y="68" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="700">第 1 步</text>
+            <text x="90" y="88" font-size="13" fill="#333333" text-anchor="middle" font-weight="700">本机 SQLite</text>
+            <text x="90" y="106" font-size="11" fill="#64748B" text-anchor="middle">3 张表</text>
+
+            <!-- Arrow 1 -->
+            <line x1="160" y1="80" x2="208" y2="80" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+            <!-- Step 2 -->
+            <rect x="212" y="40" width="160" height="80" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2" rx="8"/>
+            <text x="292" y="68" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="700">第 2 步（你写）</text>
+            <text x="292" y="88" font-size="13" fill="#333333" text-anchor="middle" font-weight="700">写 prompt</text>
+            <text x="292" y="106" font-size="10" fill="#64748B" text-anchor="middle">角色 + 任务 + 上下文 + 输出</text>
+
+            <!-- Arrow 2 -->
+            <line x1="372" y1="80" x2="420" y2="80" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+            <!-- Step 3 -->
+            <rect x="424" y="40" width="140" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+            <text x="494" y="68" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="700">第 3 步（AI 做）</text>
+            <text x="494" y="88" font-size="13" fill="#333333" text-anchor="middle" font-weight="700">AI 搬数据</text>
+            <text x="494" y="106" font-size="10" fill="#64748B" text-anchor="middle">建云端 + 迁移</text>
+
+            <!-- Arrow 3 -->
+            <line x1="564" y1="80" x2="612" y2="80" stroke="#333333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+            <!-- Step 4 -->
+            <rect x="616" y="40" width="140" height="80" fill="#F3A21C" opacity="0.10" stroke="#F3A21C" stroke-width="2" rx="8"/>
+            <text x="686" y="68" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="700">第 4 步（你验证）</text>
+            <text x="686" y="88" font-size="13" fill="#333333" text-anchor="middle" font-weight="700">云端 Supabase</text>
+            <text x="686" y="106" font-size="10" fill="#64748B" text-anchor="middle">抽样对比 + ✓△✗</text>
+
+            <!-- 底部提示 -->
+            <text x="380" y="150" font-size="11" fill="#64748B" text-anchor="middle">你只做第 2 步 + 第 4 步。第 1 / 3 步都在 AI 和电脑里发生。</text>
+
+            <defs>
+              <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                <polygon points="0 0, 8 4, 0 8" fill="#333333"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+        <p class="diagram-caption">整个搬的过程 = 你做一半（写 + 验证），AI 做一半（搬运）。</p>
 
         <details class="fold">
           <summary>📖 4.1 看一个 prompt 是什么样</summary>
