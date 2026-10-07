@@ -317,10 +317,28 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
         </div>
         <p class="diagram-caption">整个搬的过程 = 你做一半（写 + 验证），AI 做一半（搬运）。</p>
 
+        <div class="callout" style="background:rgba(243,162,28,0.10);border-left:4px solid #F3A21C;padding:16px 20px;border-radius:8px;margin:16px 0;">
+          <p style="font-size:15px;font-weight:700;color:#F3A21C;margin:0 0 8px;">⚠️ 第一件事 · 报名字（必做，漏掉就全错）</p>
+          <p style="margin:6px 0;">在打开 AI 对话后，<strong>第一句</strong>就打这一行（<code style="font-size:1.05em;">把 <code>your-name</code> 替换成你自己的拼音</code>）：</p>
+          <p style="margin:8px 0;padding:8px 12px;background:#FFFFFF;border-radius:6px;font-family:monospace;font-size:14px;">我是 <strong style="color:#F3A21C;">your-name</strong>，本节课 L6 的学生</p>
+          <p style="margin:6px 0;font-size:13.5px;color:#64748B;">
+            <strong>关键：</strong><code>your-name</code> 填的是你名字<strong style="color:#333;">后两个字的拼音</strong>。例如：
+          </p>
+          <ul style="margin:6px 0 0;padding-left:22px;font-size:13.5px;">
+            <li>皓霖 → <code>haolin</code></li>
+            <li>笑语 → <code>xiaoyu</code></li>
+            <li>周政亨 → <code>zhengheng</code></li>
+            <li>朱浩斌 → <code>haobin</code></li>
+            <li>吴旻骏 → <code>minjun</code></li>
+            <li>谭铭乐 → <code>mingle</code>（不是 mingyue！）</li>
+          </ul>
+          <p style="margin:8px 0 0;font-size:13.5px;color:#64748B;">不报名字、或报错了，AI 写进数据库时 <code>student_name</code> 字段就会是错的或空的，所有数据全乱。漏掉这一步 = 后面的活白干。</p>
+        </div>
+
         <details class="fold">
           <summary>📖 4.1 真实可用的 prompt · 复制就能用</summary>
           <div class="fold-body">
-            <p>这是「让你的 AI 直接连上本班云端数据库」的 prompt。<strong>先在对话开头报上你的名字"</strong>，然后复制下面整段发给它：</p>
+            <p>这是「让你的 AI 直接连上本班云端数据库」的 prompt。<strong>前提：你已经在对话开头报过名字了（见上面那个橙色的"报名字"块）。</strong></p>
 
             <div class="callout">
               <p><strong>第一步 · 报名字（自己打这几个字）：</strong></p>
@@ -339,7 +357,8 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
   3. 数据不丢，三色标记（✓△✗）不能串
 
 【上下文】
-  - 我是初中生，姓名（拼音）：your-name（我已经在对话开头告诉你了）
+  - 我是初中生，姓名（后两个字拼音）：your-name（← 把这里替换成你自己的拼音，比如 haolin / xiaoyu / zhengheng / haobin / minjun / mingle）
+  - 我已经在对话开头打字告诉过 AI：「我是 your-name，本节课 L6 的学生」
   - 我已经在本地搭好 SQLite，字段名已经定好（students.name / cards.student_name / cards.subject / cards.question / cards.answer / reviews.mark / reviews.card_id）
   - 云端地址：https://rwdadlbtvjuoonnbbriy.supabase.co
   - 接头暗号（publishable key）：sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB
