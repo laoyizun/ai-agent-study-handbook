@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>课程总览 · 4 阶段地图</title>
+  <link rel="stylesheet" href="https://laoyizun.github.io/ai-agent-study-handbook/学生手册/css/style.css">
+  <link rel="stylesheet" href="css/overview.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="site-nav">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="../index.html">用 AI Agent 学学习</a>
+    <a class="site-nav-back" href="../index.html">← 返回首页</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ============ Hero ============ -->
+  <header class="hero">
+    <div class="eyebrow">课程总览 · COURSE OVERVIEW</div>
+    <h1>课程全景 · 4 个阶段</h1>
+    <p class="lede">从本地功能到云端同步，从 AI 被动回应到 AI 主动调用，再到硬件和 API 延展 —— 一张图看学生在每个阶段的位置和方向。</p>
+  </header>
+
+  <!-- ============ 横向时间轴 ============ -->
+  <section class="timeline-wrap">
+    <a class="tl-node active" href="#stage-1">
+      <span class="tl-num">阶段 1</span>
+      <span class="tl-name">功能</span>
+      <span class="tl-tag done">✓ 已完成</span>
+      <span class="tl-hint">本地闭环 · 5 章</span>
+    </a>
+    <a class="tl-node active" href="#stage-2">
+      <span class="tl-num">阶段 2</span>
+      <span class="tl-name">数据上云</span>
+      <span class="tl-tag done">✓ 已完成</span>
+      <span class="tl-hint">跨设备 · 1 章</span>
+    </a>
+    <a class="tl-node planned" href="#stage-3">
+      <span class="tl-num">阶段 3</span>
+      <span class="tl-name">AI 主动用</span>
+      <span class="tl-tag plan">◇ 计划中</span>
+      <span class="tl-hint">主动调用 · 2+ 章</span>
+    </a>
+    <a class="tl-node planned" href="#stage-4">
+      <span class="tl-num">阶段 4</span>
+      <span class="tl-name">功能延展</span>
+      <span class="tl-tag plan">◇ 计划中</span>
+      <span class="tl-hint">API + 硬件 · 2+ 章</span>
+    </a>
+  </section>
+
+  <!-- ============ 阶段 1 · 概要 ============ -->
+  <details class="stage-detail" id="stage-1">
+    <summary class="stage-summary">
+      <div class="stage-summary-num">1</div>
+      <div class="stage-summary-body">
+        <div class="stage-summary-name">功能 · 本地闭环</div>
+        <div class="stage-summary-line">用 AI 帮你预习复习学科，把进度和闪卡整理到自己的 HTML 页面上，数据存于本地。</div>
+      </div>
+      <div class="stage-summary-arrow">▶</div>
+    </summary>
+    <div class="stage-body">
+      <h3>核心命题</h3>
+      <p>这一阶段解决"AI 帮学生做事，结果留在哪里"的问题。从"打开 AI 直接问"升级到"建工作空间 + 让 AI 输出变成可复用资产"。</p>
+
+      <h3>关键能力</h3>
+      <ul>
+        <li>搭建 workbuddy 工作空间，建学科对话</li>
+        <li>让 AI 跨对话记住你（方式 A 复用开场白 / 方式 B 学习者档案）</li>
+        <li>把 AI 输出整理成闪念本（学科元信息 / 卡点 / 好解释）</li>
+        <li>用记忆卡片复习 + 三色标记（✓ △ ✗）</li>
+        <li>把数据从浏览器搬到本地数据库</li>
+      </ul>
+
+      <h3>包含章节</h3>
+      <ul>
+        <li><strong>L1</strong> · 建工作空间 + 开第一个学科对话</li>
+        <li><strong>L2</strong> · 第二个学科对话 + 跨对话信息共享</li>
+        <li><strong>L3</strong> · 让 AI 输出变成可复用资产（闪念本）</li>
+        <li><strong>L4</strong> · 记忆卡片</li>
+        <li><strong>L5</strong> · 从浏览器到本地服务（SQLite）</li>
+      </ul>
+
+      <h3>交付物</h3>
+      <div class="stage-box">
+        <p>· 1 个本地 HTML 复习页（带三色标记的闪卡）</p>
+        <p>· 1 个本地 SQLite 数据库（students + cards + reviews 三张表）</p>
+      </div>
+    </div>
+  </details>
+
+  <!-- ============ 阶段 2 · 详细（重点） ============ -->
+  <details class="stage-detail" id="stage-2">
+    <summary class="stage-summary">
+      <div class="stage-summary-num">2</div>
+      <div class="stage-summary-body">
+        <div class="stage-summary-name">数据上云 · 跨设备</div>
+        <div class="stage-summary-line">把阶段 1 的本地数据搬到云端，任何设备都能看到。</div>
+      </div>
+      <div class="stage-summary-arrow">▶</div>
+    </summary>
+    <div class="stage-body">
+      <h3>核心命题</h3>
+      <p>把 L5 搭的本地数据库搬到一个"任何设备、任何 AI 都能打开"的地方。</p>
+
+      <h3>学生现状</h3>
+      <p>已经能用 AI 生成闪念本和记忆卡片，已经有本地 SQLite 数据库。但数据只锁在家里电脑。</p>
+
+      <h3>要解决的痛点</h3>
+      <ul>
+        <li>周末去学校课室复习 → 数据库不在</li>
+        <li>想让 AI 看"我最近哪类错最多" → AI 看不到</li>
+        <li>爸妈问"你家娃复习得怎么样" → 你没法给他们看</li>
+      </ul>
+
+      <h3>关键能力</h3>
+      <ul>
+        <li>理解"本机 vs 云端"的两种数据住址</li>
+        <li>把 AI 之间的"接头暗号"（API key）讲成一个比喻，不出现密钥学术语</li>
+        <li>写 prompt 让 AI 帮你迁数据</li>
+        <li>抽样验证迁移没串（三色标记一致性）</li>
+      </ul>
+
+      <h3>包含章节</h3>
+      <ul>
+        <li><strong>L6</strong> · 把数据库搬上云端（本阶段唯一一章）</li>
+      </ul>
+
+      <h3>典型 AI 协作场景</h3>
+      <div class="stage-box">
+        <p>① "让 AI 帮我建云端账号 + 3 张表 + 把本机数据搬上去"</p>
+        <p>② "让 AI 帮我处理 AI 报错（key 无效、字段不匹配）"</p>
+        <p>③ "让 AI 帮我验证迁移结果（抽样对比 5 张卡 + 三色标记）"</p>
+      </div>
+
+      <h3>完成信号</h3>
+      <ul>
+        <li>能在云端网站看到 3 张表</li>
+        <li>抽样打开 3 张卡，内容和本机一字不差</li>
+        <li>抽样 ✓ / △ / ✗ 各一条，颜色没串</li>
+      </ul>
+
+      <div class="stage-next">
+        <span class="stage-next-icon">→</span>
+        <span><strong>下一步：</strong>数据虽然搬上去了，AI 还是不会主动用 —— 这是阶段 3 的事。</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- ============ 阶段 3 · 详细（重点） ============ -->
+  <details class="stage-detail planned" id="stage-3">
+    <summary class="stage-summary">
+      <div class="stage-summary-num">3</div>
+      <div class="stage-summary-body">
+        <div class="stage-summary-name">AI 主动用 · 反向调用</div>
+        <div class="stage-summary-line">AI 不再等你发问，而是主动读你的云端数据，告诉你"你最近该复习什么"。</div>
+      </div>
+      <div class="stage-summary-arrow">▶</div>
+    </summary>
+    <div class="stage-body">
+      <h3>核心命题</h3>
+      <p>把"学生主动问 AI"反过来，变成"AI 主动读学生的数据"。从被动工具变成主动助手。</p>
+
+      <h3>学生现状</h3>
+      <p>数据已经在云端，AI 能用 API key 读出来。但 AI 还在"被动回应"——你不问它不说。</p>
+
+      <h3>要解决的痛点</h3>
+      <ul>
+        <li>复习节奏靠你自己记得，AI 不提醒</li>
+        <li>你不知道"我哪类错最多"，要手动翻卡片</li>
+        <li>想生成周报要自己写</li>
+        <li>学科 A 的 AI 看不到学科 B 的进度（信息孤岛）</li>
+      </ul>
+
+      <h3>关键能力（计划）</h3>
+      <ul>
+        <li>让 AI 主动发问（基于数据反推）</li>
+        <li>让 AI 基于 ✓△✗ 自动生成"明天该复习哪些"</li>
+        <li>让 AI 在多个学科对话间共享同一份云端数据</li>
+        <li>让 AI 写周报（基于本周复习历史）</li>
+      </ul>
+
+      <h3>包含章节（计划）</h3>
+      <ul>
+        <li><strong>L7</strong> · AI 主动读库 + 自动推荐复习（计划）</li>
+        <li><strong>L8</strong> · 跨学科对话 + 周报自动化（计划）</li>
+      </ul>
+
+      <h3>典型 AI 协作场景（计划）</h3>
+      <div class="stage-box">
+        <p>① "AI 根据我最近的 ✓△✗，告诉我明天该复习哪 3 张卡"</p>
+        <p>② "AI 帮我写本周错题周报"</p>
+        <p>③ "我在学科 A 对话提问时，AI 能调用学科 B 的数据"</p>
+        <p>④ "AI 主动发'你 3 天前标 △ 的卡还没复习'提醒"</p>
+      </div>
+
+      <h3>完成信号（计划）</h3>
+      <ul>
+        <li>打开 AI 就能收到"今天该复习 X"的主动通知</li>
+        <li>AI 能告诉你"你这周数学的函数类错最多"</li>
+        <li>一键生成上周复习周报</li>
+        <li>跨学科对话能看到完整学习历史</li>
+      </ul>
+
+      <div class="stage-next">
+        <span class="stage-next-icon">→</span>
+        <span><strong>下一步：</strong>AI 主动用了，但还只能在浏览器看。下一步是把闪卡推到硬件（阶段 4）。</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- ============ 阶段 4 · 概要 ============ -->
+  <details class="stage-detail planned" id="stage-4">
+    <summary class="stage-summary">
+      <div class="stage-summary-num">4</div>
+      <div class="stage-summary-body">
+        <div class="stage-summary-name">功能延展 · API + 硬件</div>
+        <div class="stage-summary-line">加入更多 API 或硬件显示屏，做到"电子记忆卡片"。</div>
+      </div>
+      <div class="stage-summary-arrow">▶</div>
+    </summary>
+    <div class="stage-body brief">
+      <h3>核心命题</h3>
+      <p>把 AI 学习能力拓展到硬件和外部 API，闪卡不再只能"在浏览器翻牌"。</p>
+
+      <h3>初步设想</h3>
+      <ul>
+        <li>对接第三方 API（词典 / 题库 / 错题本 / 知识点图谱）</li>
+        <li>接硬件（电子墨水屏 / 树莓派 / 手机推送 / 桌面小组件）</li>
+        <li>让闪卡出现在任何有屏幕的地方</li>
+      </ul>
+
+      <div class="stage-next">
+        <span class="stage-next-icon">◇</span>
+        <span>本阶段还在规划中。章节细节等阶段 3 完成后展开。</span>
+      </div>
+    </div>
+  </details>
+
+  <!-- ============ 底部 ============ -->
+  <div class="footer">
+    这门课的全部价值在学生主动调用 AI 的那一刻<br>
+    卡住不是失败，是信号
+  </div>
+
+</main>
+
+</body>
+</html>

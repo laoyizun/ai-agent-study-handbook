@@ -1,0 +1,260 @@
+/* ============================================
+   总览页 · 4 阶段地图 · CSS
+   沿用方块鸟配色（变量从父 CSS 继承）
+   ============================================ */
+
+/* ============ 时间轴 ============ */
+.timeline {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr 2fr;
+  gap: 0;
+  margin: 24px 0 48px;
+  align-items: stretch;
+}
+
+@media (max-width: 720px) {
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.tl-node {
+  background: var(--bg, #FFFFFF);
+  border: 1.5px solid var(--line, #EDEDED);
+  border-radius: var(--radius, 14px);
+  padding: 24px 20px;
+  margin: 0 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.tl-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* 已完成节点 */
+.tl-node.active {
+  border-color: var(--orange, #F3A21C);
+  background: rgba(243, 162, 28, 0.04);
+}
+.tl-node.active:hover {
+  background: rgba(243, 162, 28, 0.08);
+}
+
+/* 计划中节点 */
+.tl-node.planned {
+  border-style: dashed;
+  background: var(--paper, #F9FAFB);
+  opacity: 0.85;
+}
+.tl-node.planned:hover {
+  background: #FFFFFF;
+}
+
+.tl-num {
+  font-family: "SF Mono", "Menlo", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--orange, #F3A21C);
+}
+.tl-node.planned .tl-num {
+  color: var(--ink-mute, #64748B);
+}
+
+.tl-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink, #333333);
+  margin: 4px 0;
+}
+
+.tl-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.tl-tag.done {
+  background: rgba(243, 162, 28, 0.12);
+  color: var(--orange, #F3A21C);
+}
+.tl-tag.plan {
+  background: var(--line, #EDEDED);
+  color: var(--ink-mute, #64748B);
+}
+
+.tl-hint {
+  font-size: 11px;
+  color: var(--ink-mute, #64748B);
+  margin-top: 8px;
+}
+
+/* 节点之间的小箭头（窄屏隐藏） */
+@media (min-width: 721px) {
+  .tl-node:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--line, #EDEDED);
+    font-size: 18px;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+/* ============ 阶段详情面板（折叠） ============ */
+.stage-detail {
+  background: var(--bg, #FFFFFF);
+  border: 1.5px solid var(--line, #EDEDED);
+  border-radius: var(--radius, 14px);
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: border-color 0.18s;
+}
+.stage-detail:hover {
+  border-color: var(--orange, #F3A21C);
+}
+.stage-detail[open] {
+  border-color: var(--orange, #F3A21C);
+}
+
+.stage-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.stage-summary::-webkit-details-marker { display: none; }
+
+.stage-summary-num {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: rgba(243, 162, 28, 0.10);
+  color: var(--orange, #F3A21C);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 17px;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.stage-detail.planned .stage-summary-num {
+  background: var(--line, #EDEDED);
+  color: var(--ink-mute, #64748B);
+}
+
+.stage-summary-body {
+  flex: 1;
+  min-width: 0;
+}
+.stage-summary-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink, #333333);
+  margin-bottom: 4px;
+}
+.stage-summary-line {
+  font-size: 13px;
+  color: var(--ink-mute, #64748B);
+  line-height: 1.5;
+}
+
+.stage-summary-arrow {
+  flex-shrink: 0;
+  color: var(--ink-mute, #64748B);
+  font-size: 14px;
+  transition: transform 0.18s;
+}
+.stage-detail[open] .stage-summary-arrow {
+  transform: rotate(90deg);
+  color: var(--orange, #F3A21C);
+}
+
+.stage-body {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--line, #EDEDED);
+}
+
+.stage-body h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orange, #F3A21C);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 20px 0 10px;
+}
+.stage-body h3:first-child {
+  margin-top: 20px;
+}
+.stage-body p {
+  margin: 0 0 12px;
+  color: var(--ink, #333333);
+  line-height: 1.75;
+  font-size: 15px;
+}
+.stage-body ul {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  color: var(--ink, #333333);
+}
+.stage-body li {
+  margin: 4px 0;
+  line-height: 1.7;
+}
+.stage-body li strong {
+  color: var(--ink, #333333);
+}
+
+.stage-box {
+  background: var(--paper, #F9FAFB);
+  border-left: 3px solid var(--orange, #F3A21C);
+  padding: 12px 16px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+.stage-box p { margin: 4px 0; font-size: 14px; }
+
+.stage-next {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(243, 162, 28, 0.06);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--ink, #333333);
+}
+.stage-next-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+  color: var(--orange, #F3A21C);
+}
+
+/* 阶段 4 简短模式 */
+.stage-body.brief {
+  padding-top: 16px;
+}
+.stage-body.brief p {
+  font-size: 14px;
+}
