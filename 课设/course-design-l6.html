@@ -198,33 +198,37 @@
     <!-- 分段 5 -->
     <h3>5. 主课 · 写 prompt + AI 搬数据（40′）</h3>
     <div class="tch-block tch-teacher">
-      <p><b>老师动作：</b>演示三件事</p>
+      <p><b>老师动作：</b>演示 5 件事</p>
       <ol>
-        <li>展示一个 prompt 的样子（屏幕上展示 lesson-6.html 里那个示例 prompt）</li>
-        <li>拆解四要素，<strong>不重复讲</strong>，引用 L5 的拆解（"角色 / 任务 / 上下文 / 输出"已经学过）</li>
-        <li>抛场景问题，让学生想（不要求写）：「只想搬 cards 表，prompt 里任务那块怎么写？」</li>
+        <li>投屏打开 L6 手册的 Step 3.5「本课用的密钥 · 一键复制」折叠块，让全班看到 URL + publishable key</li>
+        <li>教学生"报名字"—— 在 AI 对话开头打字「我是 <code>xxx</code>，本节课 L6 的学生」（<code>xxx</code> 替换成自己的拼音）</li>
+        <li>演示：从 L6 复制真实可用的 prompt 段（含真 key），把 <code>your-name</code> 改成自己的拼音，发给 AI</li>
+        <li>拆解 prompt 的"写库硬要求"—— 为什么必须报名字、为什么禁止改他人姓名</li>
+        <li>AI 开始干活，监督 5 个验证点（云端表 / 字段名 / 行数 / 内容抽样 / 三色标记）</li>
       </ol>
-      <p>然后让学生打开自己的 AI 对话，按场景问题自己写 prompt（<strong>不是复制</strong>）。</p>
+      <p>老师自己也要在自己电脑跑一次同样的流程 —— **老师的 key 跟学生的 key 是同一个**，先跑通代表你出问题时能帮上忙。</p>
     </div>
     <div class="tch-block tch-student">
       <p><b>学生动作：</b></p>
       <ul>
-        <li>听老师讲（不重复讲四要素）</li>
-        <li>打开 AI 对话，自己写 prompt</li>
+        <li>听老师讲（不重复讲四要素，引用 L5）</li>
+        <li>在 AI 对话开头报名字</li>
+        <li>从 L6 复制 prompt，<strong>改 <code>your-name</code> 为自己的拼音</strong></li>
         <li>让 AI 执行 → 看 AI 输出</li>
-        <li>如果 AI 没做对，调整 prompt（结构不变，换措辞）</li>
+        <li>逐项验证 5 个点（不轻信 AI 说"搬完了"）</li>
       </ul>
     </div>
     <div class="tch-block tch-intent">
-      <p>💭 <b>设计意图：</b>这是本节课的核心 —— 学生必须自己写 prompt。复制 = 没学。AI 反馈不对 = 调整 prompt 的能力 = 核心技能。</p>
+      <p>💭 <b>设计意图：</b>L6 的 prompt <strong>是真实可用的</strong>（不是示例），因为这一步需要全班真的连上同一个云端数据库。复制 + 改名字 = 学生实际上手了一遍 prompt 四要素。比纯写 prompt 更扎实。</p>
     </div>
     <div class="tch-block tch-warn">
       <p>⚠️ <b>撞墙点预案：</b></p>
       <ul>
-        <li>学生 prompt 极简（只写"帮我搬数据"）→ 引导补"角色""上下文""哪些表"</li>
+        <li>学生忘了"报名字" → AI 写数据时不会报错，但所有卡都会变成 student_name = 空值或 NULL → 让 AI 帮他补填</li>
+        <li>学生改了同学的名字（恶作剧）→ 这就是为什么 prompt 里写了"硬要求"——但兜底是老师能在 admin 后台看到并纠正</li>
+        <li>学生没改 <code>your-name</code> 直接粘 → AI 不会报错，但 student_name 都变成 <code>your-name</code> → 课后清洗数据</li>
         <li>AI 执行报错 → 让学生把错误贴给 AI 看，让 AI 自己排查（这是协作能力）</li>
         <li>学生误把 API key 发到群里 → 当场演示：让另一个 AI 用这个 key 改一条数据 → 学生看到后果</li>
-        <li>学生想直接复制示例 → 拒绝："自己写比复制有用 10 倍"</li>
       </ul>
     </div>
 

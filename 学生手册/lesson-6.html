@@ -226,6 +226,40 @@
             </ol>
           </div>
         </details>
+
+        <details class="fold">
+          <summary>🔑 本课用的密钥 · 一键复制</summary>
+          <div class="fold-body">
+            <p>这是本课用到的云端数据库地址 + 接头暗号。点下面两个按钮，复制后粘到 workbuddy 里给你的 AI。</p>
+
+            <h4>① 云端地址（点复制）</h4>
+            <div class="code-wrap">
+              <pre><code id="supabase-url">https://rwdadlbtvjuoonnbbriy.supabase.co</code></pre>
+              <button class="copy-btn" data-copy-target="supabase-url">复制</button>
+            </div>
+
+            <h4>② 接头暗号（点复制）</h4>
+            <div class="code-wrap">
+              <pre><code id="supabase-key">sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
+              <button class="copy-btn" data-copy-target="supabase-key">复制</button>
+            </div>
+
+            <h4>③ 完整一键复制（地址 + 暗号，中间换行）</h4>
+            <div class="code-wrap">
+              <pre><code id="supabase-both">https://rwdadlbtvjuoonnbbriy.supabase.co
+sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
+              <button class="copy-btn" data-copy-target="supabase-both">复制全部</button>
+            </div>
+
+            <p><strong>⚠️</strong> 用法：</p>
+            <ul>
+              <li>这两个值要粘给 AI，AI 才知道去哪个云端、报哪个暗号</li>
+              <li>不要贴到班级微信群（任何人都能冒充你）</li>
+              <li>不要写进你的闪念本文件（AI 会读到，存在文件里也不安全）</li>
+              <li>粘给 AI 之后，AI 的回复里会再出现一次，记得也打码再截图</li>
+            </ul>
+          </div>
+        </details>
       </div>
     </div>
 
@@ -284,19 +318,46 @@
         <p class="diagram-caption">整个搬的过程 = 你做一半（写 + 验证），AI 做一半（搬运）。</p>
 
         <details class="fold">
-          <summary>📖 4.1 看一个 prompt 是什么样</summary>
+          <summary>📖 4.1 真实可用的 prompt · 复制就能用</summary>
           <div class="fold-body">
-            <p>这是「让 AI 帮你把本机数据库搬到云端」的一个 prompt 示例（仅展示）：</p>
-            <div class="code-wrap">
-              <pre><code>你是我的云端搭建助手，不是通用聊天 AI。
+            <p>这是「让你的 AI 直接连上本班云端数据库」的 prompt。<strong>先在对话开头报上你的名字"</strong>，然后复制下面整段发给它：</p>
 
-【角色】你懂 Supabase 这种云端数据库的搭建
-【任务】帮我把本地 SQLite 里的 3 张表（students / cards / reviews）搬到云端，数据不丢
-【上下文】我是初中生，已经在本地搭好 SQLite，字段名已经定好。我现在想升级到云端。
-【输出要求】先告诉我建云端账号的步骤；再告诉我怎么把数据迁上去；最后给我 5 个验证点，让我确认搬对了。</code></pre>
+            <div class="callout">
+              <p><strong>第一步 · 报名字（自己打这几个字）：</strong></p>
+              <p>「我是 <code>your-name</code>，本节课 L6 的学生」</p>
+              <p>把 <code>your-name</code> 换成你的真实拼音（你老师给你的名字拼音）。这一步是 AI 写入数据库时<strong>必填</strong>的字段，不能省。</p>
+            </div>
+
+            <p><strong>第二步 · 复制下面这段发给 AI：</strong></p>
+            <div class="code-wrap">
+              <pre><code>你是本班的云端数据库协作助手，不是通用聊天 AI。
+
+【角色】你懂 Supabase 公开 REST API，能帮学生读写数据库
+【任务】
+  1. 把我本机 SQLite 里的 3 张表（students / cards / reviews）搬到云端
+  2. 我的本机数据文件路径：按你的环境（macOS 常见 ~/memory-cards.db 或学习笔记目录）
+  3. 数据不丢，三色标记（✓△✗）不能串
+
+【上下文】
+  - 我是初中生，姓名（拼音）：your-name（我已经在对话开头告诉你了）
+  - 我已经在本地搭好 SQLite，字段名已经定好（students.name / cards.student_name / cards.subject / cards.question / cards.answer / reviews.mark / reviews.card_id）
+  - 云端地址：https://rwdadlbtvjuoonnbbriy.supabase.co
+  - 接头暗号（publishable key）：sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB
+
+【写库硬要求】
+  - 写 cards / reviews 时，student_name 必须等于我刚才告诉你的那个拼音，不许写错
+  - 不要替我改其他同学的 student_name（即使他们没在 devtools 里写死，你也别主动改）
+  - 改 / 删任何记录前，先告诉我要改哪一条、为什么改，等我确认
+
+【输出要求】
+  - 第一步：先列出我本机 SQLite 的内容（有几张表、每张表几行、字段名），让我先确认是不是 3 张表
+  - 第二步：再告诉我怎么连云端、用哪个 HTTP 路径插入数据
+  - 第三步：插入完后，给我 5 个验证点（看下面 4.4）
+  - 任何一步报错，把错误原文贴回来让我看</code></pre>
               <button class="copy-btn">复制</button>
             </div>
-            <p>这是「<strong>展示</strong>」，不是「<strong>模板</strong>」。看一遍结构就行，下一段拆解。</p>
+
+            <p><strong>注意：</strong>这是 <strong>真实可用的 prompt</strong>，不是示例。把 <code>your-name</code> 换成你自己的拼音就能用。改的话自己写比复制更管用 —— 改的过程你会注意到"为什么要写这些字段"。</p>
           </div>
         </details>
 
@@ -390,7 +451,11 @@
 
     <!-- ============ 下一章钩子 ============ -->
     <div class="callout">
-      <p><strong>🪝 留给 L7：</strong>数据上去了，但 AI 不会主动用。下节课让 AI 主动告诉你"你最近哪些最容易错"。</p>
+      <p><strong>🪝 留给 L7：</strong></p>
+      <ul style="margin:6px 0 0;padding-left:22px;">
+        <li>数据上去了，但 AI 不会主动用 —— 让 AI 主动告诉你"你最近哪些最容易错"</li>
+        <li>下一个阶段会做你的"复习页"：你打开它就只看到自己名字下的卡和三色标记，不用每次输入</li>
+      </ul>
     </div>
 
   </article>
