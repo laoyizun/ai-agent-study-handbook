@@ -264,6 +264,38 @@
           <summary>📖 4.5 你要建的 3 张清单 · 字段定下来</summary>
           <div class="fold-body">
             <p>之前 L4 你做卡片时只有「问题 / 答案 / 章节」3 项，<strong>够用</strong>。但升级到数据库后，AI 要按固定结构写入数据 —— 字段必须一致，否则 AI 写不进去。</p>
+
+            <div class="callout" style="background:rgba(243,162,28,0.10);border-left:4px solid #F3A21C;padding:16px 20px;border-radius:8px;margin:16px 0;">
+              <p style="font-size:15px;font-weight:700;color:#F3A21C;margin:0 0 8px;">⚠️ L5 本地 SQLite 和 L6 云端 Supabase · 字段必须完全一致</p>
+              <p style="margin:6px 0;">下面是 L5 + L6 <strong>共用的字段定义</strong>。AI 在你本机建 SQLite 时，要按这个 schema 来建；L6 上云端时不会重建表，<strong>直接用同一份字段</strong>。</p>
+              <p style="margin:6px 0;font-size:13.5px;color:#64748B;">完整 schema 参考（你可以直接复制给 AI 让它检查建对了没）：</p>
+              <pre style="background:#FFFFFF;padding:10px 14px;border-radius:6px;font-size:12.5px;line-height:1.6;margin:6px 0 0;border:1px solid #EDEDED;overflow-x:auto;"><code>-- 第一张 students
+CREATE TABLE students (
+  id          BIGSERIAL,  -- 本地 SQLite 用 INTEGER PRIMARY KEY AUTOINCREMENT
+  name        TEXT        NOT NULL UNIQUE,
+  created_at  TIMESTAMPTZ DEFAULT now()  -- 本地用 CURRENT_TIMESTAMP
+);
+
+-- 第二张 cards
+CREATE TABLE cards (
+  id           BIGSERIAL,
+  student_name TEXT        NOT NULL,
+  subject      TEXT        NOT NULL,
+  question     TEXT        NOT NULL,
+  answer       TEXT        NOT NULL,
+  created_at   TIMESTAMPTZ DEFAULT now()
+);
+
+-- 第三张 reviews
+CREATE TABLE reviews (
+  id          BIGSERIAL,
+  card_id     BIGINT      NOT NULL,
+  mark        TEXT        CHECK (mark IN ('done','half','bad')),
+  reviewed_at TIMESTAMPTZ DEFAULT now()
+);</code></pre>
+              <p style="margin:8px 0 0;font-size:13px;color:#64748B;">⚠️ 注意：<code>BIGSERIAL</code> 是 Supabase 写法；SQLite 用 <code>INTEGER PRIMARY KEY AUTOINCREMENT</code>。<code>TIMESTAMPTZ</code> 是云端，本地用 <code>TEXT DEFAULT CURRENT_TIMESTAMP</code>。<strong>字段名必须一致，类型不同没关系</strong>。</p>
+            </div>
+
             <p>下面是 3 张清单的<strong>字段定义</strong>（你和 AI 都会用到）：</p>
 
             <div class="diagram">
@@ -388,6 +420,107 @@
               <p><strong>为什么字段必须一致？</strong></p>
               <p>L6 上云端时也用同样的 3 张清单、同样的字段。你现在定义一次，L6 直接对接，<strong>不需要重新填数据</strong>。</p>
             </div>
+
+            <details class="fold">
+              <summary>📖 4.6 把你之前的 md / json 转成表数据 · 直接复制用的 prompt</summary>
+              <div class="fold-body">
+                <p>之前 L3 你写过闪念本 .md、L4 你用过记忆卡片 .json、L4 复习页用过 localStorage。这些数据现在<strong>散在不同文件里</strong>。L5 要把它们<strong>整理成 3 张表的字段</strong>，L6 才好一次性搬上云。</p>
+
+                <p><strong>为什么不能直接搬？</strong></p>
+                <ul>
+                  <li><code>闪念本.md</code> 里的标题 / 段落 / bullet 不是表字段</li>
+                  <li><code>记忆卡片.json</code> 里的 <code>front</code> / <code>back</code> 键名跟 <code>cards.question</code> / <code>cards.answer</code> 不一样</li>
+                  <li><code>localStorage</code> 里的 ✓△✗ 存在浏览器里，AI 看不见</li>
+                </ul>
+                <p>所以要<strong>让 AI 帮你转换</strong>。转换规则已经定好，学生直接复制下面 prompt 给 AI，AI 会自动读你的文件 + 整理成 INSERT 语句。</p>
+
+                <h4>第一步 · 报名字</h4>
+                <div class="callout">
+                  <p>在 AI 对话开头打：</p>
+                  <p style="padding:6px 12px;background:#FFFFFF;border-radius:6px;font-family:monospace;font-size:13.5px;">我是 <strong style="color:#F3A21C;">your-name</strong>，本节课 L5 的学生</p>
+                  <p style="margin:6px 0;font-size:13px;color:#64748B;"><code>your-name</code> 是你名字<strong>后两个字的拼音</strong>（例如 haolin / xiaoyu / zhengheng / haobin / minjun / mingle）。</p>
+                </div>
+
+                <h4>第二步 · 复制 prompt 给 AI</h4>
+                <div class="code-wrap">
+                  <pre><code>你是本班的本地数据整理助手，不是通用聊天 AI。
+
+【角色】你懂 Markdown / JSON / SQLite 三种格式，能帮学生把分散的数据整理成数据库表的 INSERT 语句
+
+【任务】
+  1. 读我工作空间里的所有"知识数据"文件
+  2. 把内容整理成下面 schema 对应的 INSERT 语句（让我手动复制粘贴到本地 SQLite 跑）
+  3. 不要直接改我的任何文件，**只输出 INSERT 语句给我**
+
+【上下文】
+  - 我是初中生，姓名（后两个字拼音）：your-name（见开头我告诉你的）
+  - 我的数据散在 3 个来源里：
+    a) 闪念本 .md 文件（路径通常是 ~/我的工作空间/闪念本/ 或类似位置）
+    b) 记忆卡片 .json 文件（路径类似 ~/我的工作空间/记忆卡片/）
+    c) localStorage（我在 L4 复习页浏览器里存的 ✓△✗ 标记 —— 这部分我需要你告诉我怎么导出成 JSON）
+  - 目标 schema（**字段名必须严格一致**）：
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+students 表
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSERT INTO students (name) VALUES ('your-name');
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+cards 表（每张闪念本条目 / 每张记忆卡片 = 一行）
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSERT INTO cards (student_name, subject, question, answer) VALUES
+  ('your-name', '数学', '勾股定理的几何意义', 'a²+b²=c² 表示直角三角形两直角边平方和等于斜边平方'),
+  ('your-name', '数学', '...', '...'),
+  ...;
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+reviews 表（每条 ✓△✗ = 一行）
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSERT INTO reviews (card_id, mark) VALUES
+  (1, 'done'),   -- ✓ 已掌握
+  (2, 'half'),   -- △ 半掌握
+  (3, 'bad');    -- ✗ 未掌握
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+【转换规则 · 必须遵守】
+  - cards 表的 student_name 全部填你自己的拼音，不要写别人
+  - 闪念本 .md 里"AI 给的好解释"每一条 bullet = cards 表一行（question 用 bullet 标题，answer 用 bullet 内容）
+  - 记忆卡片 .json 的 front → cards.question，back → cards.answer，mark → reviews.mark
+  - localStorage 里的 mark 字段：✓ = 'done'，△ = 'half'，✗ = 'bad'
+  - card_id 是 cards 插入后 AI 给我返回的 id 列表，要按那个顺序插 reviews
+  - 如果某条数据你看不懂、字段对不上，**停下来告诉我不要自己猜**
+
+【输出要求】
+  - 第一步：列出你找到的所有文件路径 + 每个文件有几条数据
+  - 第二步：告诉我 localStorage 数据怎么导出（具体步骤、点哪个按钮）
+  - 第三步：等我确认后，输出完整的 INSERT 语句（按上面的 schema）
+  - 任何一步报错，把错误原文贴回来
+
+【验证】
+  - INSERT 语句生成后，你自己用 SQLite 跑一遍（在你的环境里跑，**不要动我本机文件**），跑通了告诉我每张表有几行
+  - 我再自己用 sqlite3 命令行跑一次，最终以我跑出来的为准</code></pre>
+                  <button class="copy-btn">复制</button>
+                </div>
+
+                <h4>第三步 · 拿到 INSERT 语句后，自己跑</h4>
+                <p>AI 会给你一段 INSERT 语句，你<strong>复制到终端跑</strong>（不是直接让 AI 跑）：</p>
+                <div class="code-wrap">
+                  <pre><code># 在你电脑的 SQLite 数据库文件路径下（先问 AI 这个文件在哪）
+sqlite3 ~/你的路径/memory-cards.db &lt; generated_inserts.sql
+
+# 跑完后看一下结果
+sqlite3 ~/你的路径/memory-cards.db "SELECT COUNT(*) FROM students; SELECT COUNT(*) FROM cards; SELECT COUNT(*) FROM reviews;"</code></pre>
+                  <button class="copy-btn">复制</button>
+                </div>
+
+                <p><strong>注意：</strong>这是 <strong>真实可用的 prompt</strong>，不是示例。把 <code>your-name</code> 换成你自己的拼音就能用。改的过程你会注意到"为什么要写这些字段"。</p>
+
+                <div class="callout">
+                  <p><strong>做完 L5 这一步 → L6 就简单了：</strong>本地 SQLite 已经有数据，且字段和云端一致。L6 上云时 AI 只需要读本地 SQLite → HTTP 请求发给云端，<strong>不用再转格式</strong>。</p>
+                </div>
+              </div>
+            </details>
           </div>
         </details>
       </div>

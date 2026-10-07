@@ -189,8 +189,8 @@
 
     <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
 
-    <!-- 分段 4 -->
-    <h3>4. 主课 · 写 prompt · 让 AI 帮你搭（45′）</h3>
+    <!-- 分段 4a -->
+    <h3>4a. 主课 · 写 prompt · 让 AI 帮你搭服务（25′）</h3>
     <div class="tch-block tch-teacher">
       <p><b>老师动作：</b>演示三件事</p>
       <ol>
@@ -219,6 +219,43 @@
         <li>AI 执行报错 → 让学生把错误贴给 AI 看，让 AI 自己排查（这是协作能力）</li>
         <li>学生电脑没装 Node → 降级：跳过搭建环节，只看概念 + prompt 设计</li>
         <li>学生想直接复制示例 → 拒绝：「自己写比复制有用 10 倍」</li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 4b -->
+    <h3>4b. 格式转换 · 把 md + json 转成 INSERT 语句（20′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>演示 4 件事</p>
+      <ol>
+        <li><strong>强调"为什么要转换"</strong>：之前 L3/L4 的数据散在 .md / .json / localStorage 里，L5 搭好的 SQLite 表是空表。要先填数据，L6 才能搬上云</li>
+        <li>展示 L4.6 折叠的 prompt（含"报名字"环节——L6 那一套前重复过一遍，全班口头齐读拼音对照表）</li>
+        <li>演示在自己电脑上跑：让 AI 读自己闪念本 + 记忆卡片 → 输出 INSERT 语句 → 复制到 <code>sqlite3</code> 跑</li>
+        <li>强调"AI 不直接改本地文件"——学生自己复制 INSERT 跑，避免误操作</li>
+      </ol>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b></p>
+      <ul>
+        <li>口头齐读 6 个学生姓名 → 后两字拼音对照（防止 mingyue 之类拼错）</li>
+        <li>复制 L4.6 的 prompt，改 <code>your-name</code> 为自己的拼音，发给 AI</li>
+        <li>让 AI 列出找到的文件清单 + 数据条数（确认 AI 读对了）</li>
+        <li>拿到 INSERT 语句 → <strong>自己复制到终端跑</strong>（不是让 AI 跑）</li>
+        <li>跑完后让 AI 告诉你"students / cards / reviews 各有几行"</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-intent">
+      <p>💭 <b>设计意图：</b>L5 这一步是 L4 → L6 的<strong>数据规范化桥梁</strong>。本地 SQLite 字段跟云端 Supabase 完全一致后，L6 直接镜像即可，<strong>不用再转一次</strong>。L5 转换 prompt 写得越规范，L6 越轻松。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b></p>
+      <ul>
+        <li>AI 找不到学生的文件路径 → 学生截图给 AI 看文件树，让 AI 自己找</li>
+        <li>AI 把闪念本里的"标题"误当成 question、把"段落"误当成 answer → 强调 prompt 里"如果听不懂停下来告诉我"这条</li>
+        <li>AI 直接帮学生跑 INSERT → <strong>立刻制止</strong>，学生必须自己复制跑</li>
+        <li>学生 localStorage 数据忘了导出 → 演示具体步骤：L4 复习页 → 浏览器 devtools → Application → Local Storage</li>
+        <li>学生卡 / 3 数据条数和 AI 列的不一致 → 让 AI 自己 <code>SELECT COUNT</code> 核对</li>
       </ul>
     </div>
 
