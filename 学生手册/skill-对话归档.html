@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Skill 01 · 让 AI 自动归档对话记录 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/scene.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <header class="scene-page">
+    <a href="index.html" class="back-link">← 返回学生手册目录</a>
+
+    <div class="scene-page-header">
+      <div class="scene-page-eyebrow">📚 场景知识 · Skill 01</div>
+      <h1>让 AI 自动归档对话记录</h1>
+      <p class="scene-page-subtitle">对话存在哪儿 · Skill 是什么 · 复制一段 prompt 给 AI 帮你做归档</p>
+    </div>
+
+    <!-- ============================================================
+         真实场景
+         ============================================================ -->
+    <section>
+      <h2>真实场景</h2>
+      <p>想象一个画面：</p>
+      <p>你今天用 workbuddy 跟 AI 复习了 2 小时数学 —— 错题分析、对话串讲、补充材料都讲透了。你合上电脑，明天想再回顾一下 ——</p>
+      <ul>
+        <li><strong>重装系统后</strong>，全没了。</li>
+        <li><strong>换电脑后</strong>，找不到。</li>
+        <li><strong>想存进笔记软件</strong>，复制粘贴要粘 80 条。</li>
+      </ul>
+      <p>这不是你的问题，是 workbuddy 的设计 —— <strong>桌面端的对话记录默认存本机硬盘，不主动上云。</strong></p>
+    </section>
+
+    <!-- ============================================================
+         知识 1 · 两层存储
+         ============================================================ -->
+    <section>
+      <h2>知识 1 · workbuddy 的两层存储</h2>
+      <p>workbuddy 有两种 <strong>"任务"</strong>。区别只有一个：</p>
+
+      <table>
+        <thead>
+          <tr><th></th><th>存在哪儿</th><th>换电脑能看到吗</th><th>例子</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>云端任务</strong></td>
+            <td>服务器上（绑账号）</td>
+            <td>✅ 自动出现</td>
+            <td>你在手机 App 上看到的对话</td>
+          </tr>
+          <tr>
+            <td><strong>本机任务</strong></td>
+            <td>你电脑的硬盘里</td>
+            <td>❌ 看不到</td>
+            <td>你平时在桌面端建的工作空间对话</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <details class="fold">
+        <summary>📖 为什么桌面端要默认放本机？</summary>
+        <div class="fold-body">
+          <p>因为桌面端要<strong>读你电脑里的文件、跑本地命令、操作桌面软件</strong>。对话上下文、工具调用的返回（经常几 MB）、文件快照 —— 都在你的机器上产生。</p>
+          <p>把"对话记录"和"执行环境"绑在一起，是最不容易出错的做法 —— 也是默认不上云的理由。</p>
+          <p>这不是 bug，是设计选择。</p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>📖 怎么验证你的对话是云端任务还是本机任务？</summary>
+        <div class="fold-body">
+          <p>最干净的判断方式 ——</p>
+          <p>用 <strong>手机 App 或小程序</strong> 登录<strong>同一个账号</strong>，搜一个你记得的旧任务标题。</p>
+          <ul>
+            <li>搜得到 → 是云端任务，换设备看得到。</li>
+            <li>搜不到 → 是本机任务，重装系统即丢。</li>
+          </ul>
+          <p>这个方法比查路径、看文件靠谱 —— 因为服务端不一定会把所有对话都建索引。</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============================================================
+         知识 2 · 原文藏在本地哪里
+         ============================================================ -->
+    <section>
+      <h2>知识 2 · 你的对话原文藏在本地哪里</h2>
+      <p>虽然工作空间任务不上云，但对话原文<strong>一字不差地存在本机</strong>。位置：</p>
+
+      <div class="code-wrap">
+        <pre><code>~/.workbuddy/projects/&lt;工作目录&gt;/&lt;对话ID&gt;.jsonl</code></pre>
+        <button class="copy-btn">复制</button>
+      </div>
+
+      <p>这个 <code>.jsonl</code> 文件：</p>
+      <ul>
+        <li>每行 = 一个事件（你的提问、AI 的回复、AI 思考过程、AI 调用了哪个工具）</li>
+        <li><strong>原始格式</strong>，一字不差</li>
+        <li>workbuddy <strong>官方没有 UI 能让你直接读</strong>，但 AI 可以读</li>
+      </ul>
+
+      <p>所以"归档"本质就是 —— 让 AI 读这个文件、转成可读的 Markdown、传到云端。</p>
+    </section>
+
+    <!-- ============================================================
+         知识 3 · Skill 是什么
+         ============================================================ -->
+    <section>
+      <h2>知识 3 · Skill 是什么（本章核心新概念）</h2>
+      <p>要做"自动归档"，你需要先懂一个新概念 —— <strong>Skill</strong>。</p>
+
+      <p><strong>一句话</strong>：Skill = 给 AI 的<strong>预设指令包</strong>，告诉它「什么触发词 + 做什么事 + 怎么做」。</p>
+
+      <details class="fold">
+        <summary>📖 类比理解 Skill</summary>
+        <div class="fold-body">
+          <p>你手机里的<strong>快捷指令</strong>用过吗？比如你说一句"回家"就自动打开地图 + 放音乐 + 关 WiFi。</p>
+          <p>Skill 就是 workbuddy 的"快捷指令" ——</p>
+          <ul>
+            <li><strong>触发词</strong>：你说"归档" → AI 知道要做归档</li>
+            <li><strong>要做的事</strong>：找 .jsonl → 转 Markdown → 传到资料库</li>
+            <li><strong>怎么做</strong>：内置一段 Python 脚本，让 AI 自动跑</li>
+          </ul>
+          <p>Skill 不是黑魔法 —— 就是 <strong>一段写好的指令 + 几个脚本</strong>，打包成文件夹让 AI 知道"用户说这个关键词时调用我"。</p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>📖 怎么创建 Skill？</summary>
+        <div class="fold-body">
+          <p>workbuddy 提供了一个特殊的能力：<code>skill-creator</code>。你不用自己写 Skill 文件，你只需要给 AI <strong>一段 prompt</strong>，AI 会帮你创建：</p>
+          <ol>
+            <li>AI 在 <code>~/.workbuddy/skills/&lt;技能名&gt;/</code> 文件夹下建 <code>SKILL.md</code>（指令说明）</li>
+            <li>AI 在 <code>scripts/</code> 下放 Python 脚本（确定性操作）</li>
+            <li>AI 跑一次实际测试，确认能跑通</li>
+          </ol>
+          <p>创建完成后，以后你说触发词（比如"归档"），AI 就会自动调用这个 Skill。</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============================================================
+         实战任务
+         ============================================================ -->
+    <section>
+      <h2>实战任务 · 让 AI 帮你做"对话归档 Skill"</h2>
+
+      <div class="callout">
+        <p><strong>任务目标</strong>：你做的 AI，在你下次说"归档"时，自动把当前对话备份到资料库。</p>
+        <p><strong>前提</strong>：桌面端 workbuddy + 已登录账号。</p>
+      </div>
+
+      <h3>第 1 步 · 建一个新工作空间</h3>
+      <p>打开 workbuddy → 新建工作空间（取名"对话归档测试"）。</p>
+
+      <h3>第 2 步 · 在对话开头报名字 + 说一句话</h3>
+      <p>在 AI 对话开头打字：「帮我创建一个本地技能，自动归档对话记录，防止丢失。」</p>
+
+      <h3>第 3 步 · 复制下面整段 prompt 给 AI</h3>
+      <p>下面这段 prompt 是已经设计好的完整版 —— <strong>完整复制粘贴</strong>给 AI，不要改（除非你能说清楚为什么改）：</p>
+
+      <div class="code-wrap">
+        <pre><code>请帮我创建一个本地技能，用来自动归档对话记录，防止丢失。
+参考 skill-creator 规范创建，用户级技能，名称 conversation-archive。
+
+【触发时机】我说「总结」「结束」「收尾」「归档」「保存记录」「做完了」时启用。
+
+【要做的事】
+1. 找到本次对话的原始记录：~/.workbuddy/projects/ 下按修改时间最新的 .jsonl
+2. 生成两份 Markdown：
+   - 完整版：含提问、回复、思考过程、工具调用与返回，原文不动（只存本地）
+   - 资料库版：只含提问和回复（思考过程、工具调用、本地路径一律不写进去）
+3. 原始 .jsonl 复制一份留存；同时从本地数据库 ~/.workbuddy/workbuddy.db 的 sessions
+   表里，把这条对话对应的那一行元数据导出成一个小 JSON（user_id 留成占位符，还原时再填）
+4. 上传到资料库：
+   - 「资料库版」按文档创建，标题用「日期-对话标题」
+   - 「原始 .jsonl」和「会话元数据 JSON」按网盘文件上传（.jsonl 属于通用文件，
+     走网盘文件通道，不是文档通道），文件名用「日期-对话标题_原始记录.jsonl」
+   - 上传后回读文档一次，确认问答数量和脚本统计一致，再把链接发我
+
+【技能里必须专门写一节：加载/还原 jsonl 的注意事项】
+把下面几条原样写进 SKILL.md，以后每次归档都要向我讲清楚：
+1. 内容完整 ≠ 任务会出现。一条任务的状态分三处存放：projects 目录下的 jsonl（消息本体）、
+   本地数据库 workbuddy.db 的 sessions 表（任务列表的真正来源）、侧边栏快照。
+   任务列表读的是数据库，不是 projects 目录——光把 jsonl 放回去，任务不会自动出现。
+2. 放置路径有转义规则：~/.workbuddy/projects/&lt;工作目录转义名&gt;/&lt;对话ID&gt;.jsonl，
+   转义 = 去掉开头 /，再把 / 换成 -（例：/Users/me/WorkBuddy/x → Users-me-WorkBuddy-x）。
+3. 要出现在任务列表，还得向 sessions 表补一行，user_id 换成当前账号的用户 ID。
+4. 先备份再动手：操作前退出 WorkBuddy；同名文件先改名备份，数据库先复制一份留底，不要直接覆盖。
+5. 改数据库是非官方操作，写错可能损坏数据、版本升级可能失效，不保证被识别——
+   建议由老师执行，不要批量发给学生自行改库。
+6. 更安全的替代用法：把 jsonl 当离线存档，让 AI 读取它重建对话内容，零风险。
+7. 注意隐私：jsonl 里含本地路径、思考过程、工具调用，属私密存档，不要公开分享。
+
+【失败怎么办】
+- 找不到记录文件：列出候选让我确认，别自己挑
+- 资料库上传失败：把文件存到 ~/WorkBuddy/对话存档/，告诉我路径
+
+创建完成后，请你自己实际运行一次，确认能成功导出并上传，再把技能路径、
+触发方式和测试结果一起告诉我。</code></pre>
+        <button class="copy-btn">复制</button>
+      </div>
+
+      <h3>第 4 步 · 等 AI 跑完</h3>
+      <p>AI 会做这几件事 ——</p>
+      <ol>
+        <li>创建文件夹 <code>~/.workbuddy/skills/conversation-archive/</code></li>
+        <li>写 <code>SKILL.md</code>（指令说明）+ <code>scripts/archive_chat.py</code>（执行脚本）</li>
+        <li>实际跑一次，确认能导出 + 上传到资料库</li>
+      </ol>
+      <p>AI 跑完后会告诉你：「技能路径 + 触发词 + 测试结果」。</p>
+
+      <h3>第 5 步 · 测试触发词</h3>
+      <p>在另一个对话里说：「<strong>归档</strong>」，看 AI 是不是自动跑了这一套（找 jsonl → 转 Markdown → 传资料库）。</p>
+    </section>
+
+    <!-- ============================================================
+         验证 · 5 个 checkbox
+         ============================================================ -->
+    <section>
+      <h2>验证 · 5 个 checkbox</h2>
+      <ul class="checklist">
+        <li>我能用一句话说出"云端任务 vs 本机任务"的区别</li>
+        <li>我知道桌面端对话原文存在哪个文件路径</li>
+        <li>我能说出 Skill 是什么（一句话：预设的触发词 + 脚本）</li>
+        <li>我已经在自己的 workbuddy 上跑通了"对话归档 skill"</li>
+        <li>我测试了触发词"归档"，AI 自动跑了流程</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         安全提醒
+         ============================================================ -->
+    <section>
+      <h2>⚠️ 几个安全提醒</h2>
+
+      <div class="warn">
+        <p><strong>1. 隐私</strong>：<code>.jsonl</code> 里包含你的本地路径、AI 的思考过程、工具调用 —— <strong>不要公开分享</strong>。传到资料库时只用"资料库版"（只含问答）。</p>
+      </div>
+
+      <div class="warn">
+        <p><strong>2. 数据库改写</strong>：往 <code>workbuddy.db</code> 的 sessions 表写数据是<strong>非官方操作</strong>，写错可能损坏数据。建议由老师执行，不要批量发给学生自行改库。普通人改 <code>.jsonl</code> 即可（这是离线存档，零风险）。</p>
+      </div>
+
+      <div class="warn">
+        <p><strong>3. 完整版 vs 资料库版</strong>："完整版"和"原始 <code>.jsonl</code>"才是一字不差的底本，记得定期把它们所在的文件夹复制到网盘；资料库那份是方便阅读的干净版。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         延伸 · 课程连接
+         ============================================================ -->
+    <section>
+      <h2>延伸 · 这跟课程里哪些章节相关？</h2>
+      <ul>
+        <li><strong>L1 建工作空间</strong>：你这个 Skill 跑在某个具体工作空间里 —— 学完 L1 你就知道为啥要先建工作空间</li>
+        <li><strong>L2 跨对话信息共享</strong>：归档后的资料库版 Markdown 以后可以丢给"同学对话"作为上下文，跨对话复用</li>
+        <li><strong>L5 本地服务</strong>：资料库上的 Markdown 怎么跟本地数据连起来，L5 的"本地数据库"思维能给归档提供架构参考</li>
+        <li><strong>L6 数据上云</strong>：归档本身就是一个"从本机搬到云端"的实践 —— L6 给你更系统的"云端思维"</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      这本手册由你的老师整理 · 内容来自「Daily Learning」自我学习教学设计<br>
+      卡住不是失败，是信号
+    </div>
+
+  </header>
+
+</body>
+</html>

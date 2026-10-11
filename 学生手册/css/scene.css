@@ -1,0 +1,332 @@
+/* ============================================================
+   场景知识 · 章节外的真实场景
+   设计目标：跟章节学习区分（章节 = 橙色调；场景知识 = 绿色调）
+   ============================================================ */
+
+.scene-block {
+  margin: 40px 0 0;
+  padding: 24px;
+  background: #F0FDF4;                  /* 绿色淡背景 */
+  border-radius: 16px;
+  border: 1px dashed #86EFAC;
+}
+
+.scene-title {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scene-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #16A34A;                  /* 绿色主调 */
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.scene-subtitle {
+  font-size: 13px;
+  color: #64748B;
+}
+
+.scene-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scene-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border: 1.5px solid #86EFAC;          /* 绿色描边 */
+  border-radius: 12px;
+  text-decoration: none;
+  color: #0F172A;
+  transition: all 0.15s ease;
+}
+
+.scene-card:hover {
+  border-color: #16A34A;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.12);
+  transform: translateY(-1px);
+}
+
+.scene-num {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #DCFCE7;                  /* 绿色背景 */
+  color: #16A34A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.scene-text {
+  flex: 1;
+}
+
+.scene-h {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.scene-d {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+.scene-arrow {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: #16A34A;
+}
+
+/* ============================================================
+   场景知识页（skill-对话归档.html）
+   ============================================================ */
+
+.scene-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.scene-page-header {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.scene-page-eyebrow {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #DCFCE7;
+  color: #16A34A;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.scene-page h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.scene-page-subtitle {
+  font-size: 15px;
+  color: #64748B;
+  margin: 0;
+}
+
+.scene-page .back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #16A34A;
+  text-decoration: none;
+}
+
+.scene-page .back-link:hover {
+  text-decoration: underline;
+}
+
+.scene-page section {
+  margin-bottom: 32px;
+}
+
+.scene-page h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 32px 0 12px;
+  padding-left: 12px;
+  border-left: 4px solid #16A34A;
+}
+
+.scene-page h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 20px 0 8px;
+}
+
+.scene-page p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #1F2937;
+  margin: 0 0 12px;
+}
+
+.scene-page ul, .scene-page li {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #1F2937;
+}
+
+.scene-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.scene-page table th,
+.scene-page table td {
+  padding: 10px 12px;
+  border: 1px solid #E2E8F0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.scene-page table th {
+  background: #F0FDF4;
+  color: #15803D;
+  font-weight: 700;
+}
+
+.scene-page .callout {
+  background: #F0FDF4;
+  border-left: 4px solid #16A34A;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.scene-page .callout p:last-child {
+  margin-bottom: 0;
+}
+
+.scene-page .warn {
+  background: #FEF3C7;
+  border-left: 4px solid #F59E0B;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.scene-page code {
+  background: #F1F5F9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  color: #334155;
+}
+
+.scene-page pre {
+  background: #0F172A;
+  color: #E2E8F0;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.scene-page pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.scene-page .checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.scene-page .checklist li {
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  background: #FFFFFF;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  position: relative;
+  padding-left: 38px;
+  cursor: pointer;
+}
+
+.scene-page .checklist li::before {
+  content: '☐';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #16A34A;
+}
+
+.scene-page details.fold {
+  margin: 12px 0;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.scene-page details.fold > summary {
+  padding: 12px 16px;
+  background: #F8FAFC;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: #0F172A;
+  user-select: none;
+}
+
+.scene-page details.fold[open] > summary {
+  background: #DCFCE7;
+}
+
+.scene-page details.fold .fold-body {
+  padding: 16px;
+  background: #FFFFFF;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1F2937;
+}
+
+.scene-page .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #16A34A;
+  color: #FFFFFF;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.scene-page .copy-btn:hover {
+  opacity: 1;
+}
+
+.scene-page .code-wrap {
+  position: relative;
+  margin: 12px 0;
+}
