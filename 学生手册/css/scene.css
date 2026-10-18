@@ -330,3 +330,35 @@
   position: relative;
   margin: 12px 0;
 }
+
+/* ============================================================
+   场景知识页 · 概念图
+   ============================================================ */
+
+.scene-page .diagram {
+  margin: 20px 0;
+  padding: 20px 16px 12px;
+  background: #F9FAFB;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.scene-page .diagram svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.scene-page .diagram-caption {
+  margin-top: 12px;
+  font-size: 13px;
+  font-style: italic;
+  color: #64748B;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}

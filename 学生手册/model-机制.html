@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>场景 00 · 跟 AI 说话时，到底是谁在听你说话 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/scene.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <header class="scene-page">
+    <a href="index.html" class="back-link">← 返回学生手册目录</a>
+
+    <div class="scene-page-header">
+      <div class="scene-page-eyebrow">📚 场景知识 · 场景 00</div>
+      <h1>跟 AI 说话时，到底是谁在听你说话</h1>
+      <p class="scene-page-subtitle">模型 / 工具 / 上下文 + LLM 怎么"理解"语言</p>
+    </div>
+
+    <!-- ============================================================
+         真实场景
+         ============================================================ -->
+    <section>
+      <h2>一个常见现象</h2>
+      <p>你有没有经历过这种情况 ——</p>
+      <ul>
+        <li>你问 AI"昨天 2026 高考作文题是什么"，AI 答"我不知道"</li>
+        <li>你问 AI"读我电脑里的 <code>index.html</code>"，AI 答"我看不到"</li>
+        <li>你问 AI"用 Python 算 1+1"，AI 答"1+1=2"——但其实它没真的算</li>
+        <li>你问 AI"小明借了小王一本书谁借出谁借入"，AI 答错</li>
+      </ul>
+      <p>你以为这些是"AI 应该会"的事，<strong>它不会</strong>。除非给它工具。</p>
+    </section>
+
+    <!-- ============================================================
+         知识 1 · 三元模型
+         ============================================================ -->
+    <section>
+      <h2>知识 1 · 你以为的"AI"其实是 3 个东西</h2>
+      <p>你看到的"AI 回答"，其实是 <strong>3 个东西一起工作</strong> 的结果：</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+          <!-- 顶部输出 -->
+          <rect x="240" y="20" width="240" height="48" rx="8" fill="#F3A21C" stroke="#333" stroke-width="1.5"/>
+          <text x="360" y="50" text-anchor="middle" fill="#FFFFFF" font-size="15" font-weight="700">你看到的 "AI 回答"</text>
+
+          <!-- 箭头 1 -->
+          <line x1="360" y1="68" x2="360" y2="98" stroke="#333" stroke-width="1.5"/>
+          <polygon points="355,98 365,98 360,108" fill="#333"/>
+
+          <!-- 模型 -->
+          <rect x="240" y="110" width="240" height="48" rx="8" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+          <text x="360" y="140" text-anchor="middle" fill="#0F172A" font-size="15" font-weight="700">模型（猜下一个字）</text>
+
+          <!-- 箭头 2 -->
+          <line x1="360" y1="158" x2="360" y2="188" stroke="#333" stroke-width="1.5"/>
+          <polygon points="355,188 365,188 360,198" fill="#333"/>
+
+          <!-- 工具 + 上下文 横向并列 -->
+          <rect x="80" y="200" width="260" height="48" rx="8" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+          <text x="210" y="230" text-anchor="middle" fill="#15803D" font-size="15" font-weight="700">工具（让模型"变能"）</text>
+
+          <rect x="380" y="200" width="260" height="48" rx="8" fill="#F9FAFB" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="510" y="230" text-anchor="middle" fill="#0F172A" font-size="15" font-weight="700">上下文（决定"知道什么"）</text>
+
+          <!-- 下方说明 -->
+          <text x="210" y="280" text-anchor="middle" fill="#64748B" font-size="13">联网 · 读文件 · 算代码 · 画图</text>
+          <text x="510" y="280" text-anchor="middle" fill="#64748B" font-size="13">对话历史 · 上传的文件 · 工具返回</text>
+
+          <text x="360" y="330" text-anchor="middle" fill="#0F172A" font-size="14" font-weight="700">「AI 答错」先看 3 件事：</text>
+          <text x="360" y="350" text-anchor="middle" fill="#64748B" font-size="13">模型不够强 / 工具没给 / 上下文缺信息</text>
+        </svg>
+        <div class="diagram-caption">图 1 · 你看到的"AI" = 模型 + 工具 + 上下文。任何一处没给，AI 都答不好。</div>
+      </div>
+
+      <div class="callout">
+        <p><strong>关键认知</strong>：你看到的"AI" = <strong>模型 + 工具 + 上下文</strong>。这 3 个东西 <strong>任何一个有问题</strong>，AI 都会答错。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         知识 2 · 模型是什么（浅层）
+         ============================================================ -->
+    <section>
+      <h2>知识 2 · 模型是什么</h2>
+      <p><strong>模型 = 一个根据上文"猜下一个字"的程序</strong>。</p>
+      <p>它：</p>
+      <ul>
+        <li>不知道真实世界发生的事（除非工具告诉它）</li>
+        <li>没有长期记忆（每次新对话都"失忆"）</li>
+        <li>看到的输入 = 你这次说的 + 上下文里有的</li>
+        <li>输出的 = 一段"按概率挑的字"</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>类比</strong>：模型像一个 <strong>很会"接话茬"的人</strong>——你说"今天天气"，它能接"真不错"。但它不知道"今天"是哪天、你在哪、刚才发生了什么。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         知识 3 · LLM 怎么"理解"语言（深入到概率）
+         ============================================================ -->
+    <section>
+      <h2>知识 3 · LLM 怎么"理解"语言 — token + 概率 + 温度</h2>
+      <p>模型不是"看一个字，理解一个字"——它是 <strong>把字拆成"碎块"（token），按概率挑下一个 token</strong>。</p>
+
+      <h3>① Token（碎块）</h3>
+      <p>Token = AI 切的"碎块"——<strong>比字大、比词小</strong>。</p>
+      <table>
+        <thead>
+          <tr><th>语言</th><th>举例</th><th>Token 数</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>中文</td><td>你好</td><td>2 token</td></tr>
+          <tr><td>中文</td><td>我看见了他</td><td>5-6 token</td></tr>
+          <tr><td>英文</td><td>hello</td><td>1 token</td></tr>
+          <tr><td>英文</td><td>conversation</td><td>2-3 token</td></tr>
+        </tbody>
+      </table>
+      <p><strong>意义</strong>：AI 是按 token 计算"我看了多少字"——超出 token 限制它会"忘记"前面的内容（上下文窗口）。</p>
+
+      <h3>② 概率分布（怎么"猜"下一个 token）</h3>
+      <p>模型内部有一张 <strong>概率表</strong>——前文是 X，下一个 token 是 A 概率 80%、B 概率 15%、C 概率 5%。</p>
+      <p>它<strong>不是"猜"</strong>，是 <strong>"按概率挑"</strong>。所以：</p>
+      <ul>
+        <li>AI 不会一字不差复述——但会"复述大意"</li>
+        <li>AI 会"撒小谎"——它选概率最高的，但概率最高 <strong>未必是真</strong></li>
+      </ul>
+
+      <div class="diagram">
+        <svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+          <!-- 标题 -->
+          <text x="360" y="22" text-anchor="middle" fill="#0F172A" font-size="14" font-weight="700">例句 1：「我看见了他拿着枪」</text>
+
+          <!-- 顶部 token 流 -->
+          <g font-size="13" font-weight="600">
+            <rect x="60"  y="40" width="60" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="90"  y="63" text-anchor="middle" fill="#0F172A">我</text>
+            <rect x="130" y="40" width="80" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="170" y="63" text-anchor="middle" fill="#0F172A">看见</text>
+            <rect x="220" y="40" width="50" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="245" y="63" text-anchor="middle" fill="#0F172A">了</text>
+            <rect x="280" y="40" width="50" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="305" y="63" text-anchor="middle" fill="#0F172A">他</text>
+            <rect x="340" y="40" width="60" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="370" y="63" text-anchor="middle" fill="#0F172A">拿</text>
+            <rect x="410" y="40" width="50" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="435" y="63" text-anchor="middle" fill="#0F172A">着</text>
+            <rect x="470" y="40" width="60" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/>
+            <text x="500" y="63" text-anchor="middle" fill="#0F172A">枪</text>
+          </g>
+          <text x="640" y="63" text-anchor="end" fill="#64748B" font-size="12">← AI 按 token 读</text>
+
+          <!-- 箭头 -->
+          <line x1="360" y1="86" x2="360" y2="116" stroke="#333" stroke-width="1.5"/>
+          <polygon points="355,116 365,116 360,126" fill="#333"/>
+
+          <!-- 3 个意思 -->
+          <text x="20" y="148" fill="#64748B" font-size="12" font-weight="700">AI 算出 3 个可能意思：</text>
+
+          <!-- 意思 A -->
+          <rect x="20" y="160" width="680" height="62" rx="8" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+          <text x="36" y="184" fill="#0F172A" font-size="13" font-weight="700">意思 A：</text>
+          <text x="100" y="184" fill="#0F172A" font-size="13">「我看见 [他拿枪]」— 他拿着枪（我看到了）</text>
+          <!-- 概率条 78% -->
+          <rect x="100" y="195" width="450" height="14" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+          <rect x="100" y="195" width="351" height="14" rx="4" fill="#16A34A"/>
+          <text x="560" y="207" fill="#15803D" font-size="13" font-weight="700">78%</text>
+          <text x="650" y="207" fill="#16A34A" font-size="11" font-weight="700">★ AI 选这个</text>
+
+          <!-- 意思 B -->
+          <rect x="20" y="232" width="680" height="62" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+          <text x="36" y="256" fill="#0F172A" font-size="13" font-weight="700">意思 B：</text>
+          <text x="100" y="256" fill="#0F172A" font-size="13">「我 [拿枪] 看见他」— 我拿着枪看见他</text>
+          <rect x="100" y="267" width="450" height="14" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+          <rect x="100" y="267" width="67" height="14" rx="4" fill="#94A3B8"/>
+          <text x="560" y="279" fill="#64748B" font-size="13" font-weight="700">15%</text>
+
+          <!-- 意思 C -->
+          <rect x="20" y="304" width="680" height="62" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+          <text x="36" y="328" fill="#0F172A" font-size="13" font-weight="700">意思 C：</text>
+          <text x="100" y="328" fill="#0F172A" font-size="13">「其他奇怪理解」</text>
+          <rect x="100" y="339" width="450" height="14" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+          <rect x="100" y="339" width="22" height="14" rx="4" fill="#94A3B8"/>
+          <text x="560" y="351" fill="#64748B" font-size="13" font-weight="700">5%</text>
+
+          <!-- 底部结论 -->
+          <text x="20" y="400" fill="#0F172A" font-size="13" font-weight="700">人看这句 99% 知道是意思 A。</text>
+          <text x="20" y="420" fill="#0F172A" font-size="13">AI 也选 A，但 AI 选 A 是因为 A 概率最高（78%）—— 不是 AI "懂"中文。</text>
+          <text x="20" y="440" fill="#0F172A" font-size="13">如果训练数据里意思 B 出现更多，AI 就会选 B。AI 会被"教偏"。</text>
+        </svg>
+        <div class="diagram-caption">图 2 · AI 不是"理解"句子，是给每个可能的意思排概率，选概率最高的那个。</div>
+      </div>
+
+      <div class="diagram">
+        <svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+          <text x="360" y="22" text-anchor="middle" fill="#0F172A" font-size="14" font-weight="700">例句 2：「中国队大败美国队」</text>
+
+          <!-- 顶部 token -->
+          <g font-size="13" font-weight="600">
+            <rect x="100" y="40" width="60" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/><text x="130" y="63" text-anchor="middle" fill="#0F172A">中国</text>
+            <rect x="170" y="40" width="50" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/><text x="195" y="63" text-anchor="middle" fill="#0F172A">队</text>
+            <rect x="230" y="40" width="60" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/><text x="260" y="63" text-anchor="middle" fill="#0F172A">大败</text>
+            <rect x="300" y="40" width="60" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/><text x="330" y="63" text-anchor="middle" fill="#0F172A">美国</text>
+            <rect x="370" y="40" width="50" height="36" rx="6" fill="#FFFFFF" stroke="#333" stroke-width="1.5"/><text x="395" y="63" text-anchor="middle" fill="#0F172A">队</text>
+          </g>
+          <text x="640" y="63" text-anchor="end" fill="#64748B" font-size="12">← AI 按 token 读</text>
+
+          <line x1="360" y1="86" x2="360" y2="116" stroke="#333" stroke-width="1.5"/>
+          <polygon points="355,116 365,116 360,126" fill="#333"/>
+
+          <text x="20" y="148" fill="#64748B" font-size="12" font-weight="700">字面看：「败」= 输。意思 = 中国输了？</text>
+
+          <!-- 意思 A：实际语义 -->
+          <rect x="20" y="160" width="680" height="62" rx="8" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+          <text x="36" y="184" fill="#0F172A" font-size="13" font-weight="700">意思 A：</text>
+          <text x="100" y="184" fill="#0F172A" font-size="13">实际语义：「大败」= 大胜 — 中国赢了</text>
+          <rect x="100" y="195" width="450" height="14" rx="4" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.2"/>
+          <rect x="100" y="195" width="414" height="14" rx="4" fill="#16A34A"/>
+          <text x="560" y="207" fill="#15803D" font-size="13" font-weight="700">92%</text>
+          <text x="650" y="207" fill="#16A34A" font-size="11" font-weight="700">★ AI 选这个</text>
+
+          <!-- 意思 B：字面义 -->
+          <rect x="20" y="232" width="680" height="62" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+          <text x="36" y="256" fill="#0F172A" font-size="13" font-weight="700">意思 B：</text>
+          <text x="100" y="256" fill="#0F172A" font-size="13">字面义：拆开"大"+"败" — 中国大败（中国输了）</text>
+          <rect x="100" y="267" width="450" height="14" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+          <rect x="100" y="267" width="31" height="14" rx="4" fill="#94A3B8"/>
+          <text x="560" y="279" fill="#64748B" font-size="13" font-weight="700">7%</text>
+
+          <!-- 意思 C -->
+          <rect x="20" y="304" width="680" height="62" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+          <text x="36" y="328" fill="#0F172A" font-size="13" font-weight="700">意思 C：</text>
+          <text x="100" y="328" fill="#0F172A" font-size="13">其他理解</text>
+          <rect x="100" y="339" width="450" height="14" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2"/>
+          <rect x="100" y="339" width="4" height="14" rx="4" fill="#94A3B8"/>
+          <text x="560" y="351" fill="#64748B" font-size="13" font-weight="700">1%</text>
+
+          <text x="20" y="400" fill="#0F172A" font-size="13" font-weight="700">人看到这句话都懂：中国赢了。</text>
+          <text x="20" y="420" fill="#0F172A" font-size="13">AI 选 A 也是因为 A 概率最高（92%）—— 不是 AI "懂"修辞。</text>
+          <text x="20" y="440" fill="#0F172A" font-size="13">如果模型被训练数据"教偏"（比如训练数据里"大败"= 输），AI 就会选 B。</text>
+        </svg>
+        <div class="diagram-caption">图 3 · 字面"败"和实际"胜"意思相反，但 AI 选的是概率高的语义理解（92%）。</div>
+      </div>
+
+      <h3>③ 温度（temperature）</h3>
+      <p>温度 = AI 的 <strong>"音量旋钮"</strong>，控制 AI 选 token 的"冒险程度"。</p>
+      <table>
+        <thead>
+          <tr><th>温度</th><th>AI 行为</th><th>效果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>≈ 0</strong></td><td>永远选概率最高的 token</td><td>答得稳但单调</td></tr>
+          <tr><td><strong>≈ 0.7</strong>（默认）</td><td>大部分选高的，偶尔选低的</td><td>平衡</td></tr>
+          <tr><td><strong>= 1.0</strong></td><td>经常选低概率的</td><td>答得有创意但可能跑偏</td></tr>
+          <tr><td><strong>&gt; 1.0</strong></td><td>几乎随机</td><td>胡言乱语</td></tr>
+        </tbody>
+      </table>
+      <p>温度调高会出现：</p>
+      <ul>
+        <li>同一问题不同回答</li>
+        <li>"幻觉"（自信地说错）</li>
+        <li>写作更有创造性</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>所以 AI 为什么"撒小谎"</strong>：AI 选概率最高的，但概率最高 ≠ 真的。温度越高，AI 越敢选低概率的答案，幻觉越多。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         知识 4 · 模型默认不能做什么
+         ============================================================ -->
+    <section>
+      <h2>知识 4 · 模型默认不能做什么</h2>
+      <p>在 <strong>不加工具</strong> 的情况下，模型做不了这些事：</p>
+      <table>
+        <thead>
+          <tr><th>模型不能做的</th><th>原因</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>看实时信息（今天天气 / 高考题）</td><td>它没联网</td></tr>
+          <tr><td>看你的文件（<code>index.html</code>）</td><td>它读不到你电脑</td></tr>
+          <tr><td>跨对话记住你</td><td>每次新对话都"失忆"</td></tr>
+          <tr><td>执行真实操作（发邮件 / 改文件）</td><td>它只是输出文字</td></tr>
+          <tr><td>算数学（准确）</td><td>它"猜"字不是计算器</td></tr>
+          <tr><td>看图（基础模型）</td><td>需要带视觉的模型</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================================================
+         知识 5 · 怎么让模型"变能"——工具
+         ============================================================ -->
+    <section>
+      <h2>知识 5 · 怎么让模型"变能"——加工具</h2>
+      <p>工具 = 模型能调用的 <strong>外部能力</strong>。工具补的是"模型不能做什么"。</p>
+      <table>
+        <thead>
+          <tr><th>工具类型</th><th>解决"模型不能 X"</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>联网搜索</strong></td><td>不知道实时信息</td></tr>
+          <tr><td><strong>读文件 / 读 PDF</strong></td><td>看不到你电脑里的文件</td></tr>
+          <tr><td><strong>执行代码</strong></td><td>不能算 / 不能画</td></tr>
+          <tr><td><strong>画图生图</strong></td><td>不能生成图像</td></tr>
+          <tr><td><strong>调 API</strong></td><td>不能查数据库 / 发邮件</td></tr>
+          <tr><td><strong>看图视觉</strong></td><td>不能看图片（基础模型不能）</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <p><strong>关键认知</strong>：你让 AI"读这个文件"——AI 不会自己读，是 <strong>工具去读</strong>，再把结果告诉 AI，AI 才"看到"内容。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         知识 6 · 上下文
+         ============================================================ -->
+    <section>
+      <h2>知识 6 · 上下文是什么</h2>
+      <p>上下文 = 你在当前对话里 <strong>已经说过的所有内容</strong>，包括：</p>
+      <ul>
+        <li>你的 prompt</li>
+        <li>AI 的回答</li>
+        <li>你上传的文件</li>
+        <li>工具的返回结果</li>
+      </ul>
+      <p>上下文 <strong>决定</strong> AI 怎么接话——上下文长，AI 接得准。</p>
+      <p><strong>上下文有限度</strong>：太长了 AI 会"忘记"前面的内容（超出 token 限制）。</p>
+      <div class="callout">
+        <p><strong>类比</strong>：上下文 = AI 的"短期记忆"——它记得你刚才说了什么，但记不得太远的事。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         知识 7 · 3 步诊断
+         ============================================================ -->
+    <section>
+      <h2>知识 7 · AI 答错时，3 步诊断</h2>
+      <p>AI 答错，不是"AI 不行"——是 <strong>模型 / 工具 / 上下文</strong> 某一个没给对。用 3 步诊断：</p>
+
+      <table>
+        <thead>
+          <tr><th>AI 答错的样子</th><th>看</th><th>怎么修</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>答得"水" / 不准 / 太简单</td>
+            <td><strong>模型</strong></td>
+            <td>换更强的模型（Pro / Sonnet / o1）</td>
+          </tr>
+          <tr>
+            <td>答"看不到" / "找不到"</td>
+            <td><strong>工具</strong></td>
+            <td>确认你让 AI 用了对应工具（"读这个文件"）</td>
+          </tr>
+          <tr>
+            <td>答"不知道" / "我猜" / 胡说</td>
+            <td><strong>上下文</strong></td>
+            <td>检查 prompt 给的信息够不够</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>实战流程</strong>：</p>
+      <ol>
+        <li>先看是哪种错（答得水 / 看不到 / 不知道）</li>
+        <li>对到 3 元模型（看模型 / 看工具 / 看上下文）</li>
+        <li>补那一项，再问一次</li>
+      </ol>
+    </section>
+
+    <!-- ============================================================
+         命名体系 · 简表
+         ============================================================ -->
+    <section>
+      <h2>命名体系 · 简表（参考用）</h2>
+      <p>不同品牌的 model 名字规律差不多 —— <strong>掌握 3 句话就够</strong>：</p>
+      <ol>
+        <li><strong>Pro / Max / Opus / o1-pro</strong> = 满血贵重（强但慢）</li>
+        <li><strong>Lite / Turbo / Flash / mini / nano</strong> = 轻量便宜（快但简单）</li>
+        <li><strong>R1 / Thinking / Deep Think</strong> = 带思考（慢但准）</li>
+      </ol>
+
+      <details class="fold">
+        <summary>🇨🇳 4 个国内常用模型</summary>
+        <div class="fold-body">
+          <table>
+            <thead>
+              <tr><th>品牌</th><th>模型名</th><th>注释</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>豆包</strong>（字节）</td><td>Doubao Pro</td><td>满血版</td></tr>
+              <tr><td></td><td>Doubao Lite</td><td>轻量版</td></tr>
+              <tr><td><strong>通义千问</strong>（阿里）</td><td>Qwen-Max</td><td>满血版</td></tr>
+              <tr><td></td><td>Qwen-Plus</td><td>中等版</td></tr>
+              <tr><td></td><td>Qwen-Turbo</td><td>轻量版</td></tr>
+              <tr><td><strong>DeepSeek</strong></td><td>DeepSeek-V3</td><td>通用对话</td></tr>
+              <tr><td></td><td>DeepSeek-R1</td><td>推理出名</td></tr>
+              <tr><td><strong>Kimi</strong>（月之暗面）</td><td>Moonshot v1</td><td>长文本出名</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>🇺🇸 1 个国外参考</summary>
+        <div class="fold-body">
+          <table>
+            <thead>
+              <tr><th>品牌</th><th>模型名</th><th>注释</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>GPT</strong>（OpenAI）</td><td>GPT-4.1</td><td>通用对话</td></tr>
+              <tr><td></td><td>GPT-4.1 mini / nano</td><td>轻量便宜</td></tr>
+              <tr><td></td><td>o1 / o3 / o4</td><td>推理强</td></tr>
+              <tr><td></td><td>o1-pro / o3-pro</td><td>推理顶配（慢）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============================================================
+         实战任务 · 3 步诊断
+         ============================================================ -->
+    <section>
+      <h2>实战任务 · 用 3 步诊断解决你的一次"AI 答错"</h2>
+
+      <div class="callout">
+        <p><strong>任务</strong>：挑你最近一次"AI 答错"的经历，按 3 步诊断是 模型 / 工具 / 上下文 哪个问题。</p>
+      </div>
+
+      <details class="fold">
+        <summary>📖 场景 1 · AI 答得"水"</summary>
+        <div class="fold-body">
+          <p><strong>症状</strong>：你让 AI 解释"函数的概念"，AI 答得<strong>很水</strong>，比教材还差。</p>
+          <p><strong>诊断</strong>：答得水 = 模型问题。</p>
+          <p><strong>修法</strong>：换更强的模型（满血版 = Pro / Max / Opus / o1）。</p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>📖 场景 2 · AI 答"看不到"</summary>
+        <div class="fold-body">
+          <p><strong>症状</strong>：你说"读我电脑里的 <code>index.html</code>"，AI 答"我看不到你电脑"。</p>
+          <p><strong>诊断</strong>：看不到 = 工具问题。</p>
+          <p><strong>修法</strong>：用 workbuddy 的"读文件"工具，或者把文件内容复制到 prompt 里。</p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>📖 场景 3 · AI 答"不知道" / 胡说</summary>
+        <div class="fold-body">
+          <p><strong>症状</strong>：你问"2026 高考语文作文题"，AI 答"我不知道 2026 的"或编一个假题。</p>
+          <p><strong>诊断</strong>：不知道 = 上下文问题（你 prompt 没给）+ 工具问题（没联网）。</p>
+          <p><strong>修法</strong>：用联网搜索工具 + 在 prompt 里说"先搜索 2026 年高考作文题再答"。</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ============================================================
+         验证 · 5 个 checkbox
+         ============================================================ -->
+    <section>
+      <h2>验证 · 5 个 checkbox</h2>
+      <ul class="checklist">
+        <li>我能用一句话说出"模型 / 工具 / 上下文"3 个东西</li>
+        <li>我能说出"token"和"概率"是什么</li>
+        <li>我能说出"温度"是什么，以及温度高会出现什么</li>
+        <li>AI 答错时我能用 3 步诊断（看模型 / 看工具 / 看上下文）</li>
+        <li>我能说出 4 个国内模型和 1 个国外的命名规律</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         延伸 · 跟课程章节的关系
+         ============================================================ -->
+    <section>
+      <h2>延伸 · 这跟场景知识里其他场景的关系</h2>
+      <ul>
+        <li><strong>场景 01 · 4 种学习场景 AI 该怎么换</strong>：看完这个场景再看场景 01 — 才知道"4 种学习场景的 AI 用法"是在哪个层面上换的</li>
+        <li><strong>场景 02 · AI 怎么帮你把对话留住</strong>：Skill = 给模型"加一个工具 + 加一段上下文"，理解这个再看场景 02 更容易</li>
+        <li><strong>课程章节</strong>：L1-L5 是怎么"用 AI 做事"，场景 00-02 是"AI 是什么"——两者互补</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      这本手册由你的老师整理 · 内容来自「Daily Learning」自我学习教学设计<br>
+      卡住不是失败，是信号
+    </div>
+
+  </header>
+
+</body>
+</html>
