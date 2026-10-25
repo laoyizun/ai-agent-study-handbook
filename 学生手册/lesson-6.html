@@ -494,6 +494,104 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
 
     <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
 
+    <!-- ============ 一键整合 prompt ============ -->
+    <h2>🚀 一键完成 · 整段 prompt</h2>
+    <p>前面 4.1-4.5 拆开讲，是为了让你看懂每一步。<strong>现在把它们整合成一段</strong> —— 复制下面整段，<strong>只改 2 个地方</strong>（你的拼音 + 数据库路径），AI 就能把 L6 的活全干完。</p>
+
+    <details class="fold">
+      <summary>📖 复制这段 · 改 2 个地方 · 发给 AI</summary>
+      <div class="fold-body">
+        <div class="callout" style="background:rgba(243,162,28,0.10);border-left:4px solid #F3A21C;padding:16px 20px;border-radius:8px;margin:16px 0;">
+          <p style="font-size:15px;font-weight:700;color:#F3A21C;margin:0 0 8px;">⚠️ 你只需要改 2 个地方</p>
+          <ol style="margin:6px 0 0;padding-left:22px;">
+            <li>把 <code>your-name</code> 换成你的拼音（你名字<strong>后两个字</strong>的拼音）</li>
+            <li>把 <code>你的数据库路径</code> 换成 L5 里 AI 回显给你的那个路径（<strong>没记住就问 AI："我的 memory-cards.db 在哪？"</strong>）</li>
+          </ol>
+          <p style="margin:8px 0 0;font-size:13.5px;color:#64748B;">云端地址和接头暗号<strong>已经写在这段 prompt 里了</strong>，不用你改。</p>
+        </div>
+
+        <div class="code-wrap">
+          <pre><code>你是本班的云端数据库协作助手，不是通用聊天 AI。
+
+【角色】你懂 Supabase 公开 REST API，能帮初中生把本地数据搬到云端
+
+【我的信息】
+  - 姓名（后两个字拼音）：your-name
+  - 本地数据库文件完整路径：你的数据库路径
+  - 云端地址：https://rwdadlbtvjuoonnbbriy.supabase.co
+  - 接头暗号（publishable key）：sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB
+
+【任务 · 按顺序做完，每步做完先告诉我】
+  第 1 步 · 读本地库
+    打开我的 SQLite 文件，告诉我：
+      - 是不是有 3 张表（students / cards / reviews），每张表几行
+      - 每张表的字段名
+    字段名应该是：students.name / cards.student_name / cards.subject /
+    cards.question / cards.answer / reviews.card_id / reviews.mark
+
+  第 2 步 · 插 students（不要重复插）
+    先查：GET /rest/v1/students?name=eq.your-name&amp;select=id
+    - 如果已经有记录就跳过，不要再插（name 是唯一的，重复插会报错）
+    - 如果没有才插一条：{"name": "your-name"}
+
+  第 3 步 · 插 cards
+    把本地 cards 表的数据插到云端。
+    **云端这 3 张表已经建好了，字段也定好了 —— 你只做 INSERT，不要执行 CREATE TABLE，
+    也不要 DROP / TRUNCATE 任何表**（里面有其他同学的数据）
+
+  第 4 步 · id 重映射（关键，不能跳）
+    本地 SQLite 的 card_id 是"本地行号"（1,2,3...），云端的 card_id 是"云端自己的 id"
+    （可能是 5,6,7...）。两个数不一样，**直接搬会把三色标记贴到错误的卡片上**。
+    所以：
+    a) 插完 cards 后，先查：GET /rest/v1/cards?student_name=eq.your-name&amp;select=id,question
+       拿到每张卡在云端的真实 id
+    b) 按"问题内容"把本地 reviews 的 card_id 换成云端真实 id
+       （用 question 内容匹配，**不要靠行号猜**）
+    c) 再插 reviews
+    d) 如果哪张卡在云端找不到对应 id，**停下来告诉我**，不要猜一个 id 填上去
+
+  第 5 步 · 核对（我一定要看到）
+    ⚠️ 核对时**分两次查，不要用嵌套过滤**，否则别人的卡片会显示成 null，看着像"数据丢了"：
+      - 第一次：GET /rest/v1/reviews?select=card_id,mark
+        （**不要加 student_name 过滤**，全部拉出来，你自己筛出我 card_id 那几条）
+      - 第二次：GET /rest/v1/cards?select=id,subject,question
+        （同样**不要加过滤**，全拉出来）
+      然后**按 id 对上号**，给我一张对照表：我的每张卡的 学科 / 问题 / 标记。
+    如果你觉得上面太啰嗦，也可以直接 JOIN：
+      SELECT c.subject, c.question, r.mark FROM reviews r
+      JOIN cards c ON c.id = r.card_id WHERE c.student_name='your-name'
+      （报 PGRST200 就说明没建外键，改用上面"两次查 + 对上号"，效果一样）
+
+【写库硬要求】
+  - 写 cards / reviews 时，student_name 必须等于「我的信息」里的拼音，一个字都不能错
+  - 不要替我改其他同学的 student_name
+  - 改 / 删任何记录前，先告诉我要改哪一条、为什么改，等我确认
+
+【出错怎么办】
+  任何一步报错，把错误原文贴给我，别自己猜着改。
+  常见情况：
+    - key 无效 → 可能是暗号填错了，告诉我，我重新去网站复制
+    - 表已存在 → 表本来就在（里面有别的同学的数据），**不要删**，改成只 INSERT
+    - card_id 对不上 → 按"问题内容"重新匹配 id（第 4 步 b）
+    - 重复数据 → 先 SELECT 数一遍行数，多了再删重复的
+
+【最后给我一个结论】
+  云端 3 张表各几行 + 我一共搬了多少张卡 + 多少条复习标记 + 结论一句话
+  （"搬完了，三色标记逐条核对都对" 或 "有 N 条对不上"）</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+
+        <h4>发完之后你要做的（只有 2 件）</h4>
+        <ol>
+          <li><strong>核对结论</strong>：AI 说"搬完了"，你要看那张对照表 —— 每行的<strong>问题内容 + 标记</strong>是不是和你本机一样</li>
+          <li><strong>不对就贴给 AI</strong>：把对照表贴回去，让它自己查</li>
+        </ol>
+        <p><strong>不要自己敲命令，也不要自己去云端网站改数据。</strong>让 AI 跑，跑完你看结果。</p>
+      </div>
+    </details>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
     <!-- ============ 下一章钩子 ============ -->
     <div class="callout">
       <p><strong>🪝 留给 L7：</strong></p>

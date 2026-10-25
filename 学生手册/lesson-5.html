@@ -544,6 +544,87 @@ card_id (指向 cards 的 id) / mark / reviewed_at（自动填）
       <li><label><input type="checkbox"> 我知道怎么验证 AI 帮我搭的服务在跑</label></li>
     </ul>
 
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 一键整合 prompt ============ -->
+    <h2>🚀 一键完成 · 整段 prompt</h2>
+    <p>前面 4.1-4.6 拆开讲，是为了让你看懂每一步。<strong>现在把它们整合成一段</strong> —— 复制下面整段，<strong>只改两处</strong>（你的拼音 + 数据库路径），AI 就能把 L5 的活全干完。</p>
+
+    <details class="fold">
+      <summary>📖 复制这段 · 改 2 个地方 · 发给 AI</summary>
+      <div class="fold-body">
+        <div class="callout" style="background:rgba(243,162,28,0.10);border-left:4px solid #F3A21C;padding:16px 20px;border-radius:8px;margin:16px 0;">
+          <p style="font-size:15px;font-weight:700;color:#F3A21C;margin:0 0 8px;">⚠️ 你只需要改 2 个地方</p>
+          <ol style="margin:6px 0 0;padding-left:22px;">
+            <li>把 <code>your-name</code> 换成你的拼音（你名字<strong>后两个字</strong>的拼音）</li>
+            <li>把 <code>你的数据库路径</code> 换成你想放数据库的位置（<strong>不知道就写 <code>~/学习数据/memory-cards.db</code></strong>，AI 会帮你建这个文件夹）</li>
+          </ol>
+        </div>
+
+        <div class="code-wrap">
+          <pre><code>你是本班的本地数据搭建助手，不是通用聊天 AI。
+
+【角色】你懂 Markdown / JSON / SQLite，能帮初中生把散落的学习数据整理进数据库
+
+【我的信息】
+  - 姓名（后两个字拼音）：your-name
+  - 数据库文件完整路径：你的数据库路径
+
+【任务 · 按顺序做完，每步做完先告诉我】
+  第 1 步 · 找数据
+    读我工作空间里的所有"知识数据"文件，主要是这 3 类：
+      a) 闪念本 .md（AI 给我的好解释，每条 bullet 是一条知识）
+      b) 记忆卡片 .json（有 front / back / mark 字段）
+      c) localStorage（L4 复习页里存的 ✓△✗ 标记 —— 这部分你告诉我怎么导出成 JSON）
+    找到后先给我一份清单：文件路径 + 每个文件有几条数据
+
+  第 2 步 · 建库
+    在「我的数据库文件完整路径」建一个 SQLite 数据库，建 3 张表，字段必须严格是这样：
+      students: name (TEXT 唯一) / created_at (自动填)
+      cards:    student_name / subject / question / answer / created_at (自动填)
+      reviews:  card_id (指向 cards 的 id) / mark / reviewed_at (自动填)
+    - mark 只能是 'done' / 'half' / 'bad'
+    - card_id 必须指向一张真实存在的卡片
+    - 如果这个库已经存在而且里面已经有数据，**停下来告诉我**，不要 DROP、不要 DELETE，先 SELECT 看看有什么，我们一起决定
+
+  第 3 步 · 转换并插入
+    转换规则：
+      - 闪念本 .md 里"AI 给的好解释"每一条 bullet = cards 表一行（question 用 bullet 标题，answer 用 bullet 内容）
+      - 记忆卡片 .json 的 front → cards.question，back → cards.answer，mark → reviews.mark
+      - localStorage 里的标记：✓ = 'done'，△ = 'half'，✗ = 'bad'
+      - cards 表的 student_name 全部填「我的信息」里的拼音，不要写别人
+      - 如果某条数据你看不懂、字段对不上，**停下来告诉我不要自己猜**
+    插入前先把建表语句和准备插入的数据给我看一眼，**等我确认后再执行**
+
+  第 4 步 · 回显结果（重要，我要自己核对）
+    - 3 张表各几行
+    - 一张对照表：每张卡的 学科 / 问题 / 标记
+    - 数据库文件的完整路径
+
+【可以动什么 / 不可以动什么】
+  - ✅ 可以：创建数据库文件、建表、插入数据
+  - ❌ 不可以：修改或删除我的闪念本 .md、记忆卡片 .json、或任何其他已有文件
+  - ❌ 不可以：DROP 表、DELETE 已有数据
+  - ❌ 不可以：动「我的数据库文件完整路径」以外的任何文件
+
+【出错怎么办】
+  任何一步报错，把错误原文贴给我，别自己猜着改。
+
+【重要提醒】
+  本地 SQLite 的 card_id 是"本地行号"。下节课搬到云端时，云端会给每张卡新的 id，
+  所以那时还要按"问题内容"重新匹配一次 id —— 不匹配，三色标记就会贴到错的卡片上。</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+
+        <h4>发完之后你要做的（只有 2 件）</h4>
+        <ol>
+          <li><strong>核对回显</strong>：students 应该 1 行；cards 应该 = 闪念本条数 + 记忆卡片条数（去掉重复的）；reviews 应该 = 你打过 ✓△✗ 的次数</li>
+          <li><strong>数字不对就贴给 AI</strong>：把它的回显复制回去，让它自己 <code>SELECT COUNT</code> 查</li>
+        </ol>
+        <p><strong>不要自己敲命令。</strong>AI 会跑 sqlite3，跑完把结果给你看。</p>
+      </div>
+    </details>
+
   </article>
 
   <!-- ============ 章节底部导航 ============ -->
