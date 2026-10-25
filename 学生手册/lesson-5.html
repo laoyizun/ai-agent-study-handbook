@@ -433,25 +433,26 @@ CREATE TABLE reviews (
                   <li><code>记忆卡片.json</code> 里的 <code>front</code> / <code>back</code> 键名跟 <code>cards.question</code> / <code>cards.answer</code> 不一样</li>
                   <li><code>localStorage</code> 里的 ✓△✗ 存在浏览器里，AI 看不见</li>
                 </ul>
-                <p>所以要<strong>让 AI 帮你转换</strong>。转换规则已经定好，学生直接复制下面 prompt 给 AI，AI 会自动读你的文件 + 整理成 INSERT 语句。</p>
+                <p>所以要<strong>让 AI 帮你转换</strong>。转换规则已经定好，学生直接复制下面 prompt 给 AI，AI 会自动读你的文件 + 建库 + 插入 + <strong>把结果回显给你看</strong>。</p>
 
                 <h4>第一步 · 报名字</h4>
                 <div class="callout">
                   <p>在 AI 对话开头打：</p>
                   <p style="padding:6px 12px;background:#FFFFFF;border-radius:6px;font-family:monospace;font-size:13.5px;">我是 <strong style="color:#F3A21C;">your-name</strong>，本节课 L5 的学生</p>
-                  <p style="margin:6px 0;font-size:13px;color:#64748B;"><code>your-name</code> 是你名字<strong>后两个字的拼音</strong>（例如 haolin / xiaoyu / zhengheng / haobin / minjun / mingle）。</p>
+                  <p style="margin:6px 0;font-size:13px;color:#64748B;"><code>your-name</code> 是你名字<strong>后两个字的拼音</strong>（例如 haolin / xiaoyu / zhengheng / haobin / minjun / mingle / fangkuainiao）。</p>
                 </div>
 
                 <h4>第二步 · 复制 prompt 给 AI</h4>
                 <div class="code-wrap">
                   <pre><code>你是本班的本地数据整理助手，不是通用聊天 AI。
 
-【角色】你懂 Markdown / JSON / SQLite 三种格式，能帮学生把分散的数据整理成数据库表的 INSERT 语句
+【角色】你懂 Markdown / JSON / SQLite 三种格式，能帮学生把分散的数据整理进数据库
 
 【任务】
   1. 读我工作空间里的所有"知识数据"文件
-  2. 把内容整理成下面 schema 对应的 INSERT 语句（让我手动复制粘贴到本地 SQLite 跑）
-  3. 不要直接改我的任何文件，**只输出 INSERT 语句给我**
+  2. 在我的电脑上建一个本地 SQLite 数据库（文件放我的工作空间里，名字叫 memory-cards.db）
+  3. 把整理好的数据插进去
+  4. **跑完后把结果回显给我看**（每张表几行 + 卡片和标记的对照表）
 
 【上下文】
   - 我是初中生，姓名（后两个字拼音）：your-name（见开头我告诉你的）
@@ -464,23 +465,20 @@ CREATE TABLE reviews (
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 students 表
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-INSERT INTO students (name) VALUES ('your-name');
+name (TEXT, 唯一) / created_at (自动填)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 cards 表（每张闪念本条目 / 每张记忆卡片 = 一行）
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-INSERT INTO cards (student_name, subject, question, answer) VALUES
-  ('your-name', '数学', '勾股定理的几何意义', 'a²+b²=c² 表示直角三角形两直角边平方和等于斜边平方'),
-  ('your-name', '数学', '...', '...'),
-  ...;
+student_name / subject / question / answer / created_at（自动填）
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 reviews 表（每条 ✓△✗ = 一行）
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
-INSERT INTO reviews (card_id, mark) VALUES
-  (1, 'done'),   -- ✓ 已掌握
-  (2, 'half'),   -- △ 半掌握
-  (3, 'bad');    -- ✗ 未掌握
+card_id (指向 cards 的 id) / mark / reviewed_at（自动填）
+
+  - mark 只能是 'done' / 'half' / 'bad' 三个值之一
+  - card_id 必须指向一张真实存在的卡片
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -489,35 +487,39 @@ INSERT INTO reviews (card_id, mark) VALUES
   - 闪念本 .md 里"AI 给的好解释"每一条 bullet = cards 表一行（question 用 bullet 标题，answer 用 bullet 内容）
   - 记忆卡片 .json 的 front → cards.question，back → cards.answer，mark → reviews.mark
   - localStorage 里的 mark 字段：✓ = 'done'，△ = 'half'，✗ = 'bad'
-  - card_id 是 cards 插入后 AI 给我返回的 id 列表，要按那个顺序插 reviews
   - 如果某条数据你看不懂、字段对不上，**停下来告诉我不要自己猜**
 
-  ⚠️ 提醒：本地 SQLite 的 card_id 是"本地行号"。搬到云端时，**云端会给每张卡新的 id**，所以 L6 会让你按"问题内容"重新匹配一次 id —— 这次不匹配，三色标记就会贴到错的卡片上。
+【可以动什么 / 不可以动什么】
+  - ✅ 可以：创建 memory-cards.db 这个新文件、在里面建表、插入数据
+  - ❌ 不可以：修改 / 删除我的闪念本 .md、记忆卡片 .json、或者任何其他已有文件
+  - ❌ 不可以：DROP 表、DELETE 已有数据（如果这个库已经存在并且有数据，先告诉我，我们一起决定怎么办）
 
-【输出要求】
+【执行前先给我看计划】
   - 第一步：列出你找到的所有文件路径 + 每个文件有几条数据
   - 第二步：告诉我 localStorage 数据怎么导出（具体步骤、点哪个按钮）
-  - 第三步：等我确认后，输出完整的 INSERT 语句（按上面的 schema）
+  - 第三步：把建表语句和准备插入的数据给我看一眼
+  - 第四步：等我确认后再执行插入
   - 任何一步报错，把错误原文贴回来
 
-【验证】
-  - INSERT 语句生成后，你自己用 SQLite 跑一遍（在你的环境里跑，**不要动我本机文件**），跑通了告诉我每张表有几行
-  - 我再自己用 sqlite3 命令行跑一次，最终以我跑出来的为准</code></pre>
+【执行完必须回显】
+  - 每张表几行（students / cards / reviews）
+  - 一张对照表：每张卡的 学科 / 问题 / 标记，我要自己核对对不对
+  - 数据库文件的完整路径（我之后要在浏览器里用它）
+
+  ⚠️ 提醒：本地 SQLite 的 card_id 是"本地行号"。搬到云端时，**云端会给每张卡新的 id**，所以 L6 会让你按"问题内容"重新匹配一次 id —— 这次不匹配，三色标记就会贴到错的卡片上。</code></pre>
                   <button class="copy-btn">复制</button>
                 </div>
 
-                <h4>第三步 · 拿到 INSERT 语句后，自己跑</h4>
-                <p>AI 会给你一段 INSERT 语句，你<strong>复制到终端跑</strong>（不是直接让 AI 跑）：</p>
-                <div class="code-wrap">
-                  <pre><code># 在你电脑的 SQLite 数据库文件路径下（先问 AI 这个文件在哪）
-sqlite3 ~/你的路径/memory-cards.db &lt; generated_inserts.sql
+                <h4>第三步 · 核对 AI 回显给你的结果</h4>
+                <p>AI 会把结果贴出来。你要做的只有一件事 —— <strong>核对三个数字 + 抽查一两行</strong>：</p>
+                <ul>
+                  <li><strong>students</strong> 应该 1 行（就是你）</li>
+                  <li><strong>cards</strong> 应该等于你闪念本条数 + 记忆卡片条数（去掉重复的）</li>
+                  <li><strong>reviews</strong> 应该等于你打过 ✓△✗ 的次数</li>
+                </ul>
+                <p>数字对不上，<strong>把你看到的回显贴给 AI</strong>，让它查。</p>
 
-# 跑完后看一下结果
-sqlite3 ~/你的路径/memory-cards.db "SELECT COUNT(*) FROM students; SELECT COUNT(*) FROM cards; SELECT COUNT(*) FROM reviews;"</code></pre>
-                  <button class="copy-btn">复制</button>
-                </div>
-
-                <p><strong>注意：</strong>这是 <strong>真实可用的 prompt</strong>，不是示例。把 <code>your-name</code> 换成你自己的拼音就能用。改的过程你会注意到"为什么要写这些字段"。</p>
+                <p><strong>注意：</strong>这是 <strong>真实可用的 prompt</strong>，不是示例。把 <code>your-name</code> 换成你自己的拼音就能用。改的话自己写比复制更管用 —— 改的过程你会注意到"为什么要写这些字段"。</p>
 
                 <div class="callout">
                   <p><strong>做完 L5 这一步 → L6 就简单了：</strong>本地 SQLite 已经有数据，且字段和云端一致。L6 上云时 AI 只需要读本地 SQLite → HTTP 请求发给云端，<strong>不用再转格式</strong>。</p>
