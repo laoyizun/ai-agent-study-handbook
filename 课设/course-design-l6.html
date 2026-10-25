@@ -244,8 +244,9 @@
         <li>行数对得上</li>
         <li>抽样 3 条卡片看内容是否一致</li>
         <li><strong>三色标记一致性</strong>：抽样 ✓ / △ / ✗ 各一条，确认颜色没串</li>
-        <li><strong>JOIN 抽查</strong>：让 AI 跑 <code>SELECT c.subject, c.question, r.mark FROM reviews r JOIN cards c ON c.id = r.card_id</code>，逐行核对</li>
+        <li><strong>JOIN 抽查</strong>：让 AI 把 <code>reviews</code> 和 <code>cards</code> 都拉出来，按 <code>card_id</code> 对上号，逐行核对学科 / 问题 / 标记</li>
       </ol>
+      <p style="margin-top:8px;font-size:13.5px;color:#64748B;">💡 老师注意：PostgREST 的嵌套查询（<code>cards(...)</code>）需要数据库里建了外键才可用。建了就能直接嵌套查；没建就让学生用"两次查 + 按 id 对上号"的方式手工对照，<strong>效果一样</strong>，不阻塞上课。</p>
     </div>
     <div class="tch-block tch-student">
       <p><b>学生动作：</b>逐项验证，在 chat 里贴结果让 AI 确认</p>

@@ -289,11 +289,12 @@ CREATE TABLE cards (
 -- 第三张 reviews
 CREATE TABLE reviews (
   id          BIGSERIAL,
-  card_id     BIGINT      NOT NULL,
+  card_id     BIGINT      NOT NULL REFERENCES cards(id) ON DELETE CASCADE,
   mark        TEXT        CHECK (mark IN ('done','half','bad')),
   reviewed_at TIMESTAMPTZ DEFAULT now()
 );</code></pre>
               <p style="margin:8px 0 0;font-size:13px;color:#64748B;">⚠️ 注意：<code>BIGSERIAL</code> 是 Supabase 写法；SQLite 用 <code>INTEGER PRIMARY KEY AUTOINCREMENT</code>。<code>TIMESTAMPTZ</code> 是云端，本地用 <code>TEXT DEFAULT CURRENT_TIMESTAMP</code>。<strong>字段名必须一致，类型不同没关系</strong>。</p>
+              <p style="margin:6px 0 0;font-size:13px;color:#64748B;">🔗 <code>reviews.card_id</code> 后面那句 <code>REFERENCES cards(id)</code> 是<strong>外键</strong> —— 意思是"这条复习记录必须指向一张真实存在的卡片"。有它，数据库会帮你挡住"标记贴到不存在的卡"这种错；SQLite 那边写法一样，只是本地建表时要确保 <code>cards</code> 表先建好。</p>
             </div>
 
             <p>下面是 3 张清单的<strong>字段定义</strong>（你和 AI 都会用到）：</p>

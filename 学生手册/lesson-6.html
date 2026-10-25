@@ -377,11 +377,16 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
      拿到**每张卡在云端的真实 id**
   2. 按"问题内容"把本地 reviews 的 card_id 换成云端真实 id（用 question 内容匹配，不要靠行号猜）
   3. 再插 reviews
-  4. 插完必须跑一次校验：
-     SELECT c.subject, c.question, r.mark FROM reviews r JOIN cards c ON c.id = r.card_id
-     WHERE c.student_name='your-name' ORDER BY r.reviewed_at
-     每一行的 subject / question / mark 都要跟我本机的对得上，一行都不能错
+  4. 插完必须做一次核对（两条都做）：
+     a) GET /rest/v1/reviews?select=card_id,mark  ← 拿到所有标记和它们指向的 id
+     b) GET /rest/v1/cards?student_name=eq.your-name&select=id,question  ← 拿到卡片内容
+     然后**按 id 对上号**，确认每一行的 学科 / 问题 / 标记 跟我本机一致，一行都不能错
   5. 如果哪张卡在云端找不到对应 id，**停下来告诉我**，不要猜一个 id 填上去
+
+【不重复插入 · students 表】
+  students.name 是唯一的，直接 POST 会报 "duplicate key"。所以插 students 前先查一次：
+  GET /rest/v1/students?name=eq.your-name&select=id
+  如果已经有记录就**跳过插入**，不要重复插。
 
 【输出要求】
   - 第一步：先列出我本机 SQLite 的内容（有几张表、每张表几行、字段名），让我先确认是不是 3 张表
@@ -438,9 +443,10 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
               <li><strong>行数对得上</strong> —— 云端的 <code>cards</code> 表有几行，跟你本机的行数对得上</li>
               <li><strong>内容抽样一致</strong> —— 抽样 3 条卡片，看内容是不是和本机一字不差</li>
               <li><strong>三色标记没串</strong> —— 抽样打开一条 <code>✓</code> 一条 <code>△</code> 一条 <code>✗</code>，看颜色是不是和本机一致（这条最重要 —— 颜色变了复习节奏就乱了）</li>
-                <li><strong>JOIN 抽查</strong> —— 让 AI 跑这条查询，每一行的 <code>学科 / 问题 / 标记</code> 都要跟你本机对得上：<br>
+                <li><strong>JOIN 抽查</strong> —— 让 AI 把 <code>reviews</code> 和 <code>cards</code> 都拉出来对照，看每一行的<strong>问题内容</strong>和<strong>标记</strong>是不是跟你本机一致：<br>
+                  先查 <code>GET /rest/v1/reviews?select=card_id,mark</code> 拿到所有标记和它们指向的 card_id，再查 <code>GET /rest/v1/cards?student_name=eq.your-name&amp;select=id,question</code> 拿到卡片内容，然后<strong>按 id 对上号</strong>：<br>
                   <code>SELECT c.subject, c.question, r.mark FROM reviews r JOIN cards c ON c.id = r.card_id WHERE c.student_name='your-name'</code>
-                  （这条是第 5 条的加强版 —— 标记贴错卡是肉眼抽样不容易发现的）</li>
+                  （如果这条 SQL 报 <code>PGRST200</code>，说明数据库里没建外键关系 —— 没关系，改用上面"两次查 + 对上号"的方式手工对照，同样能查出错位）</li>
               </ol>
             <div class="callout">
               <p><strong>为什么不验证 = 没学？</strong></p>
