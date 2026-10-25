@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>记忆卡片库 · 数据概览</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="admin-topbar">
+  <a class="brand" href="../index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 返回数据概览</a>
+</header>
+
+<main class="admin-container">
+
+  <!-- ============ 头部 ============ -->
+  <section class="admin-head">
+    <h1 class="admin-title">🃏 记忆卡片库</h1>
+    <p class="admin-desc">大家加入的记忆卡片都在这里。点名字标签筛选 · 点卡片翻面看答案 · 这里只读，不会改任何数据。</p>
+    <div class="admin-meta">
+      <span id="last-updated" class="meta-pill">加载中...</span>
+      <button id="refresh-btn" class="refresh-btn">🔄 刷新</button>
+    </div>
+  </section>
+
+  <!-- ============ 名字筛选标签 ============ -->
+  <section class="filter-bar">
+    <div class="filter-label">👤 按名字筛选</div>
+    <div id="name-tabs" class="name-tabs">
+      <div class="empty-row">加载中...</div>
+    </div>
+  </section>
+
+  <!-- ============ 关键词搜索 ============ -->
+  <section class="filter-bar">
+    <div class="filter-label">🔍 关键词</div>
+    <input id="search-input" class="search-input" type="search" placeholder="输入问题或答案里的关键词..." autocomplete="off">
+  </section>
+
+  <!-- ============ 当前筛选统计 ============ -->
+  <section class="cards-stat" id="cards-stat"></section>
+
+  <!-- ============ 卡片网格 ============ -->
+  <section id="card-grid" class="card-grid">
+    <div class="empty-row">加载中...</div>
+  </section>
+
+</main>
+
+<script src="js/cards-view.js"></script>
+</body>
+</html>
