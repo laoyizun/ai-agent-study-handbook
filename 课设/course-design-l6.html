@@ -237,13 +237,14 @@
     <!-- 分段 6 -->
     <h3>6. 验证 · 抽样对比（10′）</h3>
     <div class="tch-block tch-teacher">
-      <p><b>老师动作：</b>列出 5 个验证点（不展开讲，让学生自己点）</p>
+      <p><b>老师动作：</b>列出 6 个验证点（不展开讲，让学生自己点）</p>
       <ol>
         <li>云端网站能看到 3 张表</li>
         <li>字段名跟 L5 定义的一致（特别是 <code>student_name</code>、<code>mark</code>）</li>
         <li>行数对得上</li>
         <li>抽样 3 条卡片看内容是否一致</li>
         <li><strong>三色标记一致性</strong>：抽样 ✓ / △ / ✗ 各一条，确认颜色没串</li>
+        <li><strong>JOIN 抽查</strong>：让 AI 跑 <code>SELECT c.subject, c.question, r.mark FROM reviews r JOIN cards c ON c.id = r.card_id</code>，逐行核对</li>
       </ol>
     </div>
     <div class="tch-block tch-student">
@@ -251,6 +252,12 @@
     </div>
     <div class="tch-block tch-intent">
       <p>💭 <b>设计意图：</b>验证点 5 是本节课最关键的撞墙点 —— 三色标记变了，复习节奏全乱。这是迁移的"质量门"。</p>
+      <p>⚠️ <b>老师必须提前知道的坑（会导致整节课翻车）：</b></p>
+      <ul>
+        <li><b>card_id 不会自动对上</b> —— 本地 SQLite 的 card_id 是"本地行号"（1,2,3），云端给的是自己的 id（可能是 5,6,7）。<b>不重映射 = 三色标记全贴错卡</b>。L6 prompt 里已加【id 重映射 · 必须做】段，讲课时要盯这一步有没有执行。</li>
+        <li><b>云端 3 张表已经存在</b> —— 里面有其他同学的数据。AI 如果自作主张"删旧建新"就把全班数据清了。prompt 已写死"只 INSERT 不建表"，撞墙预案也改了。</li>
+        <li><b>项目可能被暂停</b> —— Supabase 免费版 7 天不活跃会暂停。课前一定要确认项目是 Active 状态，否则所有学生都会卡在"网络超时"。</li>
+      </ul>
     </div>
 
     <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
@@ -317,7 +324,7 @@
       </thead>
       <tbody>
         <tr><td><b>key 无效</b></td><td>暗号填错了 / 用过期的</td><td>让学生回云端网站重新复制一份新的</td></tr>
-        <tr><td><b>表已存在</b></td><td>之前建过同名表</td><td>让 AI 帮学生决定"覆盖"或"删旧建新"</td></tr>
+        <tr><td><b>表已存在</b></td><td>云端 3 张表本来就在（里面还有别的同学的数据）</td><td><strong>不要删！</strong>让 AI 改成"只 INSERT，不建表"</td></tr>
         <tr><td><b>字段不匹配</b></td><td>云端字段名跟本机不一样</td><td>对照 L5 的字段表修正</td></tr>
         <tr><td><b>网络超时</b></td><td>云端连不上</td><td>重试 + 让学生在云端网站看下"服务状态"</td></tr>
         <tr><td><b>权限被拒</b></td><td>RLS 没关（开发模式需要关）</td><td>让 AI 帮学生在控制台关 RLS</td></tr>
