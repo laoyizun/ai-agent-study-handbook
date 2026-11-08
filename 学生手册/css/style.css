@@ -16,6 +16,12 @@
   --orange-38: rgba(243, 162, 28, 0.38);
   --orange-20: rgba(243, 162, 28, 0.20);
   --orange-08: rgba(243, 162, 28, 0.08);
+  /* 产品设计篇（L7 起）· 浅蓝 */
+  --sky: #38BDF8;
+  --sky-deep: #0369A1;
+  --sky-60: rgba(56, 189, 248, 0.60);
+  --sky-20: rgba(56, 189, 248, 0.20);
+  --sky-08: rgba(56, 189, 248, 0.08);
   --radius: 14px;
   --radius-sm: 8px;
 }
@@ -207,6 +213,90 @@ body {
   font-size: 18px;
   flex-shrink: 0;
 }
+
+/* ============ 目录 · 产品设计篇（L7 起） ============ */
+/* 浅蓝 + chip 上边横杠：颜色之外再加一层形状区分，
+   色弱学生不靠颜色也能分辨两段 */
+.toc-title--sky { color: var(--sky-deep); }
+
+.toc-item--product:hover {
+  border-color: var(--sky-60);
+  background: var(--sky-08);
+}
+.toc-item--product .toc-num {
+  border-color: var(--sky);
+  color: var(--sky-deep);
+  position: relative;
+}
+.toc-item--product .toc-num::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 16px;
+  height: 3px;
+  transform: translateX(-50%);
+  background: var(--sky);
+  border-radius: 2px;
+}
+.toc-item--product .toc-arrow { color: var(--sky-deep); }
+
+/* 未上线的占位卡：虚线边 + 降低存在感 */
+.toc-item--soon {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line);
+}
+.toc-item--soon .toc-num {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--sky-60);
+  color: var(--sky-deep);
+}
+.toc-item--soon:hover {
+  border-color: var(--sky-60);
+  background: var(--sky-08);
+}
+.toc-item--soon .toc-h { color: var(--ink-mute); }
+
+/* 产品篇小标题上方的分隔说明 */
+.toc-note {
+  font-size: 13px;
+  color: var(--ink-mute);
+  margin: -8px 0 18px;
+  line-height: 1.6;
+}
+.toc-note strong { color: var(--ink); font-weight: 600; }
+
+/* ============ 章节页 · 产品设计篇（L7 起）· 浅蓝 ============ */
+.page-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.page-topbar .brand {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+}
+.page-topbar .back {
+  color: var(--ink-mute);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+.page-topbar .back:hover { color: var(--orange); }
+
+.ch-head--product .ch-num {
+  background: var(--sky-08);
+  color: var(--sky-deep);
+}
+.ch-head--product .ch-eyebrow { color: var(--sky-deep); }
 
 /* ============ 章节页 ============ */
 .ch-head {
@@ -624,6 +714,12 @@ body {
   font-size: 13px;
   letter-spacing: 0.08em;
 }
+/* 产品设计篇浅蓝变体（放在 .callout 之后，确保覆盖生效） */
+.callout--sky {
+  background: var(--sky-08);
+  border-left-color: var(--sky);
+}
+.callout--sky .callout-label { color: var(--sky-deep); }
 .warn {
   background: #fff8e6;
   border-left: 4px solid #b8860b;

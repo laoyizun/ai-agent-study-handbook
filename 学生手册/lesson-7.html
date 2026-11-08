@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 7 章 · 让 AI 读回你的卡片 · 学生手册</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============ 顶部导航 ============ -->
+  <header class="page-topbar">
+    <a class="brand" href="index.html">用 AI Agent 学学习</a>
+    <a class="back" href="index.html">← 学生手册</a>
+  </header>
+
+  <main class="container">
+
+    <!-- ============ 章节头部 ============ -->
+    <section class="ch-head ch-head--product">
+      <div class="ch-num">7</div>
+      <div class="ch-text">
+        <p class="ch-eyebrow">第二段 · 做产品</p>
+        <h1 class="ch-h">让 AI 读回你的卡片</h1>
+        <p class="ch-d">前六章你把工具搭起来了，这一章让它真正开始为你干活 —— <strong>AI 自己会去读你攒下的数据</strong>，并且只挑你真正薄弱的那几张来问你。</p>
+      </div>
+    </section>
+
+    <article class="ch-body">
+
+      <!-- ============ 场景问题 ============ -->
+      <h2>一个真实的问题</h2>
+      <p>周四晚上九点，你在 workbuddy 上说：<strong>「帮我复习受力分析。」</strong></p>
+      <p>AI 很快给了你一道题 —— 小球沿斜面下滑，求摩擦力。你做了，答案对了。</p>
+      <p>但你心里清楚 —— 上周那张卡上标的是「未掌握」，卡上写的是：</p>
+      <p><strong>「画受力图时总漏掉摩擦力方向」</strong></p>
+      <p>你说「再难一点的」，AI 又给了一道更难的计算题。它不知道你上周卡在哪。</p>
+      <p>因为你手上明明有 18 张卡片，而 <strong>AI 一张都没读过</strong>。</p>
+
+      <div class="callout callout--sky">
+        <span class="callout-label">L6 到 L7</span>
+        <p>L6 你把数据库搬上了云端。<strong>搬上去 ≠ 用起来。</strong>云上的数据，AI 一次都没读过。这一章补的就是这条箭头。</p>
+      </div>
+
+      <h2>这一章要解决什么</h2>
+      <ul>
+        <li>让 AI <strong>读回</strong>你的卡片库，复习时只挑最薄弱的 3–5 张</li>
+        <li>给你的卡片补一个 <code>weakness</code> 字段 —— <strong>记卡在哪一步</strong>，而不是只记知识点</li>
+        <li>加一张 <code>focus</code> 表存<strong>考试重点</strong> —— 因为 AI 永远不会自己知道你的重点</li>
+      </ul>
+
+      <div class="callout">
+        <span class="callout-label">还在写</span>
+        <p>这一章的课堂实操记录（完整 prompt、验证点、撞墙预案）会在上课后整理进这一页。</p>
+      </div>
+
+      <h2>先自己想一想</h2>
+      <ul>
+        <li>你现在的卡片，是<strong>从对话里抽出来的知识点</strong>，还是<strong>你真正卡住的那一步</strong>？</li>
+        <li>如果你让 AI 帮你复习，它知道该挑哪几张卡给你吗？</li>
+        <li>下次的考试重点，AI 知道吗？<strong>—— 它永远不会自己知道，得你告诉它。</strong></li>
+      </ul>
+
+    </article>
+
+    <nav class="ch-nav">
+      <a href="lesson-6.html" class="prev">
+        <span class="arrow">←</span>
+        <span class="text">上一章 · 把数据库搬上云端</span>
+      </a>
+      <a href="index.html" class="next">
+        <span class="text">回到目录</span>
+        <span class="arrow">→</span>
+      </a>
+    </nav>
+
+  </main>
+
+</body>
+</html>
