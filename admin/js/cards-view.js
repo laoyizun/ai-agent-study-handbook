@@ -17,6 +17,22 @@ let editingId = null;
 let deletingId = null;
 let toastTimer = null;
 
+// 写请求要带身份头，数据库那边才知道是谁动的手
+// HTTP 头放不了中文，先转 base64，服务端解回 UTF8
+function actorHeader() {
+  if (!identity) return '';
+  const bytes = new TextEncoder().encode(identity);
+  let bin = '';
+  bytes.forEach(b => { bin += String.fromCharCode(b); });
+  return btoa(bin);
+}
+
+// 给写操作挂上身份头（没选身份就不挂）
+function withActor(builder) {
+  const h = actorHeader();
+  return h ? builder.setHeader('X-Actor-Name-B64', h) : builder;
+}
+
 // ===== 工具 =====
 function fmtFullTime(iso) {
   if (!iso) return '';
@@ -320,7 +336,9 @@ async function saveEdit() {
   btn.disabled = true;
   btn.textContent = '保存中...';
   try {
-    const { error } = await sb.from('cards').update(patch).eq('id', editingId);
+    const { error } = await withActor(
+      sb.from('cards').update(patch).eq('id', editingId)
+    );
     if (error) throw error;
 
     // 本地状态同步
@@ -365,7 +383,9 @@ async function confirmDelete() {
   btn.disabled = true;
   btn.textContent = '删除中...';
   try {
-    const { error } = await sb.from('cards').delete().eq('id', deletingId);
+    const { error } = await withActor(
+      sb.from('cards').delete().eq('id', deletingId)
+    );
     if (error) throw error;
 
     // reviews 会级联删除，本地状态也同步清掉

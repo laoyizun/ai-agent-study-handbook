@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>修改日志 · 数据概览</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="admin-topbar">
+  <a class="brand" href="../index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 返回数据概览</a>
+</header>
+
+<main class="admin-container">
+
+  <!-- ============ 头部 ============ -->
+  <section class="admin-head">
+    <h1 class="admin-title">🧾 修改日志</h1>
+    <p class="admin-desc">谁动了数据库、动了哪张表、改了什么。数据库层自动记录，学生和 AI 的每一次写入都跑不掉。</p>
+    <div class="admin-meta">
+      <span id="last-updated" class="meta-pill">加载中...</span>
+      <button id="refresh-btn" class="refresh-btn">🔄 刷新</button>
+    </div>
+  </section>
+
+  <!-- ============ 概览统计 ============ -->
+  <section class="overview">
+    <div class="ov-card">
+      <div class="ov-num" id="ov-total">—</div>
+      <div class="ov-label">总改动次数</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-num" id="ov-people">—</div>
+      <div class="ov-label">动过数据的人</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-num" id="ov-today">—</div>
+      <div class="ov-label">今天</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-num" id="ov-del">—</div>
+      <div class="ov-label">删除次数</div>
+    </div>
+  </section>
+
+  <!-- ============ 按人筛选 ============ -->
+  <section class="filter-bar">
+    <div class="filter-label">👤 谁动过</div>
+    <div id="actor-tabs" class="name-tabs">
+      <div class="empty-row">加载中...</div>
+    </div>
+  </section>
+
+  <!-- ============ 按操作类型筛选 ============ -->
+  <section class="filter-bar">
+    <div class="filter-label">🔧 什么操作</div>
+    <div id="op-tabs" class="name-tabs">
+      <button class="name-tab active" data-op="all">
+        <span class="tab-name">全部</span>
+        <span class="tab-count">0</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ 关键词搜索 ============ -->
+  <section class="filter-bar">
+    <div class="filter-label">🔍 关键词</div>
+    <input id="search-input" class="search-input" type="search" placeholder="搜索改动摘要、字段名..." autocomplete="off">
+  </section>
+
+  <!-- ============ 日志列表 ============ -->
+  <section class="section-block">
+    <h2 class="section-title">📋 改动流水</h2>
+    <p class="section-desc">最新在最上面 · 点一条看改前改后的对照</p>
+    <div class="log-list" id="log-list">
+      <div class="empty-row">加载中...</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 详情弹窗 ============ -->
+<div class="modal-backdrop" id="log-modal" hidden>
+  <div class="modal-box modal-box--wide" role="dialog" aria-modal="true" aria-labelledby="log-modal-title">
+    <h2 class="modal-title" id="log-modal-title">改动详情</h2>
+    <p class="modal-sub" id="log-modal-sub"></p>
+    <div id="log-detail" class="log-detail"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="log-close">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/logs-view.js"></script>
+</body>
+</html>
