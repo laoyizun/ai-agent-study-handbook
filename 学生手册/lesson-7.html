@@ -121,12 +121,12 @@
     <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
 
     <!-- ============ 工作流 ============ -->
-    <h2>�� 工作流（4 步）</h2>
+    <h2>📌 本节 4 步</h2>
 
     <!-- Step 1 -->
     <div class="step-block">
       <h3 class="step-title">第 1 步 · 看懂「复习回环」长什么样</h3>
-      <p>AI 帮你复习的时候，应该走完这 6 步。<strong>你要能看懂每一步在干什么</strong> —— 这一章的重点不是"让 AI 写 prompt"，是<strong>你看得懂它在干什么</strong>。</p>
+      <p>AI 帮你复习的时候，这个回环里应该走完 <strong>6 个动作</strong>。<strong>你要能看懂每一个动作在干什么</strong> —— 这一节的重点不是"让 AI 写 prompt"，是<strong>你看得懂它在干什么</strong>。</p>
 
       <div class="diagram">
         <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="复习回环六步时序图：学生提问、AI读库、AI出题、学生作答、AI写回">
@@ -201,7 +201,7 @@
       <p>要让 AI 知道你"卡在哪一步"、"这次考什么"，数据库得能存这两件事。所以 schema 要加一点东西。</p>
 
       <details class="fold">
-        <summary>�� 2.1 新的表结构 · 先看要变成什么样</summary>
+        <summary>📖 2.1 新的表结构 · 先看要变成什么样</summary>
         <div class="fold-body">
           <p>跟 L5 学到的一样：<strong>AI 要按固定结构写数据，字段必须先定死</strong>。下面是 L7 之后的样子。</p>
 
@@ -252,12 +252,12 @@ CREATE TABLE focus (
 
           <p>⚠️ <strong>建表顺序有讲究：</strong><code>focus</code> 必须<strong>先建</strong>，因为 <code>cards.focus_id</code> 要指向它。</p>
 
-          <p>�� <code>reviews.card_id</code> 上的 <code>UNIQUE</code> 是<strong>唯一约束</strong> —— 一张卡只能有一条复习记录。你改掌握程度是<strong>覆盖</strong>原来那条，不是追加。少了它，你按三次按钮数据库里就多出三条记录，掌握率统计全乱。</p>
+          <p>🔒 <code>reviews.card_id</code> 上的 <code>UNIQUE</code> 是<strong>唯一约束</strong> —— 一张卡只能有一条复习记录。你改掌握程度是<strong>覆盖</strong>原来那条，不是追加。少了它，你按三次按钮数据库里就多出三条记录，掌握率统计全乱。</p>
         </div>
       </details>
 
       <details class="fold">
-        <summary>�� 2.2 老数据怎么办 · 两个坑</summary>
+        <summary>📖 2.2 老数据怎么办 · 两个坑</summary>
         <div class="fold-body">
           <p>你 L6 已经往云端搬过数据了。现在加新东西，有两个坑必须知道。</p>
 
@@ -278,7 +278,7 @@ CREATE TABLE focus (
       <p>现在写一段 prompt，让 AI 干这件事。核心就三句：<strong>先读、再挑、后写</strong>。</p>
 
       <details class="fold">
-        <summary>�� 3.1 真实可用的 prompt · 复制就能用</summary>
+        <summary>📖 3.1 真实可用的 prompt · 复制就能用</summary>
         <div class="fold-body">
           <p>先报名字（这是必填字段，不报名字 AI 写不进去）：</p>
 
@@ -300,20 +300,20 @@ CREATE TABLE focus (
 
 【任务 · 按顺序做，每步做完告诉我结果】
 
-第 1 步 · 读我的卡片
+指令 1 · 读我的卡片
   GET /rest/v1/cards?student_name=eq.your-name&select=id,subject,question,answer,weakness
   告诉我：你一共有多少张卡？其中多少张有 weakness（卡点）？
 
-第 2 步 · 读我的掌握程度
+指令 2 · 读我的掌握程度
   GET /rest/v1/reviews?select=card_id,mark
   （**不要加 student_name 过滤**，全拉出来，你自己筛出我 card_id 那几条）
   告诉我：哪些卡标了 bad？哪些标了 half？
 
-第 3 步 · 读我的考试重点
+指令 3 · 读我的考试重点
   GET /rest/v1/focus?student_name=eq.your-name&select=id,scope,topic,weight
   如果是空的，告诉我"你还没告诉我考试重点"。
 
-第 4 步 · 挑出最薄弱的 3 道题
+指令 4 · 挑出最薄弱的 3 道题
   挑选规则，按优先级：
   a) 先看 focus 里的重点 —— 重点范围内的卡优先
   b) 再看 mark=bad 的卡 —— 完全不会的优先
@@ -325,11 +325,11 @@ CREATE TABLE focus (
      - 如果那张卡有 weakness，把它写出来（这叫"卡点提示"）
   如果我的卡里有 weakness 是空的，直接说"这张卡没记卡点，只知道知识点是 XXX"。
 
-第 5 步 · 等我作答
+指令 5 · 等我作答
   我答完之后，你问我：这道题你打 ✓（掌握）还是 △（半掌握）还是 ✗（没掌握）？
   我回答之后，你再往下走。
 
-第 6 步 · 把我的标记写回去
+指令 6 · 把我的标记写回去
   用 **upsert**（不要用普通 insert）：
   POST /rest/v1/reviews?on_conflict=card_id
   Header: Prefer: resolution=merge-duplicates
@@ -337,6 +337,7 @@ CREATE TABLE focus (
   （on_conflict=card_id 一定要放在 URL 参数上，不是 body 里。
     因为 reviews.card_id 上有唯一约束，upsert 才是"覆盖"，insert 会报 409。）
 
+指令 7 · 核对
   全部写完后，核对一遍：
   - GET /rest/v1/reviews?select=card_id,mark
   - GET /rest/v1/cards?select=id,subject,question
@@ -346,8 +347,8 @@ CREATE TABLE focus (
   - student_name 必须等于「我的信息」里的拼音，一个字都不能错
   - 不要碰 student_name 不是我的记录
   - 改 / 删任何记录前，先告诉我要改哪一条、等我确认
-  - 第 4 步最多出 3 道题，**不要一口气出 20 道**
-  - 第 6 步必须用 upsert，用 insert 会报错
+  - 指令 4 最多出 3 道题，**不要一口气出 20 道**
+  - 指令 6 必须用 upsert，用 insert 会报错
 
 【出错怎么办】
   任何一步报错，把错误原文贴给我，别自己猜着改。
@@ -404,7 +405,7 @@ CREATE TABLE focus (
       </div>
 
       <details class="fold">
-        <summary>�� 4.1 重点这件事 · AI 永远不会自己知道</summary>
+        <summary>📖 4.1 重点这件事 · AI 永远不会自己知道</summary>
         <div class="fold-body">
           <p>你 L4 学卡片的时候，卡片是"从一次对话里抽知识点"抽出来的 —— AI 抽得很全，但它<strong>不知道哪块是你快没时间了，哪块老师说明天必考</strong>。</p>
           <p>这不是 AI 笨，是<strong>信息本来就不在它手上</strong>。考试重点只有两个地方知道：<strong>老师的脑子，和你的脑子</strong>。</p>
@@ -434,7 +435,7 @@ Body: {"student_name": "your-name", "scope": "物理 一二章", "topic": "受�
       </details>
 
       <details class="fold">
-        <summary>�� 4.2 老卡片补卡点 · 让 AI 帮你回填</summary>
+        <summary>📖 4.2 老卡片补卡点 · 让 AI 帮你回填</summary>
         <div class="fold-body">
           <p>你的 170 张卡，<code>weakness</code> 大多是空的。可以让 AI 帮你补 —— 但<strong>不能让它瞎编</strong>。</p>
 
@@ -475,11 +476,11 @@ Body: {"weakness": "补的卡点"}</code></pre>
     <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
 
     <!-- ============ 一键完成 ============ -->
-    <h2>�� 一键完成 · 整段 prompt</h2>
+    <h2>🚀 一键完成 · 整段 prompt</h2>
     <p>上面几段拼起来太长了？用这段 —— <strong>只改 2 处</strong>就能跑完整条回环。</p>
 
     <details class="fold">
-      <summary>�� 复制这段 · 改 2 个地方就行</summary>
+      <summary>📖 复制这段 · 改 2 个地方就行</summary>
       <div class="fold-body">
 
         <div class="code-wrap">
@@ -497,30 +498,30 @@ Body: {"weakness": "补的卡点"}</code></pre>
 暗号（apikey）：sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB
 
 【任务 · 按顺序做】
-1) GET /rest/v1/cards?student_name=eq.your-name&select=id,subject,question,answer,weakness
+指令 1 · GET /rest/v1/cards?student_name=eq.your-name&select=id,subject,question,answer,weakness
    → 告诉我：我有多少张卡？多少张有 weakness？
 
-2) GET /rest/v1/reviews?select=card_id,mark
+指令 2 · GET /rest/v1/reviews?select=card_id,mark
    （**不要加 student_name 过滤**，全拉出来你自己筛）
    → 告诉我：哪些卡是 bad？哪些是 half？
 
-3) GET /rest/v1/focus?student_name=eq.your-name&select=id,scope,topic,weight
+指令 3 · GET /rest/v1/focus?student_name=eq.your-name&select=id,scope,topic,weight
    → 如果是空的，告诉我"你还没告诉我考试重点"
 
-4) 挑最薄弱的 **3 道题**，优先级：
+指令 4 · 挑最薄弱的 **3 道题**，优先级：
    focus 里的重点 > mark=bad > mark=half > 没标过的
    每道题给我：问题（不给答案）+ 对应的 card_id + 那张卡的 weakness（如果有）
    **卡点提示单独标出来**，方便我知道它在考我哪一步。
 
-5) 出完题停下来等我作答。我答完你问我打 ✓ / △ / ✗，我回答后再继续。
+指令 5 · 出完题停下来等我作答。我答完你问我打 ✓ / △ / ✗，我回答后再继续。
 
-6) 把标记写回：
+指令 6 · 把标记写回：
    POST /rest/v1/reviews?on_conflict=card_id
    Header: Prefer: resolution=merge-duplicates
    Body: {"card_id": 几, "mark": "done/half/bad"}
    （**必须 upsert**，用 insert 会报 duplicate key）
 
-7) 核对：GET /rest/v1/reviews?select=card_id,mark 和 GET /rest/v1/cards?select=id,subject,question，
+指令 7 · 核对：GET /rest/v1/reviews?select=card_id,mark 和 GET /rest/v1/cards?select=id,subject,question，
    按 id 对上号，给我一张表：问题 / 这次标记 / 写回成功没有。
 
 【硬要求】
@@ -528,7 +529,7 @@ Body: {"weakness": "补的卡点"}</code></pre>
 - 不碰 student_name 不是我的记录
 - 改删任何记录前先问我
 - 一次最多 3 道题
-- 第 6 步必须 upsert
+- 指令 6 必须 upsert
 
 【出错怎么办】
 报错就把原文贴给我。常见：
@@ -546,7 +547,7 @@ Body: {"weakness": "补的卡点"}</code></pre>
     <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
 
     <!-- ============ 撞墙预案 ============ -->
-    <h2>�� 撞墙了怎么办</h2>
+    <h2>🔧 撞墙了怎么办</h2>
 
     <details class="fold">
       <summary>⚠️ AI 出重复的题 / 出的题跟你卡的地方无关</summary>
@@ -619,7 +620,7 @@ curl -s "https://rwdadlbtvjuoonnbbriy.supabase.co/rest/v1/cards?select=id&limit=
 
     <!-- ============ 下一章钩子 ============ -->
     <div class="callout callout--sky">
-      <p><strong>�� 留给 L8：</strong></p>
+      <p><strong>🪝 留给 L8：</strong></p>
       <ul style="margin:6px 0 0;padding-left:22px;">
         <li>你的卡片<strong>按知识点</strong>长出来了（哪些卡属于同一块、哪块最薄弱）</li>
         <li>同班同学也在同一个知识点上栽跟头 —— 但要<strong>不泄露名字</strong>地看到</li>
