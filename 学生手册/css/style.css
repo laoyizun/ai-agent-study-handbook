@@ -292,6 +292,23 @@ body {
 }
 .page-topbar .back:hover { color: var(--orange); }
 
+/* 章节底部导航 */
+.page-bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.page-nav-link {
+  color: var(--ink-mute);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+.page-nav-link:hover { color: var(--orange); }
+
 .ch-head--product .ch-num {
   background: var(--sky-08);
   color: var(--sky-deep);
@@ -357,6 +374,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 .step-body { flex: 1; min-width: 0; }
+.step-block { margin: 0 0 36px; }
 .step-title {
   font-size: 22px;
   font-weight: 700;

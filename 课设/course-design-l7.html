@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L7 课设 · 让 AI 读回你的卡片 · 老师课设</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习 · 课设</a>
+  <a class="back" href="index.html">← 课设目录</a>
+</header>
+
+<main class="container">
+
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head">
+    <div class="ch-num">L7</div>
+    <div class="ch-head-body">
+      <h1 class="ch-title">让 AI 读回你的卡片</h1>
+      <p class="ch-desc">第二段 · 做产品的第一课。学生已经有云端数据库了，这一课补上那条一直没接上的箭头 —— 让 AI 自己会去读它攒下的数据。同时解决一个学生已经反映的真实问题：<strong>AI 生成的卡片空泛、不贴合自己的薄弱点、太多太杂</strong>。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 课前信息 ============ -->
+    <h2>课前 · 学情起点</h2>
+    <div class="callout">
+      <p><strong>学生已经会：</strong></p>
+      <ul>
+        <li>L6 已经把本地 SQLite 搬到云端 Supabase</li>
+        <li>3 张表（students / cards / reviews）的字段名和它们的关系</li>
+        <li>prompt 四要素 + 验证 AI 输出</li>
+        <li>「接头暗号」= publishable key，知道怎么让 AI 发 HTTP 请求</li>
+      </ul>
+      <p><strong>学生没经历过：</strong></p>
+      <ul>
+        <li><strong>让 AI 读回自己的数据</strong>（前六章全是 AI 单向产出，学生单向消费）</li>
+        <li><strong>「我哪里不会」这件事可以变成数据</strong>（卡点 / 薄弱点）</li>
+        <li><strong>考试重点要自己给 AI</strong> —— AI 永远不会自己知道</li>
+        <li>为什么 AI 出的题跟自己的薄弱点无关</li>
+      </ul>
+    </div>
+
+    <p><strong>本章核心命题：</strong>一个只会"回答问题"的 AI 不是 agent。会<strong>自己去找资料</strong>、再根据找到的东西给你出题的 AI 才是。这一课让学生亲眼看到那条箭头接上。</p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 时间线 ============ -->
+    <h2>⏱️ 90 分钟时间线</h2>
+
+    <div class="steps">
+      <div class="step-row"><b>12′</b><span>导入 · 周四晚上九点（AI 出的题跟你卡的点无关）</span></div>
+      <div class="step-row"><b>8′</b><span>破题 · 搬上去 ≠ 用起来 + 模型/工具/上下文凑齐</span></div>
+      <div class="step-row"><b>10′</b><span>概念 · 复习回环 6 步（看清 AI 在干什么）</span></div>
+      <div class="step-row"><b>12′</b><span>概念 · schema 加两样（focus 表 + weakness 列）</span></div>
+      <div class="step-row"><b>30′</b><span>主课 · 跑一次真实回环（读→挑→出题→答→写回）</span></div>
+      <div class="step-row"><b>12′</b><span>卡片质量 · 四条对策 + 告诉 AI 考试重点</span></div>
+      <div class="step-row"><b>6′</b><span>总结 · 对话审计 + L8 钩子</span></div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 详细设计 ============ -->
+    <h2>�� 详细设计</h2>
+
+    <!-- 分段 1 -->
+    <h3>1. 导入 · 周四晚上九点（12′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>讲一个具体到骨头里的场景，<strong>不要抽象讲"AI 不知道你哪里不会"</strong>。</p>
+      <ul>
+        <li>「周四晚上九点，你说『帮我复习受力分析』，AI 给了你一道小球沿斜面下滑求摩擦力的题。你做了，答案对了。」</li>
+        <li>「但你心里清楚 —— 上周那张卡标的是<strong>未掌握</strong>，卡上写的是『画受力图时总漏掉摩擦力方向』。」</li>
+        <li>「你说『再难一点的』。AI 又给了一道更难的计算题。<strong>它不知道你上周卡在哪。</strong>」</li>
+      </ul>
+      <p>然后<strong>当场打开某个学生的卡片库</strong>，随机抽三张念出来：</p>
+      <ul>
+        <li>「什么是摩擦力」→ 定义。背下来也会，永远不会错，也就永远记不住</li>
+        <li>「摩擦力的计算公式」→ 公式你会，你错的是方向</li>
+        <li>「受力分析的三个步骤」→ 步骤你也背过，你错的是第二步漏了一项</li>
+      </ul>
+      <p>收一句：<strong>「这三张卡片每一张都对，每一张都帮不到你。」</strong></p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>对照自己的卡片库，认出自己也有这种卡。有人说出自己卡片里的具体一条。</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>用<strong>具体场景 + 真实卡片</strong>砸，不用抽象概念。学生必须先"认出自己的问题"，后面的方案才愿意接受。抽真实卡片这一步不能省 —— 抽象讲"卡片质量差"学生没感觉，指着自己的卡说"这张我也写过"才有。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b>有学生说"那我把公式也记进去不就行了"——让他想清楚：<strong>卡点不是知识点</strong>，是"我在这张卡的哪一步会栽"。「公式是什么」和「我总是漏掉摩擦力方向」是两个不同性质的东西，前者背下来就完了，后者才需要练。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 2 -->
+    <h3>2. 破题 · 模型 + 工具 + 上下文（8′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>把场景 00 学的「模型 + 工具 + 上下文」拿出来对上号。</p>
+      <ul>
+        <li>「模型 —— 你早就有。AI 出题的本事一直都在。」</li>
+        <li>「工具 —— <strong>这章补上</strong>。AI 能自己发请求读你的数据库。」</li>
+        <li>「上下文 —— <strong>这章补上</strong>。AI 知道你的复习记录、你的考试重点。」</li>
+      </ul>
+      <p>收一句：<strong>「前六章你一直在用一个只有模型的 AI。这一章工具和上下文第一次接上 —— 凑齐了才叫 agent。」</strong></p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>说出自己这六章里"AI 替我干了什么"（答、抽卡片、搬数据），再回答"它什么时候替我<strong>自己找过</strong>资料"（答：从来没有）。</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>场景 00 是<strong>概念课</strong>，L7 是<strong>它的实战落地</strong>。这一段的作用是让学生意识到：之前学的不是冷知识，是"我还没用上的零件"。<strong>不要展开讲 agent 理论</strong>，就一句话把三块拼上，然后立刻进下一步。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b>有学生说"那让 AI 自己上网搜不就行了"——区分一下：<strong>搜的是全世界的知识，你要的是你自己的薄弱点</strong>。你的薄弱点只存在于你自己的数据库里，这是不可替代的。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 3 -->
+    <h3>3. 概念 · 复习回环 6 步（10′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>用手册里那张时序图，<strong>逐步走一遍</strong>。重点强调第 ② 步和第 ③ 步。</p>
+      <ul>
+        <li>① 你提问 / ② <strong>AI 读卡片库</strong> / ③ <strong>库里返回：你有多少卡、哪些标了 bad</strong></li>
+        <li>④ AI 只出最薄弱的 3 道题 / ⑤ 你作答 + 打三色标记 / ⑥ AI 把标记写回去</li>
+      </ul>
+      <p>问一句：<strong>「第 ② 步和第 ③ 步，以前发生过吗？」</strong>（答：从来没有）</p>
+      <p>再说：<strong>「①④⑤ 你一直在做，⑥ 你在网页上手动标 —— 但 ② 从来没有。所以 AI 出的题永远跟你的薄弱点无关。」</strong></p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>在对话里指出自己过去一周"问 AI 复习"的次数，以及每次是不是都跟自己的卡无关。</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>这是全课的<strong>技术核心</strong>，但要用<strong>"以前没发生过"</strong>这种<strong>对比</strong>来讲，不要用流程图讲流程。图是给课后自己看的，课上要讲的是<strong>"这件事一直是缺的"</strong>。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 4 -->
+    <h3>4. 概念 · schema 加两样东西（12′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>讲清<strong>为什么要加</strong>，再讲加什么。</p>
+      <p><strong>先讲「为什么」：</strong></p>
+      <ul>
+        <li>「要让 AI 知道你卡在哪一步 —— 数据库得能存这个信息 → cards 加一列 <code>weakness</code>」</li>
+        <li>「要让 AI 知道这次考什么 —— 得有个地方存重点 → 加一张 <code>focus</code> 表」</li>
+      </ul>
+      <p><strong>再讲「怎么加」（当工具，不当知识点）：</strong></p>
+      <ul>
+        <li><code>focus</code> 表必须<strong>先建</strong>，因为 <code>cards.focus_id</code> 要指向它</li>
+        <li>老卡片的两列都是 <code>NULL</code> —— <strong>NULL 不是"没有弱点"，是"还不知道"</strong></li>
+        <li>同一张卡只保留最近一次复习记录（<code>UNIQUE</code> 约束）</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>把新 schema 发给 AI，让它<strong>对比自己本地 SQLite 的结构</strong>，列出差异。</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>schema 变更<strong>不当知识点讲</strong>，当"改配置的活"处理 —— 学生要的是"让 AI 照着做"，不是"理解外键语法"。<strong>但「NULL 不等于没有」这一条必须讲透</strong>，因为这是 L7 卡片质量的地基：AI 要能区分"这卡没弱点"和"这卡我没记过弱点"。</p>
+      <p>顺带一个回扣：<strong>L5 为什么强调字段要定死？</strong>因为 L7 加字段的时候，<strong>L5 定的那份规范直接就能用</strong>，两个学生改出来的表结构完全一样，数据能互相看懂。这是 L5 的延迟收益，课上点一句。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b>有学生本地 SQLite 加了 <code>UNIQUE</code> 但已有重复数据 → 建约束会报错。<strong>正确做法：先删重复（每张卡留最近一次），再加约束</strong>。这正好是"约束替你兜底"的反面教材 —— <strong>约束不会帮你处理脏数据，它只会拒绝你</strong>。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 5 -->
+    <h3>5. 主课 · 跑一次真实回环（30′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>用<strong>某个学生的真实数据</strong>当场跑一遍（老师自己先跑通，别让全班一起卡住）。</p>
+      <ul>
+        <li>报名字 → AI 读卡片库 → AI 报数（你有几张卡、哪些标了 bad）</li>
+        <li>AI 挑最薄弱的 3 道题 → <strong>它必须给出对应的 card_id 和卡点</strong></li>
+        <li>老师<strong>替一个学生作答</strong>（或者请一个学生上台）</li>
+        <li>AI 问打什么标记 → AI <strong>upsert</strong> 写回 → 给出对照表</li>
+      </ul>
+      <p>跑完一定要<strong>当场核对对照表</strong>：每一行的卡和标记对不对。</p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b></p>
+      <ul>
+        <li>复制手册 3.1 的 prompt，只改 <code>your-name</code></li>
+        <li>发出去，看 AI 报数 —— <strong>数字不对就停下来</strong>，先让它读对了再往下</li>
+        <li>收到 3 道题后<strong>自己作答</strong>，告诉 AI 打什么标记</li>
+        <li>核对 AI 给的对照表</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>这是全课的<strong>高光时刻</strong> —— 学生亲眼看到 AI 说出"你有 18 张卡，其中 3 张标了未掌握"，那一刻"数据是我的、但它现在是 AI 的记忆"这件事才真正成立。<strong>用真实数据，不要用演示数据</strong>。</p>
+      <p>关键教学动作：<strong>先让 AI 报数，再让它出题。</strong>如果 AI 报的数字就不对，出再多题也是错的。这个"先验证中间结果"的习惯是本课比"跑通回环"更重要的收获。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b></p>
+      <ul>
+        <li><strong>AI 出的题跟你卡的点无关</strong> → 让它先回显它读到的卡片清单（card_id | 问题 | weakness | mark），一行一行贴出来看。多数情况是 <code>student_name</code> 打错了。</li>
+        <li><strong>报 duplicate key</strong> → 它用了 insert 不是 upsert。强调 <code>on_conflict=card_id</code> 要放<strong> URL 参数</strong>上，不是 body 里（放 body 里报 PGRST204）。</li>
+        <li><strong>AI 说"我无法访问数据库"</strong> → 它把"发 HTTP 请求"理解成"看网页"。直接给它 curl 命令让它跑。</li>
+        <li><strong>AI 出 20 道题</strong> → 数量限制没被遵守。再强调一次"最多 3 道"，并要求它<strong>先报要出哪几张卡的 id</strong>，你确认了再出题。</li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 6 -->
+    <h3>6. 卡片质量 · 四条对策（12′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>回到开场那三张卡片，问：<strong>「同样的数据库，换个挑法，卡片质量就变了。怎么挑？」</strong></p>
+      <ul>
+        <li><strong>① 卡片要带卡点</strong> —— 不只记「公式是什么」，要记「我总是漏掉摩擦力方向」</li>
+        <li><strong>② 只挑薄弱的</strong> —— 重点 &gt; bad &gt; half &gt; 没标过的</li>
+        <li><strong>③ 限量</strong> —— 一次最多 3 道。18 张全给你，等于没重点</li>
+        <li><strong>④ 重点你说了算</strong> —— AI 永远不会自己知道</li>
+      </ul>
+      <p>重点讲第 ④ 条：<strong>「考试重点只有两个地方知道 —— 老师的脑子，和你的脑子。AI 永远不会自己知道，这不是它笨，是信息不在它手上。」</strong></p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b></p>
+      <ul>
+        <li>告诉 AI 这次考什么（一句口语化的就行）</li>
+        <li>让 AI 把它写进 <code>focus</code> 表</li>
+        <li>让 AI 帮<strong>5 张 weakness 为空的卡</strong>补卡点（规则见手册 4.2）</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>第 ④ 条是<strong>本课的素养点</strong>，不是功能点。它对应场景 01 教的「AI 是什么 / 我是谁 / 怎么协作」第三件事：<strong>有些信息 AI 永远不会自己知道，你得主动给</strong>。这比"AI 能存重点"重要得多。</p>
+      <p>补卡点那条 prompt 里<strong>必须写"看不出来就跳过"</strong> —— 因为<strong>编出来的卡点比没有卡点更糟</strong>，AI 会拿着假卡点去出题，出的题跟你真正卡的地方无关。这个判断标准本身就是给学生的 AI 素养训练。</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b>有学生问"AI 补的卡点能信吗" —— <strong>不能全信，要抽查</strong>。这正是你要教的：<strong>AI 产出的一切都要验证</strong>。抽查 2-3 条，看看卡点是不是真的指向一个具体动作，而不是"理解不深"这种空话。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 7 -->
+    <h3>7. 总结 · 对话审计（6′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>让全班一起回答三个问题（举手/口答）：</p>
+      <ul>
+        <li>「今天 AI 第一次<strong>自己去找了</strong>什么？」→ 你的卡片库</li>
+        <li>「它找的时候<strong>依据</strong>是什么？」→ 你的标记、你的卡点、你的重点</li>
+        <li>「如果这些信息是空的，它会出什么题？」→ 泛泛的题（回到开场那个问题）</li>
+      </ul>
+      <p>收尾：<strong>「模型 + 工具 + 上下文 —— 今天凑齐了。而且最后那个'上下文'是你自己给的，不是天上掉的。」</strong></p>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b>回答三个问题；写下"我这次告诉 AI 的考试重点是 ____"。</p>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>结尾要<strong>回收开场的场景</strong>，让学生自己说出"现在为什么不会出那种题了"。<strong>让结论从学生嘴里出来，比老师总结更有力。</strong></p>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ L8 钩子 ============ -->
+    <h2>�� 留给 L8</h2>
+    <div class="callout">
+      <ul>
+        <li>卡片<strong>按知识点</strong>长出来 —— 哪些卡属于同一块、哪块最薄弱、哪块该先补</li>
+        <li>同班同学也在同一个知识点上栽跟头 —— 但要<strong>不泄露名字</strong>地看到（这需要 <strong>RLS</strong>，不是前端藏一藏就行）</li>
+        <li>你的复习记录<strong>只有你自己能读写</strong> —— 现在 publishable key 是全表可读的，<strong>这是个待补的安全洞</strong></li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 老师自查 ============ -->
+    <h2>�� 上课前自查</h2>
+    <div class="callout">
+      <ul>
+        <li><strong>Supabase 项目没被暂停</strong> —— 免费版 7 天不活跃会自动停，上课前先去 dashboard 看一眼</li>
+        <li><strong>云端 schema 是新的</strong> —— focus 表在、cards 有 weakness 和 focus_id 两列、reviews.card_id 有 UNIQUE</li>
+        <li><strong>有一份演示数据</strong> —— 用某个学生的真实卡，别用编的</li>
+        <li><strong>你自己跑通过一遍</strong> —— 全班一起卡在第 5 步是最糟的情况</li>
+        <li><strong>本地 SQLite 的表结构也更新了</strong> —— L7 的 schema 改动要同步到 L5 建表那一步，否则后面迁数据会卡</li>
+      </ul>
+    </div>
+
+  </article>
+
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="page-bottom-nav">
+    <a class="page-nav-link" href="course-design-l6.html">← 上一课 · L6 把数据库搬上云端</a>

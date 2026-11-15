@@ -8,73 +8,633 @@
 </head>
 <body>
 
-  <!-- ============ 顶部导航 ============ -->
-  <header class="page-topbar">
-    <a class="brand" href="index.html">用 AI Agent 学学习</a>
-    <a class="back" href="index.html">← 学生手册</a>
-  </header>
+<!-- ============ 顶部导航 ============ -->
+<header class="page-topbar">
+  <a class="brand" href="index.html">用 AI Agent 学学习</a>
+  <a class="back" href="index.html">← 学生手册</a>
+</header>
 
-  <main class="container">
+<main class="container">
 
-    <!-- ============ 章节头部 ============ -->
-    <section class="ch-head ch-head--product">
-      <div class="ch-num">7</div>
-      <div class="ch-text">
-        <p class="ch-eyebrow">第二段 · 做产品</p>
-        <h1 class="ch-h">让 AI 读回你的卡片</h1>
-        <p class="ch-d">前六章你把工具搭起来了，这一章让它真正开始为你干活 —— <strong>AI 自己会去读你攒下的数据</strong>，并且只挑你真正薄弱的那几张来问你。</p>
+  <!-- ============ 章节头部 ============ -->
+  <section class="ch-head ch-head--product">
+    <div class="ch-num">7</div>
+    <div class="ch-text">
+      <p class="ch-eyebrow">第二段 · 做产品</p>
+      <h1 class="ch-h">让 AI 读回你的卡片</h1>
+      <p class="ch-d">L6 你把数据库搬上了云端。但搬上去 ≠ 用起来 —— 云上的数据，AI 一次都没读过。这一章补上那条箭头：<strong>让 AI 自己会去读你攒下的东西，并且只挑你真正薄弱的那几张来问你</strong>。</p>
+    </div>
+  </section>
+
+  <article class="ch-body">
+
+    <!-- ============ 场景问题 ============ -->
+    <h2>一个真实的问题</h2>
+    <p>周四晚上九点。你在 workbuddy 上说：</p>
+    <p><strong>「帮我复习受力分析。」</strong></p>
+    <p>AI 很快给了你一道题 —— 小球沿斜面下滑，求摩擦力。你做了，答案对了。</p>
+    <p>但你心里清楚 —— 上周那张卡上标的是「未掌握」，卡上写的是：</p>
+    <p><strong>「画受力图时总漏掉摩擦力方向」</strong></p>
+    <p>你说「再难一点的」。AI 又给了一道更难的计算题。</p>
+    <p><strong>它不知道你上周卡在哪。</strong></p>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 三张卡片 ============ -->
+    <h2>再看三张卡片</h2>
+    <p>把你自己的卡片库打开，随机抽三张出来看看。你会发现每一张都<strong>都对</strong>，但每一张都<strong>帮不到你</strong>：</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 760 236" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三张记忆卡片的对比：定义、公式、步骤，问题是它们记的是知识点而你卡的是步骤">
+        <rect x="20" y="20" width="230" height="196" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2" rx="8"/>
+        <text x="135" y="46" font-size="12" fill="#F3A21C" text-anchor="middle" font-weight="700">卡片 ①</text>
+        <text x="135" y="72" font-size="13" fill="#333333" text-anchor="middle" font-weight="600">什么是摩擦力</text>
+        <line x1="40" y1="88" x2="230" y2="88" stroke="#EDEDED" stroke-width="1"/>
+        <text x="135" y="112" font-size="11" fill="#64748B" text-anchor="middle">定义</text>
+        <text x="135" y="134" font-size="11" fill="#64748B" text-anchor="middle">背下来也会</text>
+        <text x="135" y="152" font-size="11" fill="#64748B" text-anchor="middle">永远不会错</text>
+        <rect x="48" y="168" width="174" height="30" fill="#F3A21C" opacity="0.10" rx="6"/>
+        <text x="135" y="188" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="600">也永远记不住</text>
+
+        <rect x="265" y="20" width="230" height="196" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2" rx="8"/>
+        <text x="380" y="46" font-size="12" fill="#F3A21C" text-anchor="middle" font-weight="700">卡片 ②</text>
+        <text x="380" y="72" font-size="13" fill="#333333" text-anchor="middle" font-weight="600">摩擦力的计算公式</text>
+        <line x1="285" y1="88" x2="475" y2="88" stroke="#EDEDED" stroke-width="1"/>
+        <text x="380" y="112" font-size="11" fill="#64748B" text-anchor="middle">公式你会</text>
+        <text x="380" y="134" font-size="11" fill="#64748B" text-anchor="middle">你错的是方向</text>
+        <text x="380" y="152" font-size="11" fill="#64748B" text-anchor="middle">不是公式</text>
+        <rect x="293" y="168" width="174" height="30" fill="#F3A21C" opacity="0.10" rx="6"/>
+        <text x="380" y="188" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="600">卡点没被记下来</text>
+
+        <rect x="510" y="20" width="230" height="196" fill="#FFFFFF" stroke="#F3A21C" stroke-width="2" rx="8"/>
+        <text x="625" y="46" font-size="12" fill="#F3A21C" text-anchor="middle" font-weight="700">卡片 ③</text>
+        <text x="625" y="72" font-size="13" fill="#333333" text-anchor="middle" font-weight="600">受力分析的三个步骤</text>
+        <line x1="530" y1="88" x2="720" y2="88" stroke="#EDEDED" stroke-width="1"/>
+        <text x="625" y="112" font-size="11" fill="#64748B" text-anchor="middle">步骤你也背过</text>
+        <text x="625" y="134" font-size="11" fill="#64748B" text-anchor="middle">你错的是第二步</text>
+        <text x="625" y="152" font-size="11" fill="#64748B" text-anchor="middle">漏了一项</text>
+        <rect x="538" y="168" width="174" height="30" fill="#F3A21C" opacity="0.10" rx="6"/>
+        <text x="625" y="188" font-size="11" fill="#F3A21C" text-anchor="middle" font-weight="600">记的是知识点</text>
+      </svg>
+      <p class="diagram-caption">三张卡片记的都是<strong>知识点</strong>，而你真正卡的是<strong>步骤</strong>。</p>
+    </div>
+
+    <div class="callout callout--sky">
+      <span class="callout-label">破题</span>
+      <p>这三张卡片<strong>每一张都对，每一张都帮不到你</strong>。</p>
+      <p>原因只有一个：它们记的是<strong>知识点</strong>，而你卡的是<strong>步骤</strong>。而且你手上明明有 18 张卡片 —— <strong>AI 一张都没读过</strong>。</p>
+      <p>L6 你把数据库搬上了云端。<strong>搬上去 ≠ 用起来。</strong>云上的数据，AI 一次都没读过。这一章补的就是这条箭头。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 模型 + 工具 + 上下文 ============ -->
+    <h2>模型 + 工具 + 上下文</h2>
+    <p>你在场景 00 学过一个说法：<strong>AI = 模型 + 工具 + 上下文</strong>。现在我们把它对上号：</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="模型加工具加上下文三要素拼合图">
+        <rect x="20" y="60" width="170" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+        <text x="105" y="88" font-size="11" fill="#64748B" text-anchor="middle">你早就有</text>
+        <text x="105" y="110" font-size="14" fill="#333333" text-anchor="middle" font-weight="700">模型</text>
+        <text x="105" y="128" font-size="10" fill="#64748B" text-anchor="middle">出题的本事</text>
+
+        <rect x="295" y="60" width="170" height="80" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2" rx="8"/>
+        <text x="380" y="88" font-size="11" fill="#0369A1" text-anchor="middle">这章补上</text>
+        <text x="380" y="110" font-size="14" fill="#0369A1" text-anchor="middle" font-weight="700">工具</text>
+        <text x="380" y="128" font-size="10" fill="#64748B" text-anchor="middle">能读库、能写库</text>
+
+        <rect x="570" y="60" width="170" height="80" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2" rx="8"/>
+        <text x="655" y="88" font-size="11" fill="#0369A1" text-anchor="middle">这章补上</text>
+        <text x="655" y="110" font-size="14" fill="#0369A1" text-anchor="middle" font-weight="700">上下文</text>
+        <text x="655" y="128" font-size="10" fill="#64748B" text-anchor="middle">你的记录、你的重点</text>
+
+        <line x1="190" y1="100" x2="290" y2="100" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <line x1="465" y1="100" x2="565" y2="100" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+        <text x="380" y="34" font-size="14" fill="#0369A1" text-anchor="middle" font-weight="700">凑齐了，这才叫一个 agent</text>
+        <text x="380" y="180" font-size="12" fill="#64748B" text-anchor="middle">L1–L6 你一直在用「模型」，这章第一次把「工具」和「上下文」接上</text>
+      </svg>
+      <p class="diagram-caption">模型 + 工具 + 上下文，第一次凑齐。</p>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 工作流 ============ -->
+    <h2>�� 工作流（4 步）</h2>
+
+    <!-- Step 1 -->
+    <div class="step-block">
+      <h3 class="step-title">第 1 步 · 看懂「复习回环」长什么样</h3>
+      <p>AI 帮你复习的时候，应该走完这 6 步。<strong>你要能看懂每一步在干什么</strong> —— 这一章的重点不是"让 AI 写 prompt"，是<strong>你看得懂它在干什么</strong>。</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="复习回环六步时序图：学生提问、AI读库、AI出题、学生作答、AI写回">
+          <defs>
+            <marker id="l7arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+              <path d="M1 1 L7 4 L1 7 Z" fill="#333333"/>
+            </marker>
+            <marker id="l7arrowSky" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+              <path d="M1 1 L7 4 L1 7 Z" fill="#38BDF8"/>
+            </marker>
+          </defs>
+
+          <!-- 三个参与方 -->
+          <rect x="20" y="20" width="150" height="52" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+          <text x="95" y="42" font-size="13" fill="#333333" text-anchor="middle" font-weight="700">你</text>
+          <text x="95" y="60" font-size="10" fill="#64748B" text-anchor="middle">提问 + 作答</text>
+
+          <rect x="305" y="20" width="150" height="52" fill="#EAF7FE" stroke="#38BDF8" stroke-width="2" rx="8"/>
+          <text x="380" y="42" font-size="13" fill="#0369A1" text-anchor="middle" font-weight="700">AI</text>
+          <text x="380" y="60" font-size="10" fill="#0369A1" text-anchor="middle">复习引擎</text>
+
+          <rect x="590" y="20" width="150" height="52" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+          <text x="665" y="42" font-size="13" fill="#333333" text-anchor="middle" font-weight="700">卡片库</text>
+          <text x="665" y="60" font-size="10" fill="#64748B" text-anchor="middle">云端数据库</text>
+
+          <!-- 生命线 -->
+          <line x1="95" y1="72" x2="95" y2="320" stroke="#D3D4DA" stroke-width="1.5" stroke-dasharray="5 6"/>
+          <line x1="380" y1="72" x2="380" y2="320" stroke="#D3D4DA" stroke-width="1.5" stroke-dasharray="5 6"/>
+          <line x1="665" y1="72" x2="665" y2="320" stroke="#D3D4DA" stroke-width="1.5" stroke-dasharray="5 6"/>
+
+          <!-- 1 学生→AI -->
+          <line x1="95" y1="104" x2="370" y2="104" stroke="#333333" stroke-width="1.5" marker-end="url(#l7arrow)"/>
+          <rect x="150" y="90" width="170" height="24" fill="#FFFFFF" stroke="#EDEDED" rx="6"/>
+          <text x="235" y="106" font-size="11" fill="#333333" text-anchor="middle">① 帮我复习受力分析</text>
+
+          <!-- 2 AI→库 (蓝色重点) -->
+          <line x1="380" y1="150" x2="655" y2="150" stroke="#38BDF8" stroke-width="2" marker-end="url(#l7arrowSky)"/>
+          <rect x="440" y="136" width="170" height="24" fill="#EAF7FE" stroke="#38BDF8" rx="6"/>
+          <text x="525" y="152" font-size="11" fill="#0369A1" text-anchor="middle" font-weight="600">② 读卡片 + 标记 + 重点</text>
+
+          <!-- 3 库→AI -->
+          <line x1="665" y1="196" x2="390" y2="196" stroke="#38BDF8" stroke-width="2" marker-end="url(#l7arrowSky)"/>
+          <rect x="445" y="182" width="170" height="24" fill="#EAF7FE" stroke="#38BDF8" rx="6"/>
+          <text x="530" y="198" font-size="11" fill="#0369A1" text-anchor="middle" font-weight="600">③ 18 张卡 · 3 张标 ✗</text>
+
+          <!-- 4 AI→学生 -->
+          <line x1="380" y1="242" x2="105" y2="242" stroke="#333333" stroke-width="1.5" marker-end="url(#l7arrow)"/>
+          <rect x="165" y="228" width="170" height="24" fill="#FFFFFF" stroke="#EDEDED" rx="6"/>
+          <text x="250" y="244" font-size="11" fill="#333333" text-anchor="middle">④ 只出最薄弱的 3 道题</text>
+
+          <!-- 5 学生→AI -->
+          <line x1="95" y1="288" x2="370" y2="288" stroke="#333333" stroke-width="1.5" marker-end="url(#l7arrow)"/>
+          <rect x="160" y="274" width="170" height="24" fill="#FFFFFF" stroke="#EDEDED" rx="6"/>
+          <text x="245" y="290" font-size="11" fill="#333333" text-anchor="middle">⑤ 作答 + 三色标记</text>
+
+          <text x="380" y="330" font-size="11" fill="#64748B" text-anchor="middle">还有第 6 步：AI 把你的标记写回卡片库（下面会讲怎么写）</text>
+        </svg>
+        <p class="diagram-caption">第 ② 步和第 ③ 步是<strong>这一章的全部</strong> —— 前六章你从没让 AI 做过这件事。</p>
       </div>
-    </section>
 
-    <article class="ch-body">
-
-      <!-- ============ 场景问题 ============ -->
-      <h2>一个真实的问题</h2>
-      <p>周四晚上九点，你在 workbuddy 上说：<strong>「帮我复习受力分析。」</strong></p>
-      <p>AI 很快给了你一道题 —— 小球沿斜面下滑，求摩擦力。你做了，答案对了。</p>
-      <p>但你心里清楚 —— 上周那张卡上标的是「未掌握」，卡上写的是：</p>
-      <p><strong>「画受力图时总漏掉摩擦力方向」</strong></p>
-      <p>你说「再难一点的」，AI 又给了一道更难的计算题。它不知道你上周卡在哪。</p>
-      <p>因为你手上明明有 18 张卡片，而 <strong>AI 一张都没读过</strong>。</p>
-
-      <div class="callout callout--sky">
-        <span class="callout-label">L6 到 L7</span>
-        <p>L6 你把数据库搬上了云端。<strong>搬上去 ≠ 用起来。</strong>云上的数据，AI 一次都没读过。这一章补的就是这条箭头。</p>
-      </div>
-
-      <h2>这一章要解决什么</h2>
+      <p>对照着看，你发现了吗？<strong>第 ② 步和第 ③ 步以前从来没有发生过。</strong></p>
       <ul>
-        <li>让 AI <strong>读回</strong>你的卡片库，复习时只挑最薄弱的 3–5 张</li>
-        <li>给你的卡片补一个 <code>weakness</code> 字段 —— <strong>记卡在哪一步</strong>，而不是只记知识点</li>
-        <li>加一张 <code>focus</code> 表存<strong>考试重点</strong> —— 因为 AI 永远不会自己知道你的重点</li>
+        <li>第 ① 步和第 ④ 步、⑤ 步 —— 你一直在做（问 AI、要题、作答）</li>
+        <li>第 ⑥ 步写回 —— L4 以后你在网页上手动标，云端才有数据</li>
+        <li><strong>第 ② 步读回来 —— 一直没有发生</strong>。所以 AI 出的题永远跟你的薄弱点无关</li>
       </ul>
+    </div>
 
-      <div class="callout">
-        <span class="callout-label">还在写</span>
-        <p>这一章的课堂实操记录（完整 prompt、验证点、撞墙预案）会在上课后整理进这一页。</p>
+    <!-- Step 2 -->
+    <div class="step-block">
+      <h3 class="step-title">第 2 步 · 数据库要加两样东西</h3>
+      <p>要让 AI 知道你"卡在哪一步"、"这次考什么"，数据库得能存这两件事。所以 schema 要加一点东西。</p>
+
+      <details class="fold">
+        <summary>�� 2.1 新的表结构 · 先看要变成什么样</summary>
+        <div class="fold-body">
+          <p>跟 L5 学到的一样：<strong>AI 要按固定结构写数据，字段必须先定死</strong>。下面是 L7 之后的样子。</p>
+
+          <div class="callout callout--sky">
+            <span class="callout-label">变化在哪</span>
+            <p><strong>多了 1 张表</strong>（<code>focus</code> · 存考试重点）、<strong>cards 多了 2 列</strong>（<code>weakness</code> · 卡在哪一步、<code>focus_id</code> · 这张卡属于哪个重点）。</p>
+            <p>其他表和字段<strong>一个字都没动</strong>。你 L5 L6 攒下来的数据全部还在。</p>
+          </div>
+
+          <div class="code-wrap">
+            <pre><code>-- 第一张 students（没变）
+CREATE TABLE students (
+  id          BIGSERIAL,
+  name        TEXT        NOT NULL UNIQUE,
+  created_at  TIMESTAMPTZ DEFAULT now()
+);
+
+-- 第二张 cards（多了 2 列）
+CREATE TABLE cards (
+  id           BIGSERIAL,
+  student_name TEXT        NOT NULL,
+  subject      TEXT        NOT NULL,
+  question     TEXT        NOT NULL,
+  answer       TEXT        NOT NULL,
+  weakness     TEXT,        -- 新增：卡在哪一步
+  focus_id     INTEGER REFERENCES focus(id) ON DELETE SET NULL,  -- 新增
+  created_at   TIMESTAMPTZ DEFAULT now()
+);
+
+-- 第三张 reviews（多了 UNIQUE）
+CREATE TABLE reviews (
+  id          BIGSERIAL,
+  card_id     BIGINT      NOT NULL UNIQUE REFERENCES cards(id) ON DELETE CASCADE,
+  mark        TEXT        CHECK (mark IN ('done','half','bad')),
+  reviewed_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 第四张 focus（全新：你的考试重点）
+CREATE TABLE focus (
+  id           integer GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+  student_name TEXT    NOT NULL,
+  scope        TEXT,    -- 范围，如「物理 一二章」
+  topic        TEXT,    -- 具体重点，如「受力分析」
+  weight       INTEGER NOT NULL DEFAULT 1,
+  created_at   TIMESTAMPTZ DEFAULT now()
+);</code></pre>
+          </div>
+
+          <p>⚠️ <strong>建表顺序有讲究：</strong><code>focus</code> 必须<strong>先建</strong>，因为 <code>cards.focus_id</code> 要指向它。</p>
+
+          <p>�� <code>reviews.card_id</code> 上的 <code>UNIQUE</code> 是<strong>唯一约束</strong> —— 一张卡只能有一条复习记录。你改掌握程度是<strong>覆盖</strong>原来那条，不是追加。少了它，你按三次按钮数据库里就多出三条记录，掌握率统计全乱。</p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>�� 2.2 老数据怎么办 · 两个坑</summary>
+        <div class="fold-body">
+          <p>你 L6 已经往云端搬过数据了。现在加新东西，有两个坑必须知道。</p>
+
+          <h4>坑 1 · 老卡片没有 weakness，是空的，不是"没有弱点"</h4>
+          <p>你之前那 170 张卡，<code>weakness</code> 这一列全是 <code>NULL</code>（空值）。</p>
+          <p><strong>NULL ≠ "没有弱点"</strong>。NULL 的意思是<strong>"还不知道"</strong>。如果填成"无"或者空字符串，AI 就没法区分"这卡没弱点"和"这卡我没记录过弱点" —— 前者不用管，后者得让 AI 追问一句。</p>
+
+          <h4>坑 2 · 同一张卡可能已经有好几条复习记录</h4>
+          <p>如果你之前是用"每次点一下就插一条"的方式标记的，云端可能有同一张卡的多条记录。直接加唯一约束会<strong>报错</strong>。</p>
+          <p>处理办法：<strong>同一张卡只保留最近的一次</strong>（最近的那次才是你现在的真实掌握程度）。这个我们已经在云端处理好了，你的表已经干净。</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-block">
+      <h3 class="step-title">第 3 步 · 让 AI 读回你的卡片</h3>
+      <p>现在写一段 prompt，让 AI 干这件事。核心就三句：<strong>先读、再挑、后写</strong>。</p>
+
+      <details class="fold">
+        <summary>�� 3.1 真实可用的 prompt · 复制就能用</summary>
+        <div class="fold-body">
+          <p>先报名字（这是必填字段，不报名字 AI 写不进去）：</p>
+
+          <div class="callout callout--sky">
+            <p><strong>第一步 · 报名字（自己打这几个字）：</strong></p>
+            <p>「我是 <code>your-name</code>，本节课 L7 的学生」</p>
+            <p>把 <code>your-name</code> 换成你的真实拼音。<strong>这一步不能省</strong> —— 少了它，AI 不知道数据该写给谁。</p>
+          </div>
+
+          <div class="code-wrap">
+            <pre><code>你是我的复习助手。现在请读回我的记忆卡片库，给我做一次真实的复习。
+
+【我的信息】
+- 名字：your-name
+
+【云端数据库】
+- 地址：https://rwdadlbtvjuoonnbbriy.supabase.co/rest/v1
+- 暗号（apikey）：sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB
+
+【任务 · 按顺序做，每步做完告诉我结果】
+
+第 1 步 · 读我的卡片
+  GET /rest/v1/cards?student_name=eq.your-name&select=id,subject,question,answer,weakness
+  告诉我：你一共有多少张卡？其中多少张有 weakness（卡点）？
+
+第 2 步 · 读我的掌握程度
+  GET /rest/v1/reviews?select=card_id,mark
+  （**不要加 student_name 过滤**，全拉出来，你自己筛出我 card_id 那几条）
+  告诉我：哪些卡标了 bad？哪些标了 half？
+
+第 3 步 · 读我的考试重点
+  GET /rest/v1/focus?student_name=eq.your-name&select=id,scope,topic,weight
+  如果是空的，告诉我"你还没告诉我考试重点"。
+
+第 4 步 · 挑出最薄弱的 3 道题
+  挑选规则，按优先级：
+  a) 先看 focus 里的重点 —— 重点范围内的卡优先
+  b) 再看 mark=bad 的卡 —— 完全不会的优先
+  c) 然后是 mark=half 的卡
+  d) 最后是没标过的卡
+  **最多 3 道，最少 1 道**。每道题给我：
+     - 问题（不要直接给答案）
+     - 这道题在考我 card_id 为几的那张卡
+     - 如果那张卡有 weakness，把它写出来（这叫"卡点提示"）
+  如果我的卡里有 weakness 是空的，直接说"这张卡没记卡点，只知道知识点是 XXX"。
+
+第 5 步 · 等我作答
+  我答完之后，你问我：这道题你打 ✓（掌握）还是 △（半掌握）还是 ✗（没掌握）？
+  我回答之后，你再往下走。
+
+第 6 步 · 把我的标记写回去
+  用 **upsert**（不要用普通 insert）：
+  POST /rest/v1/reviews?on_conflict=card_id
+  Header: Prefer: resolution=merge-duplicates
+  Body: {"card_id": 几, "mark": "done 或 half 或 bad"}
+  （on_conflict=card_id 一定要放在 URL 参数上，不是 body 里。
+    因为 reviews.card_id 上有唯一约束，upsert 才是"覆盖"，insert 会报 409。）
+
+  全部写完后，核对一遍：
+  - GET /rest/v1/reviews?select=card_id,mark
+  - GET /rest/v1/cards?select=id,subject,question
+  - 按 id 对上号，给我一张表：每张卡的问题 / 这次打的标记 / 写回成功没有
+
+【硬要求】
+  - student_name 必须等于「我的信息」里的拼音，一个字都不能错
+  - 不要碰 student_name 不是我的记录
+  - 改 / 删任何记录前，先告诉我要改哪一条、等我确认
+  - 第 4 步最多出 3 道题，**不要一口气出 20 道**
+  - 第 6 步必须用 upsert，用 insert 会报错
+
+【出错怎么办】
+  任何一步报错，把错误原文贴给我，别自己猜着改。
+  常见情况：
+  - 404 / PGRST205 → 表结构对不上，告诉我，我检查
+  - duplicate key value violates unique constraint → 改用 upsert（第 6 步）
+  - 401 / key 无效 → 暗号填错了，告诉我，我重新去网站复制</code></pre>
+            <button class="copy-btn">复制</button>
+          </div>
+
+          <p><strong>注意：</strong>这段 prompt 里第 5 步是<strong>停一下等你说</strong> —— AI 出完题要等你答完再写回。<strong>不是一口气做完。</strong></p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-block">
+      <h3 class="step-title">第 4 步 · 卡片质量：让 AI 出能打的牌</h3>
+      <p>回到开头那三张卡片。<strong>同样的数据库，换个挑法，卡片质量就变了。</strong></p>
+
+      <h4>四条规则</h4>
+
+      <div class="diagram">
+        <svg viewBox="0 0 760 268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="卡片质量四条对策：带卡点、挑薄弱、限量、重点说了算">
+          <rect x="20" y="20" width="350" height="106" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2" rx="8"/>
+          <text x="38" y="44" font-size="12" fill="#0369A1" font-weight="700">规则 ① 卡片要带卡点</text>
+          <text x="38" y="66" font-size="11" fill="#333333">不只记「摩擦力的公式是什么」</text>
+          <text x="38" y="86" font-size="11" fill="#333333">要记「我总是漏掉摩擦力方向」</text>
+          <rect x="38" y="94" width="314" height="20" fill="#EAF7FE" rx="4"/>
+          <text x="195" y="108" font-size="10" fill="#0369A1" text-anchor="middle">写在 weakness 这一列</text>
+
+          <rect x="390" y="20" width="350" height="106" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2" rx="8"/>
+          <text x="408" y="44" font-size="12" fill="#0369A1" font-weight="700">规则 ② 只挑薄弱的</text>
+          <text x="408" y="66" font-size="11" fill="#333333">先看 mark=bad，再看 half</text>
+          <text x="408" y="86" font-size="11" fill="#333333">完全会的卡，今天不问你</text>
+          <rect x="408" y="94" width="314" height="20" fill="#EAF7FE" rx="4"/>
+          <text x="565" y="108" font-size="10" fill="#0369A1" text-anchor="middle">写在 prompt 的挑选规则里</text>
+
+          <rect x="20" y="142" width="350" height="106" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2" rx="8"/>
+          <text x="38" y="166" font-size="12" fill="#0369A1" font-weight="700">规则 ③ 限量</text>
+          <text x="38" y="188" font-size="11" fill="#333333">一次最多 3 道题</text>
+          <text x="38" y="208" font-size="11" fill="#333333">18 张全给你，等于没重点</text>
+          <rect x="38" y="216" width="314" height="20" fill="#EAF7FE" rx="4"/>
+          <text x="195" y="230" font-size="10" fill="#0369A1" text-anchor="middle">写在 prompt 的数量限制里</text>
+
+          <rect x="390" y="142" width="350" height="106" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2" rx="8"/>
+          <text x="408" y="166" font-size="12" fill="#0369A1" font-weight="700">规则 ④ 重点你说了算</text>
+          <text x="408" y="188" font-size="11" fill="#333333">AI 永远不会自己知道重点</text>
+          <text x="408" y="208" font-size="11" fill="#333333">你得主动告诉它</text>
+          <rect x="408" y="216" width="314" height="20" fill="#EAF7FE" rx="4"/>
+          <text x="565" y="230" font-size="10" fill="#0369A1" text-anchor="middle">存在 focus 表里</text>
+        </svg>
+        <p class="diagram-caption">四条规则，前三条在 prompt 里，第四条在数据库里。</p>
       </div>
 
-      <h2>先自己想一想</h2>
-      <ul>
-        <li>你现在的卡片，是<strong>从对话里抽出来的知识点</strong>，还是<strong>你真正卡住的那一步</strong>？</li>
-        <li>如果你让 AI 帮你复习，它知道该挑哪几张卡给你吗？</li>
-        <li>下次的考试重点，AI 知道吗？<strong>—— 它永远不会自己知道，得你告诉它。</strong></li>
+      <details class="fold">
+        <summary>�� 4.1 重点这件事 · AI 永远不会自己知道</summary>
+        <div class="fold-body">
+          <p>你 L4 学卡片的时候，卡片是"从一次对话里抽知识点"抽出来的 —— AI 抽得很全，但它<strong>不知道哪块是你快没时间了，哪块老师说明天必考</strong>。</p>
+          <p>这不是 AI 笨，是<strong>信息本来就不在它手上</strong>。考试重点只有两个地方知道：<strong>老师的脑子，和你的脑子</strong>。</p>
+          <p>所以这一步要做的是<strong>你主动给</strong>。跟 AI 说一句就行：</p>
+
+          <div class="code-wrap">
+            <pre><code>我下周考物理一二章，重点是受力分析和浮力。
+帮我记下来，以后出题优先从这两块里挑。</code></pre>
+            <button class="copy-btn">复制</button>
+          </div>
+
+          <p>然后让 AI 把它写进 <code>focus</code> 表：</p>
+
+          <div class="code-wrap">
+            <pre><code>POST /rest/v1/focus
+Body: {"student_name": "your-name", "scope": "物理 一二章", "topic": "受力分析", "weight": 3}
+（weight 是优先级，1 最低。写重点一般给 3，普通内容给 1。）</code></pre>
+            <button class="copy-btn">复制</button>
+          </div>
+
+          <div class="callout callout--sky">
+            <span class="callout-label">这一点很重要</span>
+            <p>你在场景 01 学过「AI 是什么 / 我是谁 / 怎么协作」。这里是第三件事的现实场景：<strong>有些信息 AI 永远不会自己知道，你得主动给。</strong></p>
+            <p>这不是"AI 不够聪明"，这是<strong>协作</strong>。你把判断权留在自己手里，让 AI 干它擅长的活（出题、归纳、找卡点）。</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>�� 4.2 老卡片补卡点 · 让 AI 帮你回填</summary>
+        <div class="fold-body">
+          <p>你的 170 张卡，<code>weakness</code> 大多是空的。可以让 AI 帮你补 —— 但<strong>不能让它瞎编</strong>。</p>
+
+          <div class="code-wrap">
+            <pre><code>帮我给 weakness 还是空的卡片补卡点。
+
+规则：
+1. 一次只处理 5 张，从最久没复习的开始
+2. 卡点必须指向一个**具体的动作或判断**，不能是"不理解""不熟"这种空话
+   ✗ "对摩擦力理解不够深"
+   ✓ "画受力图时总把重力沿斜面的分量当成摩擦力"
+3. 如果你看不出来，就**跳过这张**，在最后告诉我"这 5 张里有几张我看不出来"
+4. 补完之后，把改动列给我看（卡片 id + 原来的 weakness + 新的 weakness）
+
+写入用 PATCH：PATCH /rest/v1/cards?id=eq.几
+Body: {"weakness": "补的卡点"}</code></pre>
+            <button class="copy-btn">复制</button>
+          </div>
+
+          <p>为什么强调"看不出来就跳过"？因为<strong>编出来的卡点比没有卡点更糟</strong> —— AI 会拿着假卡点去出题，出的题跟你真正卡的地方没关系。</p>
+        </div>
+      </details>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 完成检查 ============ -->
+    <h2>✅ 完成检查</h2>
+    <ul>
+      <li><strong>AI 读回了你的卡片</strong> —— 它能说出你有多少张卡、哪些标了 bad</li>
+      <li><strong>AI 出的题不超过 3 道</strong> —— 而且是按「重点 → bad → half」挑的</li>
+      <li><strong>题目带着卡点提示</strong> —— 你能看出它在考你哪一步</li>
+      <li><strong>你答完，AI 把标记写回去了</strong> —— 用 upsert 写的，不是 insert</li>
+      <li><strong>你能核对</strong> —— AI 给的那张对照表，每行的卡和标记都对得上</li>
+      <li><strong>你告诉了 AI 考试重点</strong> —— focus 表里有记录了</li>
+    </ul>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 一键完成 ============ -->
+    <h2>�� 一键完成 · 整段 prompt</h2>
+    <p>上面几段拼起来太长了？用这段 —— <strong>只改 2 处</strong>就能跑完整条回环。</p>
+
+    <details class="fold">
+      <summary>�� 复制这段 · 改 2 个地方就行</summary>
+      <div class="fold-body">
+
+        <div class="code-wrap">
+          <pre><code>你是我的复习助手。读回我的卡片库，给我做一次真实复习，并写回我的掌握程度。
+
+【要改的地方 · 只有 2 处】
+1. 下面的 your-name → 换成你的拼音
+2. 下面「3 道题」→ 改成你想练的题数（建议 3~5）
+
+【我的信息】
+名字：your-name
+
+【云端数据库】
+地址：https://rwdadlbtvjuoonnbbriy.supabase.co/rest/v1
+暗号（apikey）：sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB
+
+【任务 · 按顺序做】
+1) GET /rest/v1/cards?student_name=eq.your-name&select=id,subject,question,answer,weakness
+   → 告诉我：我有多少张卡？多少张有 weakness？
+
+2) GET /rest/v1/reviews?select=card_id,mark
+   （**不要加 student_name 过滤**，全拉出来你自己筛）
+   → 告诉我：哪些卡是 bad？哪些是 half？
+
+3) GET /rest/v1/focus?student_name=eq.your-name&select=id,scope,topic,weight
+   → 如果是空的，告诉我"你还没告诉我考试重点"
+
+4) 挑最薄弱的 **3 道题**，优先级：
+   focus 里的重点 > mark=bad > mark=half > 没标过的
+   每道题给我：问题（不给答案）+ 对应的 card_id + 那张卡的 weakness（如果有）
+   **卡点提示单独标出来**，方便我知道它在考我哪一步。
+
+5) 出完题停下来等我作答。我答完你问我打 ✓ / △ / ✗，我回答后再继续。
+
+6) 把标记写回：
+   POST /rest/v1/reviews?on_conflict=card_id
+   Header: Prefer: resolution=merge-duplicates
+   Body: {"card_id": 几, "mark": "done/half/bad"}
+   （**必须 upsert**，用 insert 会报 duplicate key）
+
+7) 核对：GET /rest/v1/reviews?select=card_id,mark 和 GET /rest/v1/cards?select=id,subject,question，
+   按 id 对上号，给我一张表：问题 / 这次标记 / 写回成功没有。
+
+【硬要求】
+- student_name 一字都不能错
+- 不碰 student_name 不是我的记录
+- 改删任何记录前先问我
+- 一次最多 3 道题
+- 第 6 步必须 upsert
+
+【出错怎么办】
+报错就把原文贴给我。常见：
+- duplicate key value violates unique constraint → 改用 upsert
+- 401 → 暗号填错了
+- PGRST205 → 表结构对不上</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+
+        <p><strong>改完直接发给 AI 就行。</strong>它会一步步做，每步停下来告诉你结果。</p>
+
+      </div>
+    </details>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 撞墙预案 ============ -->
+    <h2>�� 撞墙了怎么办</h2>
+
+    <details class="fold">
+      <summary>⚠️ AI 出重复的题 / 出的题跟你卡的地方无关</summary>
+      <div class="fold-body">
+        <p><strong>原因：</strong>AI 没读到你的卡，或者读错了。</p>
+        <p><strong>怎么办：</strong>让 AI 先回显它读到了什么：</p>
+        <div class="code-wrap">
+          <pre><code>先别出题。先把你刚才读到的 cards 和 reviews 完整贴给我看，
+每张卡一行：card_id | 问题 | weakness | mark。
+我要先确认你读对了，再让你出题。</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+        <p>如果 AI 贴出来的卡<strong>根本不是你的</strong>，多半是 <code>student_name</code> 打错了。</p>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary>⚠️ 写回去报 duplicate key value violates unique constraint</summary>
+      <div class="fold-body">
+        <p><strong>原因：</strong>AI 用了普通 <code>insert</code>，但这张卡已经有记录了。</p>
+        <p><strong>怎么办：</strong>让它改成 upsert，并且强调参数位置：</p>
+        <div class="code-wrap">
+          <pre><code>改用 upsert：
+POST /rest/v1/reviews?on_conflict=card_id     ← on_conflict 放 URL 参数上
+Header: Prefer: resolution=merge-duplicates
+Body: {"card_id": 几, "mark": "done"}
+
+不要放在 body 里，body 里放 on_conflict 会报 PGRST204。</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary>⚠️ AI 不肯写 / 说"我无法访问你的数据库"</summary>
+      <div class="fold-body">
+        <p><strong>原因：</strong>它把"读取网页"和"发 HTTP 请求"搞混了。你要明确说：</p>
+        <div class="code-wrap">
+          <pre><code>你不是要"看网页"，是要**发 HTTP 请求**。
+用 curl 就行：
+curl -s "https://rwdadlbtvjuoonnbbriy.supabase.co/rest/v1/cards?select=id&limit=5" \
+  -H "apikey: sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB" \
+  -H "Authorization: Bearer sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB"
+
+先跑这一条，把返回结果贴给我。</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary>⚠️ AI 写的题你一道都不会 / 一道都太简单</summary>
+      <div class="fold-body">
+        <p><strong>原因：</strong>卡片的 <code>weakness</code> 是空的，或者重点没告诉它。</p>
+        <p><strong>怎么办：</strong>两件事——先补卡点，再补重点：</p>
+        <div class="code-wrap">
+          <pre><code>我们先做两件事，出了题再来：
+
+1. 给我 5 张 weakness 是空的卡，你帮我补卡点（规则见下）
+2. 我告诉你这次考什么，你记进 focus 表
+
+然后再出题。</code></pre>
+          <button class="copy-btn">复制</button>
+        </div>
+        <p>补卡点的规则：卡点必须指向一个<strong>具体的动作或判断</strong>，不能是"理解不够深"这种空话。看不出来就跳过，别硬编。</p>
+      </div>
+    </details>
+
+    <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
+
+    <!-- ============ 下一章钩子 ============ -->
+    <div class="callout callout--sky">
+      <p><strong>�� 留给 L8：</strong></p>
+      <ul style="margin:6px 0 0;padding-left:22px;">
+        <li>你的卡片<strong>按知识点</strong>长出来了（哪些卡属于同一块、哪块最薄弱）</li>
+        <li>同班同学也在同一个知识点上栽跟头 —— 但要<strong>不泄露名字</strong>地看到</li>
+        <li>你的复习记录<strong>只有你自己看</strong> —— 这需要数据库层面加权限（RLS），不是网页上藏一藏就行的</li>
       </ul>
+    </div>
 
-    </article>
+  </article>
 
-    <nav class="ch-nav">
-      <a href="lesson-6.html" class="prev">
-        <span class="arrow">←</span>
-        <span class="text">上一章 · 把数据库搬上云端</span>
-      </a>
-      <a href="index.html" class="next">
-        <span class="text">回到目录</span>
-        <span class="arrow">→</span>
-      </a>
-    </nav>
+  <!-- ============ 章节底部导航 ============ -->
+  <nav class="page-bottom-nav">
+    <a class="page-nav-link" href="lesson-6.html">← 上一章 · 把数据库搬上云端</a>
+    <a class="page-nav-link" href="index.html">回到目录 →</a>
+  </nav>
 
-  </main>
+</main>
 
-</body>
-</html>
+<script src="js
