@@ -388,6 +388,12 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
   GET /rest/v1/students?name=eq.your-name&select=id
   如果已经有记录就**跳过插入**，不要重复插。
 
+【不重复插入 · reviews 表】
+  reviews.card_id 上有唯一约束，**一张卡只能有一条复习记录**。直接 POST 会报
+  "duplicate key value violates unique constraint"。插之前先查一次：
+  GET /rest/v1/reviews?select=card_id,mark
+  如果某个 card_id 已经有了，就**跳过它**，不要重复插。
+
 【输出要求】
   - 第一步：先列出我本机 SQLite 的内容（有几张表、每张表几行、字段名），让我先确认是不是 3 张表
   - 第二步：再告诉我怎么连云端、用哪个 HTTP 路径插入数据
@@ -573,6 +579,9 @@ sb_publishable_JgjEFVnjeZPwzn9kO-2qCg_TpE6rIhB</code></pre>
     - key 无效 → 可能是暗号填错了，告诉我，我重新去网站复制
     - 表已存在 → 表本来就在（里面有别的同学的数据），**不要删**，改成只 INSERT
     - card_id 对不上 → 按"问题内容"重新匹配 id（第 4 步 b）
+    - duplicate key value violates unique constraint → reviews.card_id 上有唯一约束，
+      **一张卡只能有一条复习记录**。先 GET /rest/v1/reviews?select=card_id,mark 查一下，
+      已经有记录的那条**跳过**，别重复插
     - 重复数据 → 先 SELECT 数一遍行数，多了再删重复的
 
 【最后给我一个结论】

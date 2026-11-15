@@ -75,11 +75,19 @@
       if (error) throw error;
       return data;
     },
-    async addReview(cardId, mark) {
+    // 写入掌握程度：upsert（同一张卡只保留一条，重复点击是覆盖不是追加）
+    // reviews.card_id 上有 UNIQUE 约束，onConflict 必须写 'card_id'
+    async setReview(cardId, mark) {
       const c = getClient();
-      const { data, error } = await c.from('reviews').insert({ card_id: cardId, mark }).select();
+      const { data, error } = await c.from('reviews')
+        .upsert({ card_id: cardId, mark }, { onConflict: 'card_id' })
+        .select();
       if (error) throw error;
       return data?.[0];
+    },
+    // 旧方法保留兼容，但内部改成 upsert，避免重复插入
+    async addReview(cardId, mark) {
+      return this.setReview(cardId, mark);
     },
 
     // ============ 统计 ============
