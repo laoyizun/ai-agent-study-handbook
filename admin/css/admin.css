@@ -551,8 +551,16 @@ html, body {
 /* ===== 翻卡 ===== */
 .flip-card {
   perspective: 1200px;
-  height: 190px;
+  min-height: 190px;
   cursor: pointer;
+}
+.flip-card.has-weakness { min-height: 240px; }
+.flip-card.can-edit { min-height: 246px; }
+.flip-card.has-weakness.can-edit { min-height: 296px; }
+
+/* 正面内容：可滚动，避免溢出被裁 */
+.flip-front {
+  overflow-y: auto;
 }
 
 .flip-inner {
@@ -648,4 +656,243 @@ html, body {
 .mark-none {
   background: var(--line-soft);
   color: var(--ink-faint);
+}
+
+/* ================================================
+   身份选择 + 编辑 / 删除
+   ================================================ */
+
+/* ===== 身份栏 ===== */
+.identity-bar {
+  align-items: center;
+}
+.identity-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.identity-select {
+  flex: 0 0 auto;
+  min-width: 200px;
+  cursor: pointer;
+  font-family: var(--mono);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+.identity-hint {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+.identity-hint.on {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ===== 卡点显示 ===== */
+.card-weakness {
+  margin-top: 8px;
+  padding: 7px 10px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.card-weakness b {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+/* ===== 卡片上的操作按钮 ===== */
+.card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-soft);
+}
+.card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.card-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.card-btn.card-btn--del:hover {
+  border-color: var(--bad);
+  color: var(--bad);
+  background: var(--bad-soft);
+}
+.card-id {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  align-self: center;
+}
+
+/* ===== 弹窗 ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+.modal-backdrop[hidden] { display: none; }
+
+.modal-box {
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+  padding: 26px 28px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-box--danger { max-width: 440px; }
+
+.modal-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+.modal-sub {
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin: 0 0 18px;
+  line-height: 1.6;
+}
+
+/* ===== 表单 ===== */
+.form-field { margin-bottom: 14px; }
+.form-field label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 5px;
+}
+.form-field .search-input {
+  width: 100%;
+  font-family: var(--font);
+}
+textarea.search-input {
+  resize: vertical;
+  line-height: 1.6;
+}
+.field-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+.field-hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  line-height: 1.55;
+}
+
+/* ===== 按钮 ===== */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-family: var(--font);
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink-soft);
+  transition: all 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ghost { background: var(--paper-soft); }
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-primary:hover { background: #e08e0a; border-color: #e08e0a; color: #fff; }
+.btn-danger {
+  background: var(--bad);
+  border-color: var(--bad);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-danger:hover { background: #b91c1c; border-color: #b91c1c; color: #fff; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ===== 删除提示 ===== */
+.delete-warn {
+  background: var(--bad-soft);
+  border: 1px solid var(--bad);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.delete-warn p { margin: 0 0 6px; }
+.delete-warn p:last-child { margin-bottom: 0; }
+
+/* ===== 提示条 ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: #fff;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.24);
+  z-index: 200;
+  animation: toastIn 0.2s ease;
+}
+.toast[hidden] { display: none; }
+.toast.toast--err { background: var(--bad); }
+.toast.toast--ok  { background: var(--good); }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
 }

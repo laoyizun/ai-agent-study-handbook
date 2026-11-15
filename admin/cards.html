@@ -20,10 +20,21 @@
   <!-- ============ 头部 ============ -->
   <section class="admin-head">
     <h1 class="admin-title">🃏 记忆卡片库</h1>
-    <p class="admin-desc">大家加入的记忆卡片都在这里。点名字标签筛选 · 点卡片翻面看答案 · 这里只读，不会改任何数据。</p>
+    <p class="admin-desc">大家加入的记忆卡片都在这里。点名字标签筛选 · 点卡片翻面看答案 · 选中「我是谁」后可以编辑和删除自己的卡片。</p>
     <div class="admin-meta">
       <span id="last-updated" class="meta-pill">加载中...</span>
       <button id="refresh-btn" class="refresh-btn">🔄 刷新</button>
+    </div>
+  </section>
+
+  <!-- ============ 身份选择（决定哪些卡可以改） ============ -->
+  <section class="filter-bar identity-bar">
+    <div class="filter-label">✏️ 我是谁</div>
+    <div class="identity-wrap">
+      <select id="identity-select" class="search-input identity-select">
+        <option value="">— 不设置（只读浏览）—</option>
+      </select>
+      <span class="identity-hint" id="identity-hint">选好名字后，只有这个人的卡片上会出现编辑和删除按钮</span>
     </div>
   </section>
 
@@ -48,6 +59,62 @@
   <section id="card-grid" class="card-grid">
     <div class="empty-row">加载中...</div>
   </section>
+
+  <!-- ============ 编辑弹窗 ============ -->
+  <div class="modal-backdrop" id="edit-modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+      <h2 class="modal-title" id="edit-modal-title">✏️ 编辑卡片</h2>
+      <p class="modal-sub" id="edit-modal-sub"></p>
+
+      <div class="form-field">
+        <label for="edit-subject">学科 subject</label>
+        <input id="edit-subject" class="search-input" type="text" placeholder="例如 数学">
+      </div>
+
+      <div class="form-field">
+        <label for="edit-question">问题 question</label>
+        <textarea id="edit-question" class="search-input" rows="3" placeholder="卡片正面"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="edit-answer">答案 answer</label>
+        <textarea id="edit-answer" class="search-input" rows="3" placeholder="卡片反面"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="edit-weakness">
+          卡点 weakness
+          <span class="field-tag">L7 新增</span>
+        </label>
+        <textarea id="edit-weakness" class="search-input" rows="2" placeholder="我总是漏掉摩擦力方向"></textarea>
+        <span class="field-hint">写你<strong>卡在哪一步</strong>，不是"不熟悉"这种空话。留空也行——“NULL”和"没有卡点"是两件事。</span>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="edit-cancel">取消</button>
+        <button class="btn btn-primary" id="edit-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 删除确认弹窗 ============ -->
+  <div class="modal-backdrop" id="delete-modal" hidden>
+    <div class="modal-box modal-box--danger" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+      <h2 class="modal-title" id="delete-modal-title">🗑️ 删除卡片</h2>
+      <p class="modal-sub" id="delete-modal-sub"></p>
+      <div class="delete-warn">
+        <p>⚠️ 删除后，这张卡的<strong>复习标记也会一起消失</strong>（数据库里是自动的，不会留得下脏数据）。</p>
+        <p>删了就没了。确认确定要删吗？</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="delete-cancel">取消</button>
+        <button class="btn btn-danger" id="delete-confirm">确认删除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 提示条 ============ -->
+  <div class="toast" id="toast" hidden></div>
 
 </main>
 

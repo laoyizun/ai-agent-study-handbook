@@ -59,8 +59,9 @@
       <div class="step-row"><b>10′</b><span>概念 · 复习回环 6 步（看清 AI 在干什么）</span></div>
       <div class="step-row"><b>12′</b><span>概念 · schema 加两样（focus 表 + weakness 列）</span></div>
       <div class="step-row"><b>30′</b><span>主课 · 跑一次真实回环（读→挑→出题→答→写回）</span></div>
-      <div class="step-row"><b>12′</b><span>卡片质量 · 四条对策 + 告诉 AI 考试重点</span></div>
-      <div class="step-row"><b>6′</b><span>总结 · 对话审计 + L8 钩子</span></div>
+      <div class="step-row"><b>10′</b><span>卡片质量 · 四条对策 + 告诉 AI 考试重点</span></div>
+      <div class="step-row"><b>8′</b><span>改和删 · 页面按钮 + AI 找重复（分工）</span></div>
+      <div class="step-row"><b>4′</b><span>总结 · 对话审计 + L8 钩子</span></div>
     </div>
 
     <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
@@ -223,21 +224,72 @@
       <ul>
         <li>告诉 AI 这次考什么（一句口语化的就行）</li>
         <li>让 AI 把它写进 <code>focus</code> 表</li>
-        <li>让 AI 帮<strong>5 张 weakness 为空的卡</strong>补卡点（规则见手册 4.2）</li>
+        <li>让 AI 帮<strong>5 张 weakness 为空的卡</strong><strong>出卡点建议</strong>（规则见手册 4.2）</li>
+        <li>拿到建议后，<strong>自己在记忆卡片库页面上把卡点填进去</strong> —— 选「我是谁」→ 编辑 → 填卡点 → 保存</li>
+        <li>把 AI 标成「待定」的那几条<strong>改掉或删掉</strong></li>
       </ul>
     </div>
     <div class="tch-block tch-intent">
       <p><b>设计意图：</b>第 ④ 条是<strong>本课的素养点</strong>，不是功能点。它对应场景 01 教的「AI 是什么 / 我是谁 / 怎么协作」第三件事：<strong>有些信息 AI 永远不会自己知道，你得主动给</strong>。这比"AI 能存重点"重要得多。</p>
       <p>补卡点那条 prompt 里<strong>必须写"看不出来就跳过"</strong> —— 因为<strong>编出来的卡点比没有卡点更糟</strong>，AI 会拿着假卡点去出题，出的题跟你真正卡的地方无关。这个判断标准本身就是给学生的 AI 素养训练。</p>
+      <p><strong>关键教学设计：AI 出建议，学生自己填。</strong>不要让 AI 直接写进数据库 —— 卡点写错了，下游全错，而且学生毫无察觉。学生得自己判断「[确定] 还是 [待定]」，这一步就是"验证"本身。</p>
     </div>
     <div class="tch-block tch-warn">
       <p>⚠️ <b>撞墙点预案：</b>有学生问"AI 补的卡点能信吗" —— <strong>不能全信，要抽查</strong>。这正是你要教的：<strong>AI 产出的一切都要验证</strong>。抽查 2-3 条，看看卡点是不是真的指向一个具体动作，而不是"理解不深"这种空话。</p>
+      <p>如果有学生直接让 AI 把卡点写进数据库 —— <strong>不要制止，但要求他抽查</strong>。这是本课可以借机讲清楚的机会：<strong>AI 动手可以，但人要能验证它动过什么。</strong></p>
     </div>
 
     <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
 
     <!-- 分段 7 -->
-    <h3>7. 总结 · 对话审计（6′）</h3>
+    <h3>7. 改和删 · 你的卡片你做主（8′）</h3>
+    <div class="tch-block tch-teacher">
+      <p><b>老师动作：</b>当场演示卡片库页面的编辑和删除，然后讲清楚<strong>分工</strong>。</p>
+      <ul>
+        <li>打开卡片库页面，顶部「✏️ 我是谁」选一个学生名字</li>
+        <li>演示：<strong>只有这个人的卡片上出现按钮</strong>，别人的卡片你看得见但动不了</li>
+        <li>演示编辑弹窗：改问题、改答案、<strong>填卡点</strong></li>
+        <li>演示删除：红色警告框说明<strong>复习标记会一起消失</strong></li>
+      </ul>
+      <p>然后给判断标准：</p>
+      <ul>
+        <li><strong>内容不对但想留着</strong> → 改（问题太笼统、答案错了、卡点空着）</li>
+        <li><strong>重复了 / 当时没搞懂</strong> → 删</li>
+      </ul>
+      <p>最后讲分工（<strong>本段的核心</strong>）：</p>
+      <ul>
+        <li><strong>改一张、删一张</strong> → 页面按钮，你亲眼看着改，最快</li>
+        <li><strong>找重复、清一批</strong> → 让 AI 做，它能一口气看完几十张卡，人眼干不了这活</li>
+        <li>但<strong>删之前必须人点头</strong> —— AI 列清单，你确认，它才动手</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-student">
+      <p><b>学生动作：</b></p>
+      <ul>
+        <li>打开卡片库，选自己的名字</li>
+        <li>把 AI 刚才给的卡点建议<strong>自己填进去</strong>（至少 3 张）</li>
+        <li>把「待定」的那些<strong>删掉或改掉</strong></li>
+        <li>让 AI 帮自己<strong>找一遍重复的卡</strong>，看看清单里有没有该删的</li>
+      </ul>
+    </div>
+    <div class="tch-block tch-intent">
+      <p><b>设计意图：</b>这一段教的<strong>不是"怎么用按钮"，是"什么时候该让 AI 动手、什么时候该自己动手"</strong>。</p>
+      <p>「让 AI 找重复」是最能体现 AI 价值的一个动作 —— <strong>几十张卡的文字比对是人眼干不了的活</strong>，但"该不该删"是判断题，必须人来做。这正好把 L1 就强调的「AI 干活，人做判断」落到了具体操作上。</p>
+      <p>另外，「我是谁」这个下拉框是<strong>防误操作设计</strong>，也要讲一句：<strong>你能看见所有人的卡，但你只能改自己的。</strong>（真正的权限隔离要等 L8 的 RLS，这句要跟学生说清楚现在的边界在哪。）</p>
+    </div>
+    <div class="tch-block tch-warn">
+      <p>⚠️ <b>撞墙点预案：</b></p>
+      <ul>
+        <li><strong>学生说"为什么不能直接删别人的卡"</strong> —— 好问题。答案是<strong>权限</strong>：现在靠前端限制，真正的隔离在数据库层（L8 的 RLS）。这个钩子可以留到 L8。</li>
+        <li><strong>学生手滑删错卡</strong> —— 删了就是删了，<strong>没有撤销</strong>。这正好说明为什么"删之前看一眼清单"重要。</li>
+        <li><strong>学生的卡全是 weakness 空</strong> —— 说明前面几课的卡片质量确实不行，<strong>这不是他的错，是流程的问题</strong>。正好用这个案例说明为什么要加卡点这一栏。</li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px dashed var(--line);margin:24px 0;">
+
+    <!-- 分段 8 -->
+    <h3>8. 总结 · 对话审计（4′）</h3>
     <div class="tch-block tch-teacher">
       <p><b>老师动作：</b>让全班一起回答三个问题（举手/口答）：</p>
       <ul>
@@ -277,6 +329,8 @@
         <li><strong>有一份演示数据</strong> —— 用某个学生的真实卡，别用编的</li>
         <li><strong>你自己跑通过一遍</strong> —— 全班一起卡在「主课 · 跑一次真实回环」这一段是最糟的情况</li>
         <li><strong>本地 SQLite 的表结构也更新了</strong> —— L7 的 schema 改动要同步到 L5 建表那一步，否则后面迁数据会卡</li>
+        <li><strong>记忆卡片库页面的编辑/删除能用</strong> —— 现场要演示，先确认「我是谁」下拉框能选到学生、卡片上出现按钮</li>
+        <li><strong>备一张"重复卡"给 haobin</strong> —— 演示"让 AI 找重复"需要现场有重复的卡才看得出效果</li>
       </ul>
     </div>
 

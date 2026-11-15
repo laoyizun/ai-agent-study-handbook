@@ -435,9 +435,13 @@ Body: {"student_name": "your-name", "scope": "物理 一二章", "topic": "受�
       </details>
 
       <details class="fold">
-        <summary>📖 4.2 老卡片补卡点 · 让 AI 帮你回填</summary>
+        <summary>📖 4.2 老卡片补卡点 · AI 出建议，你来填</summary>
         <div class="fold-body">
-          <p>你的 170 张卡，<code>weakness</code> 大多是空的。可以让 AI 帮你补 —— 但<strong>不能让它瞎编</strong>。</p>
+          <p>你的 170 张卡，<code>weakness</code> 大多是空的。补卡点这件事，<strong>AI 只能帮你"想"，不能帮你"定"</strong>。</p>
+
+          <p>为什么不让 AI 直接写进数据库？回到 L5 学的那条边界 —— <strong>AI 可以动手，但你得在旁边看着</strong>。卡点写错了，AI 下次就拿着这个错卡点去出题，出的题跟你真正卡的地方没关系，<strong>越错越偏</strong>。</p>
+
+          <h4>第一步 · 让 AI 出建议</h4>
 
           <div class="code-wrap">
             <pre><code>帮我给 weakness 还是空的卡片补卡点。
@@ -448,14 +452,163 @@ Body: {"student_name": "your-name", "scope": "物理 一二章", "topic": "受�
    ✗ "对摩擦力理解不够深"
    ✓ "画受力图时总把重力沿斜面的分量当成摩擦力"
 3. 如果你看不出来，就**跳过这张**，在最后告诉我"这 5 张里有几张我看不出来"
-4. 补完之后，把改动列给我看（卡片 id + 原来的 weakness + 新的 weakness）
+4. **只给我建议，不要写进数据库。** 用这个格式列给我：
 
-写入用 PATCH：PATCH /rest/v1/cards?id=eq.几
-Body: {"weakness": "补的卡点"}</code></pre>
+   卡片 id | 原来的卡点 | 建议的卡点
+
+5. 每条建议后面标一个标记：
+   [确定] 我很确定这就是我的问题
+   [待定] 看着像，但我不太确定
+
+等我确认哪些要写，我再告诉你写哪几条。</code></pre>
             <button class="copy-btn">复制</button>
           </div>
 
+          <h4>第二步 · 你自己在页面上填</h4>
+
+          <p>拿到建议之后，打开<strong>记忆卡片库</strong>页面：</p>
+
+          <ol>
+            <li>在顶部「✏️ 我是谁」里<strong>选你自己的名字</strong>（不选的话卡片上不会出现编辑按钮）</li>
+            <li>找到那张卡，点「✏️ 编辑」</li>
+            <li>把 AI 建议的卡点填进「卡点 weakness」那一栏</li>
+            <li>点「保存」</li>
+          </ol>
+
+          <div class="callout callout--sky">
+            <span class="callout-label">为什么要多这一步</span>
+            <p>因为 <strong>[确定] 和 [待定] 只有你能分</strong>。AI 只能看到卡片的文字，看不到你做题时的表情。</p>
+            <p>你顺手把 AI 标成「待定」的那些<strong>改掉或删掉</strong>，你的卡库就干净了。这比事后发现"AI 给我写的卡点全是错的"省事得多。</p>
+          </div>
+
           <p>为什么强调"看不出来就跳过"？因为<strong>编出来的卡点比没有卡点更糟</strong> —— AI 会拿着假卡点去出题，出的题跟你真正卡的地方没关系。</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-block">
+      <h3 class="step-title">第 5 步 · 改和删 · 你的卡片你做主</h3>
+      <p>卡片库不是只读的。<strong>你自己加的卡，AI 生成的卡，都可以改、可以删。</strong></p>
+
+      <div class="callout callout--sky">
+        <span class="callout-label">页面在哪</span>
+        <p><strong>记忆卡片库</strong>页面：<a href="../admin/cards.html" target="_blank" class="inline-link">admin/cards.html</a></p>
+        <p>它是<strong>全班的卡片库</strong> —— 你能看到所有人的卡（这也是 L6 搬上云端的意义）。但<strong>改和删只对自己开放</strong>，方法是在页面顶部选「我是谁」。</p>
+      </div>
+
+      <div class="diagram">
+        <svg viewBox="0 0 760 246" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="卡片库页面上的编辑和删除操作，以及删除时复习标记的级联关系">
+          <rect x="20" y="20" width="230" height="86" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+          <text x="135" y="46" font-size="12" fill="#333333" text-anchor="middle" font-weight="700">你是谁</text>
+          <text x="135" y="68" font-size="11" fill="#64748B" text-anchor="middle">顶部下拉选自己的名字</text>
+          <text x="135" y="88" font-size="10" fill="#64748B" text-anchor="middle">不选 = 只读浏览</text>
+
+          <rect x="295" y="20" width="445" height="86" fill="#EAF7FE" stroke="#38BDF8" stroke-width="2" rx="8"/>
+          <text x="517" y="46" font-size="12" fill="#0369A1" text-anchor="middle" font-weight="700">只有这个人的卡片上才出现按钮</text>
+          <text x="517" y="68" font-size="11" fill="#0369A1" text-anchor="middle">别人的卡片你看得见，但动不了</text>
+          <text x="517" y="88" font-size="10" fill="#64748B" text-anchor="middle">防误操作：不会一不小心删掉同学的卡</text>
+
+          <line x1="250" y1="63" x2="290" y2="63" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+          <rect x="20" y="140" width="230" height="86" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+          <text x="135" y="166" font-size="12" fill="#333333" text-anchor="middle" font-weight="700">编辑</text>
+          <text x="135" y="188" font-size="11" fill="#64748B" text-anchor="middle">改学科 / 问题 / 答案 / 卡点</text>
+          <text x="135" y="208" font-size="10" fill="#64748B" text-anchor="middle">卡点留空 = 还没记</text>
+
+          <rect x="295" y="140" width="230" height="86" fill="#FFFFFF" stroke="#333333" stroke-width="1.5" rx="8"/>
+          <text x="410" y="166" font-size="12" fill="#333333" text-anchor="middle" font-weight="700">删除</text>
+          <text x="410" y="188" font-size="11" fill="#64748B" text-anchor="middle">删卡 + 这张卡的复习标记</text>
+          <text x="410" y="208" font-size="10" fill="#64748B" text-anchor="middle">删了就没了，要确认</text>
+
+          <rect x="570" y="140" width="170" height="86" fill="#F3A21C" opacity="0.10" stroke="#F3A21C" stroke-width="2" rx="8"/>
+          <text x="655" y="166" font-size="12" fill="#F3A21C" text-anchor="middle" font-weight="700">为什么一起删</text>
+          <text x="655" y="188" font-size="10" fill="#64748B" text-anchor="middle">标记挂在这张卡上</text>
+          <text x="655" y="206" font-size="10" fill="#64748B" text-anchor="middle">卡没了，标记没意义</text>
+
+          <line x1="250" y1="183" x2="290" y2="183" stroke="#333333" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="525" y1="183" x2="565" y2="183" stroke="#F3A21C" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </svg>
+        <p class="diagram-caption">改和删都在页面上做，<strong>不用求 AI 代劳</strong>。</p>
+      </div>
+
+      <details class="fold">
+        <summary>📖 5.1 什么时候该改，什么时候该删</summary>
+        <div class="fold-body">
+          <p>卡片多了以后，你会遇到两种"这张卡不太对"：</p>
+
+          <table class="compare-table">
+            <thead><tr><th>情况</th><th>怎么办</th><th>为什么</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>问题写得太笼统</td>
+                <td><strong>改</strong></td>
+                <td>内容没错，但帮不到你。改的时候把问题改具体</td>
+              </tr>
+              <tr>
+                <td>答案写错了</td>
+                <td><strong>改</strong></td>
+                <td>错的答案比没答案更糟</td>
+              </tr>
+              <tr>
+                <td>卡点空着</td>
+                <td><strong>改</strong></td>
+                <td>填上你真正卡的那一步</td>
+              </tr>
+              <tr>
+                <td>跟别的卡重复了</td>
+                <td><strong>删</strong></td>
+                <td>同一件事记两遍，复习时就是浪费时间</td>
+              </tr>
+              <tr>
+                <td>当时就没搞懂，留着也没用</td>
+                <td><strong>删</strong></td>
+                <td>等你真的搞懂了再重新加一张，比留个半懂的强</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>👉 打开<strong>记忆卡片库</strong>页面，选自己的名字，卡片上就有按钮了。</p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>📖 5.2 也能让 AI 帮你改或删</summary>
+        <div class="fold-body">
+          <p>页面上的按钮是给你<strong>精细操作</strong>用的。但有时候你要动的是"一批" —— 比如某次对话生成的 8 张卡里有 3 张是重复的。这时候让 AI 来做更快：</p>
+
+          <div class="code-wrap">
+            <pre><code>帮我在卡片库里做两件事，做之前先列清单给我看，我确认了再动手。
+
+【任务 1 · 找重复】
+  GET /rest/v1/cards?student_name=eq.your-name&select=id,subject,question,answer
+  找出 question 意思重复的卡（意思一样但问法不同也算重复）
+  列给我：哪几张重复，重复在哪
+
+【任务 2 · 删除（等我确认）】
+  DELETE /rest/v1/cards?id=eq.几
+  - 只删我 student_name 名下的
+  - **删之前把要删的清单给我看，我点头了再删**
+  - 删完告诉我删了几张
+
+【如果我说了要改某张卡】
+  PATCH /rest/v1/cards?id=eq.几
+  Body: {"weakness": "新的卡点"}
+  改之前先把要改的字段和内容给我看
+
+【硬要求】
+  - student_name 必须是 your-name
+  - 任何 DELETE 之前必须等我确认
+  - 不许碰 student_name 不是我的记录</code></pre>
+            <button class="copy-btn">复制</button>
+          </div>
+
+          <div class="callout callout--sky">
+            <span class="callout-label">两种做法怎么选</span>
+            <p><strong>改一张、删一张</strong> → 用页面上的按钮。<strong>你亲眼看着改，最快。</strong></p>
+            <p><strong>找重复、清一批</strong> → 让 AI 做。它能一口气看完几十张卡的文字来找重复，这是人眼干不了的活。<strong>但删之前要它把清单列出来给你看。</strong></p>
+            <p>这就是分工：<strong>动手用页面，判断用 AI，删除前一定要人点头。</strong></p>
+          </div>
         </div>
       </details>
     </div>
@@ -471,6 +624,8 @@ Body: {"weakness": "补的卡点"}</code></pre>
       <li><strong>你答完，AI 把标记写回去了</strong> —— 用 upsert 写的，不是 insert</li>
       <li><strong>你能核对</strong> —— AI 给的那张对照表，每行的卡和标记都对得上</li>
       <li><strong>你告诉了 AI 考试重点</strong> —— focus 表里有记录了</li>
+      <li><strong>你在页面上改过或删过一张卡</strong> —— 选中「我是谁」后，卡片上出现编辑和删除按钮</li>
+      <li><strong>你至少抽查过一条 AI 给的卡点建议</strong> —— 把「待定」的那些改掉或删掉</li>
     </ul>
 
     <hr style="border:none;border-top:1px solid var(--line);margin:32px 0;">
@@ -530,6 +685,10 @@ Body: {"weakness": "补的卡点"}</code></pre>
 - 改删任何记录前先问我
 - 一次最多 3 道题
 - 指令 6 必须 upsert
+
+【另外提醒我】
+- 改单张卡、删单张卡，去记忆卡片库页面自己点（选中「我是谁」后卡片上就有按钮）
+- 只有"找重复、清一批"这种才让你来干，而且删之前必须把清单给我看
 
 【出错怎么办】
 报错就把原文贴给我。常见：
