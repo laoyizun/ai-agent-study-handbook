@@ -258,3 +258,413 @@
 .stage-body.brief p {
   font-size: 14px;
 }
+
+/* ============ 复习回环列表 ============ */
+.loop-list {
+  counter-reset: loop;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+.loop-list li {
+  counter-increment: loop;
+  position: relative;
+  padding: 6px 0 6px 34px;
+  line-height: 1.7;
+  font-size: 15px;
+  color: var(--ink, #333333);
+}
+.loop-list li::before {
+  content: counter(loop);
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(243, 162, 28, 0.12);
+  color: var(--orange, #F3A21C);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "SF Mono", "Menlo", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loop-note {
+  font-size: 14px;
+  color: var(--ink-mute, #64748B);
+  padding: 10px 14px;
+  background: var(--paper, #F9FAFB);
+  border-radius: 6px;
+  margin: 0 0 12px;
+}
+
+/* ============================================
+   能力维度解析
+   ============================================ */
+.ability-section {
+  margin: 56px 0 0;
+}
+
+.ability-head {
+  margin-bottom: 24px;
+}
+.ability-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--orange, #F3A21C);
+  margin-bottom: 8px;
+}
+.ability-head h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink, #333333);
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+.ability-lede {
+  font-size: 15px;
+  color: var(--ink-mute, #64748B);
+  line-height: 1.75;
+  margin: 0;
+  max-width: 720px;
+}
+
+.dim-block {
+  background: var(--bg, #FFFFFF);
+  border: 1.5px solid var(--line, #EDEDED);
+  border-radius: var(--radius, 14px);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.18s;
+}
+.dim-block:hover { border-color: var(--orange, #F3A21C); }
+.dim-block[open] { border-color: var(--orange, #F3A21C); }
+
+.dim-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.dim-summary::-webkit-details-marker { display: none; }
+
+.dim-num {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: rgba(243, 162, 28, 0.10);
+  color: var(--orange, #F3A21C);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+
+.dim-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink, #333333);
+}
+.dim-en {
+  font-size: 12px;
+  color: var(--ink-mute, #64748B);
+  font-style: italic;
+}
+.dim-count {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--ink-mute, #64748B);
+  background: var(--paper, #F9FAFB);
+  border: 1px solid var(--line, #EDEDED);
+  padding: 2px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.dim-arrow {
+  color: var(--ink-mute, #64748B);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.18s;
+}
+.dim-block[open] .dim-arrow {
+  transform: rotate(90deg);
+  color: var(--orange, #F3A21C);
+}
+
+.dim-body {
+  padding: 4px 22px 20px;
+  border-top: 1px solid var(--line, #EDEDED);
+}
+.dim-intro {
+  font-size: 14px;
+  color: var(--ink-mute, #64748B);
+  line-height: 1.75;
+  margin: 14px 0 4px;
+}
+
+/* 能力点 */
+.ab-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line, #EDEDED);
+}
+.ab-item:last-child { border-bottom: none; }
+
+.ab-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+.ab-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink, #333333);
+}
+.ab-lesson {
+  display: flex;
+  gap: 5px;
+}
+.ab-lesson a {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: "SF Mono", "Menlo", monospace;
+  color: var(--orange, #F3A21C);
+  background: rgba(243, 162, 28, 0.10);
+  padding: 1px 8px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.ab-lesson a:hover { background: rgba(243, 162, 28, 0.22); }
+
+.ab-do {
+  font-size: 13.5px;
+  color: var(--ink-mute, #64748B);
+  line-height: 1.7;
+}
+
+/* ============================================
+   能力自查清单
+   ============================================ */
+.checklist-section {
+  margin: 64px 0 0;
+}
+
+.check-progress {
+  background: var(--bg, #FFFFFF);
+  border: 1.5px solid var(--line, #EDEDED);
+  border-radius: var(--radius, 14px);
+  padding: 18px 22px;
+  margin-bottom: 16px;
+}
+.cp-bar {
+  height: 10px;
+  background: var(--paper, #F9FAFB);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--line, #EDEDED);
+}
+.cp-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #F3A21C, #FBBF24);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.cp-nums {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-mute, #64748B);
+}
+.cp-nums span { font-weight: 700; color: var(--ink, #333333); }
+.cp-reset {
+  margin-left: auto;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line, #EDEDED);
+  background: var(--paper, #F9FAFB);
+  color: var(--ink-mute, #64748B);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.cp-reset:hover {
+  border-color: var(--bad, #DC2626);
+  color: var(--bad, #DC2626);
+}
+
+.cl-group {
+  background: var(--bg, #FFFFFF);
+  border: 1.5px solid var(--line, #EDEDED);
+  border-radius: var(--radius, 14px);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.cl-group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--paper, #F9FAFB);
+  border-bottom: 1px solid var(--line, #EDEDED);
+}
+.cl-group-num {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background: rgba(243, 162, 28, 0.12);
+  color: var(--orange, #F3A21C);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: "SF Mono", "Menlo", monospace;
+}
+.cl-group-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink, #333333);
+}
+.cl-group-progress {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: "SF Mono", "Menlo", monospace;
+  color: var(--ink-mute, #64748B);
+}
+.cl-group-progress.done { color: var(--good, #16A34A); }
+
+.cl-items { padding: 4px 20px 12px; }
+
+.cl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line, #EDEDED);
+  cursor: pointer;
+}
+.cl-item:last-child { border-bottom: none; }
+
+/* 隐藏原生 checkbox，自绘方框 */
+.cl-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.cl-box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: 2px solid var(--line, #EDEDED);
+  border-radius: 6px;
+  background: var(--paper, #F9FAFB);
+  position: relative;
+  transition: all 0.15s;
+}
+.cl-item:hover .cl-box { border-color: var(--orange, #F3A21C); }
+.cl-item input:checked + .cl-box {
+  background: var(--good, #16A34A);
+  border-color: var(--good, #16A34A);
+}
+.cl-item input:checked + .cl-box::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.cl-item input:focus-visible + .cl-box {
+  outline: 2px solid var(--orange, #F3A21C);
+  outline-offset: 2px;
+}
+
+.cl-text { flex: 1; min-width: 0; }
+.cl-name {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink, #333333);
+  transition: color 0.15s;
+}
+.cl-item input:checked ~ .cl-text .cl-name {
+  color: var(--ink-mute, #64748B);
+}
+.cl-do {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-mute, #64748B);
+  line-height: 1.65;
+  margin-top: 2px;
+}
+.cl-lessons {
+  display: inline-flex;
+  gap: 5px;
+  margin-top: 7px;
+}
+.cl-lessons a {
+  font-size: 10.5px;
+  font-weight: 700;
+  font-family: "SF Mono", "Menlo", monospace;
+  color: var(--ink-mute, #64748B);
+  background: var(--paper, #F9FAFB);
+  border: 1px solid var(--line, #EDEDED);
+  padding: 1px 8px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.cl-lessons a:hover {
+  border-color: var(--orange, #F3A21C);
+  color: var(--orange, #F3A21C);
+}
+
+.check-tip {
+  background: rgba(243, 162, 28, 0.06);
+  border-radius: var(--radius, 14px);
+  padding: 18px 22px;
+  margin-top: 20px;
+}
+.check-tip p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink, #333333);
+}
+.check-tip-sub {
+  font-size: 12.5px !important;
+  color: var(--ink-mute, #64748B) !important;
+  margin-top: 6px !important;
+}
+
+/* ============ 窄屏 ============ */
+@media (max-width: 720px) {
+  .ability-head h2 { font-size: 21px; }
+  .dim-summary { flex-wrap: wrap; gap: 10px; }
+  .dim-count { margin-left: 0; order: 4; }
+  .dim-arrow { margin-left: auto; }
+  .cl-group-head { padding: 12px 16px; }
+  .cl-items { padding: 2px 16px 10px; }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>课程总览 · 4 阶段地图</title>
+  <title>课程总览 · 能力地图</title>
   <link rel="stylesheet" href="https://laoyizun.github.io/ai-agent-study-handbook/学生手册/css/style.css">
   <link rel="stylesheet" href="css/overview.css">
 </head>
@@ -22,8 +22,8 @@
   <!-- ============ Hero ============ -->
   <header class="hero">
     <div class="eyebrow">课程总览 · COURSE OVERVIEW</div>
-    <h1>课程全景 · 4 个阶段</h1>
-    <p class="lede">从本地功能到云端同步，从 AI 被动回应到 AI 主动调用，再到硬件和 API 延展 —— 一张图看学生在每个阶段的位置和方向。</p>
+    <h1>课程全景 · 能力地图</h1>
+    <p class="lede">这门课不教「用 AI 背单词」，教的是<strong>把 AI 当成一个能协作的伙伴去用</strong>。下面是每个阶段学生要解决的问题，以及这些课最终落在学生身上的 5 项能力。</p>
   </header>
 
   <!-- ============ 横向时间轴 ============ -->
@@ -32,98 +32,88 @@
       <span class="tl-num">阶段 1</span>
       <span class="tl-name">功能</span>
       <span class="tl-tag done">✓ 已完成</span>
-      <span class="tl-hint">本地闭环 · 5 章</span>
+      <span class="tl-hint">本地闭环 · L1–L5</span>
     </a>
     <a class="tl-node active" href="#stage-2">
       <span class="tl-num">阶段 2</span>
       <span class="tl-name">数据上云</span>
       <span class="tl-tag done">✓ 已完成</span>
-      <span class="tl-hint">跨设备 · 1 章</span>
+      <span class="tl-hint">跨设备 · L6</span>
     </a>
-    <a class="tl-node planned" href="#stage-3">
+    <a class="tl-node active" href="#stage-3">
       <span class="tl-num">阶段 3</span>
       <span class="tl-name">AI 主动用</span>
-      <span class="tl-tag plan">◇ 计划中</span>
-      <span class="tl-hint">主动调用 · 2+ 章</span>
+      <span class="tl-tag done">✓ 已完成</span>
+      <span class="tl-hint">反向调用 · L7</span>
     </a>
     <a class="tl-node planned" href="#stage-4">
       <span class="tl-num">阶段 4</span>
-      <span class="tl-name">功能延展</span>
+      <span class="tl-name">权限与延展</span>
       <span class="tl-tag plan">◇ 计划中</span>
-      <span class="tl-hint">API + 硬件 · 2+ 章</span>
+      <span class="tl-hint">谁能改 · L8 起</span>
     </a>
   </section>
 
-  <!-- ============ 阶段 1 · 概要 ============ -->
+  <!-- ============ 阶段 1 ============ -->
   <details class="stage-detail" id="stage-1">
     <summary class="stage-summary">
       <div class="stage-summary-num">1</div>
       <div class="stage-summary-body">
         <div class="stage-summary-name">功能 · 本地闭环</div>
-        <div class="stage-summary-line">用 AI 帮你预习复习学科，把进度和闪卡整理到自己的 HTML 页面上，数据存于本地。</div>
+        <div class="stage-summary-line">用 AI 帮你预习复习学科，把进度和卡片整理成自己的资产，数据存在本机。</div>
       </div>
       <div class="stage-summary-arrow">▶</div>
     </summary>
     <div class="stage-body">
       <h3>核心命题</h3>
-      <p>这一阶段解决"AI 帮学生做事，结果留在哪里"的问题。从"打开 AI 直接问"升级到"建工作空间 + 让 AI 输出变成可复用资产"。</p>
-
-      <h3>关键能力</h3>
-      <ul>
-        <li>搭建 workbuddy 工作空间，建学科对话</li>
-        <li>让 AI 跨对话记住你（方式 A 复用开场白 / 方式 B 学习者档案）</li>
-        <li>把 AI 输出整理成闪念本（学科元信息 / 卡点 / 好解释）</li>
-        <li>用记忆卡片复习 + 三色标记（✓ △ ✗）</li>
-        <li>把数据从浏览器搬到本地数据库</li>
-      </ul>
+      <p>这一阶段解决「AI 帮学生做事，结果留在哪里」的问题。从「打开 AI 直接问」升级到「建工作空间 + 让 AI 输出变成可复用的资产」。</p>
 
       <h3>包含章节</h3>
       <ul>
-        <li><strong>L1</strong> · 建工作空间 + 开第一个学科对话</li>
-        <li><strong>L2</strong> · 第二个学科对话 + 跨对话信息共享</li>
-        <li><strong>L3</strong> · 让 AI 输出变成可复用资产（闪念本）</li>
-        <li><strong>L4</strong> · 记忆卡片</li>
-        <li><strong>L5</strong> · 从浏览器到本地服务（SQLite）</li>
+        <li><strong>L1</strong> · 建工作空间 + 开第一个学科对话 · <em>交付物：工作空间 + 学科对话 + 结构化开场白</em></li>
+        <li><strong>L2</strong> · 第二个学科对话 + 跨对话信息共享 · <em>交付物：方式 A 复制开场白 + 方式 B「学习者档案.md」</em></li>
+        <li><strong>L3</strong> · 让 AI 输出变成可复用资产 · <em>交付物：每个学科一份独立闪念本 v1 + 反向调用 prompt</em></li>
+        <li><strong>L4</strong> · 记忆卡片 · <em>交付物：三色标记（✓ △ ✗）的复习节奏，只读演示</em></li>
+        <li><strong>L5</strong> · 从浏览器到本地服务 · <em>交付物：本地 SQLite 数据库 + localhost 服务</em></li>
       </ul>
 
-      <h3>交付物</h3>
-      <div class="stage-box">
-        <p>· 1 个本地 HTML 复习页（带三色标记的闪卡）</p>
-        <p>· 1 个本地 SQLite 数据库（students + cards + reviews 三张表）</p>
+      <h3>关键能力</h3>
+      <ul>
+        <li>用「角色 + 上下文约束 + 输出规范」三要素写开场白，而不是「你是我的老师」</li>
+        <li>把 AI 的输出沉淀成自己的文件（档案 / 闪念本），下次直接复用</li>
+        <li>用「主动回忆 + 间隔效应 + 测试效应」安排复习节奏</li>
+        <li>让 AI 干脏活：写 prompt 让它把库和本地服务搭起来</li>
+      </ul>
+
+      <div class="stage-next">
+        <span class="stage-next-icon">→</span>
+        <span><strong>下一步：</strong>数据锁在自己电脑上，换台设备 AI 就读不到了 —— 这是阶段 2 的事。</span>
       </div>
     </div>
   </details>
 
-  <!-- ============ 阶段 2 · 详细（重点） ============ -->
+  <!-- ============ 阶段 2 ============ -->
   <details class="stage-detail" id="stage-2">
     <summary class="stage-summary">
       <div class="stage-summary-num">2</div>
       <div class="stage-summary-body">
         <div class="stage-summary-name">数据上云 · 跨设备</div>
-        <div class="stage-summary-line">把阶段 1 的本地数据搬到云端，任何设备都能看到。</div>
+        <div class="stage-summary-line">把阶段 1 的本地数据库搬到云端，任何设备、任何 AI 都能打开。</div>
       </div>
       <div class="stage-summary-arrow">▶</div>
     </summary>
     <div class="stage-body">
       <h3>核心命题</h3>
-      <p>把 L5 搭的本地数据库搬到一个"任何设备、任何 AI 都能打开"的地方。</p>
+      <p>把 L5 搭的本地数据库搬到一个「任何时候都能打开」的地方。学生全程不碰代码，只写 prompt。</p>
 
       <h3>学生现状</h3>
-      <p>已经能用 AI 生成闪念本和记忆卡片，已经有本地 SQLite 数据库。但数据只锁在家里电脑。</p>
+      <p>已经有本地 SQLite 数据库，已经会生成闪念本和记忆卡片。但数据只锁在家里那台电脑。</p>
 
       <h3>要解决的痛点</h3>
       <ul>
         <li>周末去学校课室复习 → 数据库不在</li>
-        <li>想让 AI 看"我最近哪类错最多" → AI 看不到</li>
-        <li>爸妈问"你家娃复习得怎么样" → 你没法给他们看</li>
-      </ul>
-
-      <h3>关键能力</h3>
-      <ul>
-        <li>理解"本机 vs 云端"的两种数据住址</li>
-        <li>把 AI 之间的"接头暗号"（API key）讲成一个比喻，不出现密钥学术语</li>
-        <li>写 prompt 让 AI 帮你迁数据</li>
-        <li>抽样验证迁移没串（三色标记一致性）</li>
+        <li>想让 AI 看「我最近哪类错最多」→ AI 看不到</li>
+        <li>爸妈问「你家娃复习得怎么样」→ 你没法给他们看</li>
       </ul>
 
       <h3>包含章节</h3>
@@ -131,19 +121,19 @@
         <li><strong>L6</strong> · 把数据库搬上云端（本阶段唯一一章）</li>
       </ul>
 
-      <h3>典型 AI 协作场景</h3>
-      <div class="stage-box">
-        <p>① "让 AI 帮我建云端账号 + 3 张表 + 把本机数据搬上去"</p>
-        <p>② "让 AI 帮我处理 AI 报错（key 无效、字段不匹配）"</p>
-        <p>③ "让 AI 帮我验证迁移结果（抽样对比 5 张卡 + 三色标记）"</p>
-      </div>
-
-      <h3>完成信号</h3>
+      <h3>关键能力</h3>
       <ul>
-        <li>能在云端网站看到 3 张表</li>
-        <li>抽样打开 3 张卡，内容和本机一字不差</li>
-        <li>抽样 ✓ / △ / ✗ 各一条，颜色没串</li>
+        <li>理解「本机 vs 云端」两种数据住址，以及为什么云端才有跨设备能力</li>
+        <li>把 AI 之间的「接头暗号」（API key）讲成一个比喻，不出现密钥学术语</li>
+        <li>card_id 重映射：本地行号 ≠ 云端 id，要按内容而不是按编号搬</li>
+        <li>抽样验证迁移没串（抽 3 张卡 + 三色标记逐条核对）</li>
       </ul>
+
+      <div class="stage-box">
+        <p>· 云端 Supabase 数据库 · students / cards / reviews 三张表</p>
+        <p>· REST 调用路径 <code>/rest/v1/{students,cards,reviews}</code></p>
+        <p>· 达标信号：云端网站看得到 3 张表，抽样 3 张卡内容一字不差，✓△✗ 没串</p>
+      </div>
 
       <div class="stage-next">
         <span class="stage-next-icon">→</span>
@@ -152,95 +142,385 @@
     </div>
   </details>
 
-  <!-- ============ 阶段 3 · 详细（重点） ============ -->
-  <details class="stage-detail planned" id="stage-3">
+  <!-- ============ 阶段 3 ============ -->
+  <details class="stage-detail" id="stage-3">
     <summary class="stage-summary">
       <div class="stage-summary-num">3</div>
       <div class="stage-summary-body">
         <div class="stage-summary-name">AI 主动用 · 反向调用</div>
-        <div class="stage-summary-line">AI 不再等你发问，而是主动读你的云端数据，告诉你"你最近该复习什么"。</div>
+        <div class="stage-summary-line">AI 不再等你发问，而是主动读你的云端数据，只挑你真正薄弱的那几张来问你。</div>
       </div>
       <div class="stage-summary-arrow">▶</div>
     </summary>
     <div class="stage-body">
       <h3>核心命题</h3>
-      <p>把"学生主动问 AI"反过来，变成"AI 主动读学生的数据"。从被动工具变成主动助手。</p>
+      <p>一个只会「回答问题」的 AI 不是 agent。会<strong>自己去找资料</strong>、再根据找到的东西给你出题的 AI 才是。这一课是「模型 + 工具 + 上下文」第一次凑齐。</p>
 
-      <h3>学生现状</h3>
-      <p>数据已经在云端，AI 能用 API key 读出来。但 AI 还在"被动回应"——你不问它不说。</p>
+      <h3>复习回环 6 步</h3>
+      <ol class="loop-list">
+        <li>你提问</li>
+        <li><strong>AI 读卡片库</strong></li>
+        <li><strong>库返回：你有多少卡、哪些标了 bad</strong></li>
+        <li>AI 只出最薄弱的 3 道题</li>
+        <li>你作答 + 打三色标记</li>
+        <li><strong>AI 把标记写回去</strong></li>
+      </ol>
+      <p class="loop-note">②③ 以前从来没发生过 —— 前六章全是 AI 单向产出、学生单向消费。所以 AI 出的题永远跟你的薄弱点无关。</p>
 
-      <h3>要解决的痛点</h3>
+      <h3>包含章节</h3>
       <ul>
-        <li>复习节奏靠你自己记得，AI 不提醒</li>
-        <li>你不知道"我哪类错最多"，要手动翻卡片</li>
-        <li>想生成周报要自己写</li>
-        <li>学科 A 的 AI 看不到学科 B 的进度（信息孤岛）</li>
+        <li><strong>L7</strong> · 让 AI 读回你的卡片（本阶段唯一一章）</li>
       </ul>
 
-      <h3>关键能力（计划）</h3>
+      <h3>数据库加了两样东西</h3>
       <ul>
-        <li>让 AI 主动发问（基于数据反推）</li>
-        <li>让 AI 基于 ✓△✗ 自动生成"明天该复习哪些"</li>
-        <li>让 AI 在多个学科对话间共享同一份云端数据</li>
-        <li>让 AI 写周报（基于本周复习历史）</li>
+        <li><code>cards.weakness</code> —— 记「我卡在哪一步」，不是「我不熟悉」</li>
+        <li><code>focus</code> 表 —— 存考试重点，AI 永远不会自己知道这件事</li>
+      </ul>
+      <p>建表顺序固定为 <code>focus → students → cards → reviews</code>。老卡片两列都是 <code>NULL</code>，<strong>NULL 的意思是「还不知道」，不是「没有弱点」</strong>。</p>
+
+      <h3>卡片质量四条对策</h3>
+      <ul>
+        <li><strong>① 卡片要带卡点</strong> —— 写在 <code>weakness</code> 列</li>
+        <li><strong>② 只挑薄弱的</strong> —— bad → half → 没标过的</li>
+        <li><strong>③ 限量</strong> —— 一次最多 3 道，18 张全给你等于没重点</li>
+        <li><strong>④ 重点你说了算</strong> —— 存在 <code>focus</code> 表，前三条在 prompt 里，第四条在数据库里</li>
       </ul>
 
-      <h3>包含章节（计划）</h3>
+      <h3>关键能力</h3>
       <ul>
-        <li><strong>L7</strong> · AI 主动读库 + 自动推荐复习（计划）</li>
-        <li><strong>L8</strong> · 跨学科对话 + 周报自动化（计划）</li>
+        <li>先让 AI 报数（你有几张卡、哪些标了 bad），数字不对就停下来 —— <strong>「验证中间结果」比「跑通流程」更值钱</strong></li>
+        <li>把「AI 的建议」和「写进数据库」分成两步：AI 只给建议，学生自己在页面上填</li>
+        <li>分工原则：<strong>动手用页面，判断用 AI，删除前一定要人点头</strong></li>
       </ul>
 
-      <h3>典型 AI 协作场景（计划）</h3>
       <div class="stage-box">
-        <p>① "AI 根据我最近的 ✓△✗，告诉我明天该复习哪 3 张卡"</p>
-        <p>② "AI 帮我写本周错题周报"</p>
-        <p>③ "我在学科 A 对话提问时，AI 能调用学科 B 的数据"</p>
-        <p>④ "AI 主动发'你 3 天前标 △ 的卡还没复习'提醒"</p>
+        <p>· 交付物：跑通一次真实复习回环（读 → 出题 → 作答 → 写回）</p>
+        <p>· <code>focus</code> 表里有考试重点记录，<code>cards.weakness</code> 补上了卡点</p>
+        <p>· 在页面上改过或删过一张自己的卡片</p>
       </div>
-
-      <h3>完成信号（计划）</h3>
-      <ul>
-        <li>打开 AI 就能收到"今天该复习 X"的主动通知</li>
-        <li>AI 能告诉你"你这周数学的函数类错最多"</li>
-        <li>一键生成上周复习周报</li>
-        <li>跨学科对话能看到完整学习历史</li>
-      </ul>
 
       <div class="stage-next">
         <span class="stage-next-icon">→</span>
-        <span><strong>下一步：</strong>AI 主动用了，但还只能在浏览器看。下一步是把闪卡推到硬件（阶段 4）。</span>
+        <span><strong>下一步：</strong>AI 主动用了，但<strong>任何人都能改所有人的卡片</strong> —— 权限和边界是阶段 4 的事。</span>
       </div>
     </div>
   </details>
 
-  <!-- ============ 阶段 4 · 概要 ============ -->
+  <!-- ============ 阶段 4 ============ -->
   <details class="stage-detail planned" id="stage-4">
     <summary class="stage-summary">
       <div class="stage-summary-num">4</div>
       <div class="stage-summary-body">
-        <div class="stage-summary-name">功能延展 · API + 硬件</div>
-        <div class="stage-summary-line">加入更多 API 或硬件显示屏，做到"电子记忆卡片"。</div>
+        <div class="stage-summary-name">权限与延展 · 谁能改</div>
+        <div class="stage-summary-line">从「AI 能干活」走到「AI 干得对而且不出事」—— 权限、审计、跨设备延展。</div>
       </div>
       <div class="stage-summary-arrow">▶</div>
     </summary>
-    <div class="stage-body brief">
+    <div class="stage-body">
       <h3>核心命题</h3>
-      <p>把 AI 学习能力拓展到硬件和外部 API，闪卡不再只能"在浏览器翻牌"。</p>
+      <p>前三阶段把能力接上了，这一阶段补<strong>边界</strong>。数据在云端，谁都能读写 —— 这在教学场景里是隐患。</p>
 
-      <h3>初步设想</h3>
+      <h3>已落地的部分（工具层）</h3>
       <ul>
-        <li>对接第三方 API（词典 / 题库 / 错题本 / 知识点图谱）</li>
-        <li>接硬件（电子墨水屏 / 树莓派 / 手机推送 / 桌面小组件）</li>
-        <li>让闪卡出现在任何有屏幕的地方</li>
+        <li><strong>修改日志</strong> —— 数据库层自动记录每次增删改，谁改的、改前改后是什么，在页面上可查</li>
+        <li><strong>页面身份栏</strong> —— 选好「我是谁」后，只能编辑和删除自己名下的卡片</li>
+      </ul>
+
+      <h3>待展开的部分</h3>
+      <ul>
+        <li><strong>RLS 权限</strong> —— 让 anon 角色不能随便改所有人的数据（目前是待补的安全洞）</li>
+        <li>知识点维度的聚合 —— 卡片按知识点长出来，而不是按对话长出来</li>
+        <li>班级匿名视野 —— 能看到同班的复习节奏，但不泄露谁是谁</li>
+        <li>外部 API 与硬件延展 —— 词典、题库、电子墨水屏</li>
       </ul>
 
       <div class="stage-next">
         <span class="stage-next-icon">◇</span>
-        <span>本阶段还在规划中。章节细节等阶段 3 完成后展开。</span>
+        <span>本阶段章节细节等上一阶段收尾后展开。</span>
       </div>
     </div>
   </details>
+
+  <!-- ============ 能力维度解析 ============ -->
+  <section class="ability-section" id="ability">
+    <div class="ability-head">
+      <div class="ability-eyebrow">能力维度解析 · CAPABILITY BREAKDOWN</div>
+      <h2>这些课最终落在学生身上的 5 项能力</h2>
+      <p class="ability-lede">前面 3 个阶段讲的是「做了什么」，这一节讲「<strong>学生因此会了什么</strong>」。每个能力点都标了它落在哪一课、达到什么表现算学会。</p>
+    </div>
+
+    <!-- 维度 1 -->
+    <details class="dim-block" open>
+      <summary class="dim-summary">
+        <span class="dim-num">1</span>
+        <span class="dim-name">工具认知</span>
+        <span class="dim-en">Tool Awareness</span>
+        <span class="dim-count">4 个能力点</span>
+        <span class="dim-arrow">›</span>
+      </summary>
+      <div class="dim-body">
+        <p class="dim-intro">理解 AI 工具能做什么、不能做什么、有什么边界。解决「撞墙」类问题 —— 比如 AI 不认识我、新对话丢了上下文。</p>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">AI 工作空间机制</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a></div>
+          </div>
+          <div class="ab-do">理解工作空间是「一组对话 + 共享知识库」的容器，能正确创建、迁移</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">学科任务对话</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a> <a href="../学生手册/lesson-2.html">L2</a></div>
+          </div>
+          <div class="ab-do">知道每个学科用独立对话，不混用</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">跨设备 / 跨账号迁移</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-2.html">L2</a> <a href="../学生手册/lesson-6.html">L6</a></div>
+          </div>
+          <div class="ab-do">会用迁移文件、或把数据库搬上云端来携带自己的 AI 资产</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">AI 上下文窗口</div>
+            <div class="ab-lesson"><a href="../学生手册/model-机制.html">场景 00</a></div>
+          </div>
+          <div class="ab-do">知道 AI 不是「全知」，闪念本太长它会漏读</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 维度 2 -->
+    <details class="dim-block">
+      <summary class="dim-summary">
+        <span class="dim-num">2</span>
+        <span class="dim-name">Prompt 工程</span>
+        <span class="dim-en">Prompt Engineering</span>
+        <span class="dim-count">6 个能力点</span>
+        <span class="dim-arrow">›</span>
+      </summary>
+      <div class="dim-body">
+        <p class="dim-intro">学会用结构化的提示词让 AI 按你希望的方式工作，而不是默认方式。核心不是「会写 prompt」，是<strong>知道 AI 为什么要这么问</strong>。</p>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">结构化 prompt 三要素</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a></div>
+          </div>
+          <div class="ab-do">用「角色设定 + 上下文约束 + 输出规范」组织开场白</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">个人信息 prompt</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a> <a href="../学生手册/lesson-2.html">L2</a></div>
+          </div>
+          <div class="ab-do">主动告诉 AI 自己的年级、学校类型、吃力学科，而不是等它问</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">对话审计 prompt</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a></div>
+          </div>
+          <div class="ab-do">用「总结今天的学习情况」让 AI 反向记录，形成每节课的收尾习惯</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">prompt 移植</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-2.html">L2</a></div>
+          </div>
+          <div class="ab-do">让旧对话生成开场白，复制到新对话复用，而不是每次重写</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">反向调用 prompt</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">把闪念本喂给 AI，让它接着讲 —— 并能说出「我讲通的版本」为什么是关键那一列</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">弱项诊断 prompt</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-2.html">L2</a> <a href="../学生手册/lesson-7.html">L7</a></div>
+          </div>
+          <div class="ab-do">让 AI 基于自己的数据找出弱项（L2 用闪念本卡点，L7 用数据库标记挑最薄弱 3 张）</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 维度 3 -->
+    <details class="dim-block">
+      <summary class="dim-summary">
+        <span class="dim-num">3</span>
+        <span class="dim-name">知识库设计</span>
+        <span class="dim-en">Knowledge Base Design</span>
+        <span class="dim-count">4 个能力点</span>
+        <span class="dim-arrow">›</span>
+      </summary>
+      <div class="dim-body">
+        <p class="dim-intro">把分散在对话里的有用信息，组织成结构化、可复用的知识库 —— 这是 AI 时代最重要的「个人笔记」能力。</p>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">文件即知识库</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-2.html">L2</a> <a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">理解「学习者档案.md」「闪念本.md」是 AI 可读取的知识库载体，文件比复制粘贴更可靠</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">字段颗粒度决策</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-5.html">L5</a> <a href="../学生手册/lesson-7.html">L7</a></div>
+          </div>
+          <div class="ab-do">决定 schema 里写多少字段、写哪些；理解 L5 定死的规范为什么在 L7 加字段时能直接用</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">学科闪念本结构</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">给每个学科建独立的闪念本，含「卡点 + AI 输出 + 我讲通的版本」</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">闪念本版本迭代</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">在 v1 基础上加「我讲通的版本」这一列，知道为什么要自己再讲一遍</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 维度 4 -->
+    <details class="dim-block">
+      <summary class="dim-summary">
+        <span class="dim-num">4</span>
+        <span class="dim-name">对话协作</span>
+        <span class="dim-en">Dialogue Collaboration</span>
+        <span class="dim-count">4 个能力点</span>
+        <span class="dim-arrow">›</span>
+      </summary>
+      <div class="dim-body">
+        <p class="dim-intro">和 AI 进行有判断力的协作 —— 让 AI 进入陪练模式、澄清误判、审阅输出，而不是被动接受。</p>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">让 AI 进入陪练模式而非代写模式</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a> <a href="../学生手册/agent-角色设定.html">场景 01</a></div>
+          </div>
+          <div class="ab-do">通过开场白让 AI 知道「我不是来抄答案的」—— 敢要费曼提问、敢要三种角度</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">AI 误判澄清</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-6.html">L6</a></div>
+          </div>
+          <div class="ab-do">当 AI 把打错字误判为不理解、或把迁移出错当成功，主动澄清而不是绕过去</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">多轮对话的迭代</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">让 AI 反复更新闪念本，自己审阅质量 —— 而不是第一版就收下</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">AI 输出可移植性</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a> <a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">判断 AI 的输出能不能在新对话里被用 —— 分清「复制题目」和「沉淀资产」</div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 维度 5 -->
+    <details class="dim-block">
+      <summary class="dim-summary">
+        <span class="dim-num">5</span>
+        <span class="dim-name">元认知与反思</span>
+        <span class="dim-en">Meta-cognition &amp; Reflection</span>
+        <span class="dim-count">4 个能力点</span>
+        <span class="dim-arrow">›</span>
+      </summary>
+      <div class="dim-body">
+        <p class="dim-intro">跳出工具看自己 —— 知道 AI 在哪里帮到你、哪里没帮到；意识到「假装懂了」的盲区。</p>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">学习状态自评</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a> <a href="../学生手册/lesson-7.html">L7</a></div>
+          </div>
+          <div class="ab-do">在 AI 的总结里识别「假装懂了」的盲区；L7 是让 AI 先报数、发现数字不对就停下</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">对话审计习惯</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-1.html">L1</a></div>
+          </div>
+          <div class="ab-do">每节课结束前主动让 AI 总结 —— 变成习惯而不是任务</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">沉淀意识</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">意识到 AI 输出要变成<strong>自己的</strong>资产，放进对话里等于没沉淀</div>
+        </div>
+
+        <div class="ab-item">
+          <div class="ab-head">
+            <div class="ab-name">跨学科迁移思维</div>
+            <div class="ab-lesson"><a href="../学生手册/lesson-2.html">L2</a> <a href="../学生手册/lesson-3.html">L3</a></div>
+          </div>
+          <div class="ab-do">看到不同学科闪念本里的共性，知道「我学过的学科」这张进度地图能让 AI 跨学科帮忙</div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ 能力自查清单 ============ -->
+  <section class="checklist-section" id="checklist">
+    <div class="ability-head">
+      <div class="ability-eyebrow">能力自查清单 · CHECKLIST</div>
+      <h2>老师带学生一起回顾：22 项能力，勾一勾</h2>
+      <p class="ability-lede">逐条问学生「这条你能做到吗」，学生自己勾。<strong>勾选会自动保存在这台设备上</strong>，下次打开还在。</p>
+    </div>
+
+    <!-- 进度统计 -->
+    <div class="check-progress">
+      <div class="cp-bar"><div class="cp-fill" id="cp-fill"></div></div>
+      <div class="cp-nums">
+        <span id="cp-count">0</span> / <span id="cp-total">22</span> 项已达成
+        <button class="cp-reset" id="cp-reset" type="button">清空重勾</button>
+      </div>
+    </div>
+
+    <div id="checklist-body"><!-- 由 js 渲染 --></div>
+
+    <div class="check-tip">
+      <p><strong>用法：</strong>老师逐条念，学生举手 / 自己勾。全部勾满说明这门课的核心目标达成了 —— 不管他在哪个学科、用了什么工具。</p>
+      <p class="check-tip-sub">勾选只存在这台设备的浏览器里，不上传、不共享。换设备要重新勾。</p>
+    </div>
+  </section>
 
   <!-- ============ 底部 ============ -->
   <div class="footer">
@@ -250,5 +530,6 @@
 
 </main>
 
+<script src="js/checklist.js"></script>
 </body>
 </html>
